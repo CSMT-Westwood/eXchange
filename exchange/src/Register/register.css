@@ -1,0 +1,24 @@
+.inputWrapper{
+    height: 50px;
+    width: 250px;
+    background: rgb(235, 139, 49);
+    margin: auto;
+}
+
+.pageWrapper{
+    background: #719ceb;
+    height: 400px;
+    width: 600px;
+    margin: auto;
+}
+
+.inputTitle{
+    text-align: start;
+}
+
+.alternateBtn{
+    background-color: rgba(0,0,0,0);
+    border-width: 0;
+    text-decoration: underline;
+}
+
