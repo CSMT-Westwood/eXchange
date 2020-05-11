@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Container } from './components/Container';
+import { Filler } from './components/Filler';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          eXchange
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const triggerText = 'Offer/Request';
+	const onSubmit = (event) => {
+		// event.preventDefault(event);
+		// console.log(typeof(event));
+		// console.log(event.offerChecked); //console.log treats offerChecked as a string for some reason
+		// console.log(event.target.email.value);
+		// console.log(event.target.name.value);
+	};
+	return (
+		<div className="App">
+			<Filler />
+			<Container triggerText={triggerText} onSubmit={onSubmit} />
+			<Filler />
+		</div>
+	);
+};
 
 export default App;
