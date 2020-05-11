@@ -1,24 +1,107 @@
-.inputWrapper{
-    height: 50px;
-    width: 250px;
-    background: rgb(235, 139, 49);
-    margin: auto;
-}
-
 .pageWrapper{
-    background: #719ceb;
+    position: absolute;
+    top: 10vh;
+    left:30vw;
     height: 400px;
-    width: 600px;
+    width: 400px;
     margin: auto;
+    background-color: rgba(231, 169, 54, 0.7);
+    border-radius: 10px;
 }
 
-.inputTitle{
-    text-align: start;
+.pageWrapper::before{
+    content:"";
+    background-image: url('bgi.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.4;
+
+    border-radius: 10px;
+}
+
+.registerForm{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    top: 5%;
+
+}
+
+.navBar{
+    height: 75px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.inputWrapper{
+    height: 170px;
+    width: 400px;
+    position: absolute;
+    top: 60px;
+    background: rbga(0,0,0,0);
+}
+
+.inputBar{
+    height: 30px;
+    width: 250px;
+    margin:auto;
+    border-color: rgb(6, 6, 165);
+    border-width: 2px;
+    border-radius: 6px;
+    font-size: 14px;
+    position: relative;
+    margin: 4px;
+}
+
+#inputWarning{
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+    font-size: 15px;
+}
+
+.submitBtn{
+    height: 6vh;
+    width: 250px;
+    background: #fff;
+    border-width: 0;
+    border-radius: 6px;
+    background: rgb(10, 80, 255);
+    color: #fff;
+    font-size: 120%;
+    font-weight: 400;
+    position: absolute;
+    bottom: 0px;
+    left: 75px;
+    
+}
+.submitBtn:hover{
+    background: rgb(0, 68, 228);
+    cursor: pointer;
+}
+.submitBtn:focus{
+    border: none; 
+    outline: none;
 }
 
 .alternateBtn{
+    width: 100%;
+    position: absolute;
     background-color: rgba(0,0,0,0);
     border-width: 0;
+    left: 0;
+    bottom: 30px;
+}
+.alternateBtn:hover{
     text-decoration: underline;
+    cursor: pointer;
 }
 

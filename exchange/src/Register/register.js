@@ -12,26 +12,27 @@ import RegisterContextProvider, { RegisterContext } from './registerContext';
 const InputField = (props) => {
     const {info, setInfo} = useContext(RegisterContext);
     return(
-        <div className={"inputWrapper"}>
-            <div className="inputTitle">{props.keys+ ': '}</div>
-            <input type={props.keys.slice(-1)==='d' ? 'password' : 'text'} placeholder={props.keys} value={info[props.keys]} onChange = {(e) => {setInfo(
-                info.map( obj => Object.keys(obj)[0] === props.keys ? {[props.keys]:e.target.value} : obj)
+            <input className="inputBar" type={props.keys.slice(-1)==='d' ? 'password' : 'text'} placeholder={' '+props.keys} value={info[props.keys]} onChange = {(e) => {
+                setInfo(info.map( obj => Object.keys(obj)[0] === props.keys ? {[props.keys]:e.target.value} : obj)
             )}
-            } required />
-        </div>           
+            } required />        
     );
 }
+
 
 const Login = () => {
     const {info, setStatus, handleSumbit} = useContext(RegisterContext);
     
     return (
         <div className='pageWrapper'>
-            <form className="loginForm" onSubmit={handleSumbit}>
-                {info.slice(0,2).map(obj => {
-                    return (<InputField key={Object.keys(obj)[0]} keys={Object.keys(obj)[0]}/> );
-                })}
-                <input type='submit' value='log in' onSubmit={handleSumbit} /> 
+            <div className="navBar">Log in</div>
+            <form className="registerForm" onSubmit={handleSumbit}>
+                <div className="inputWrapper">
+                    {[0,2].map(i => info[i]).map(obj => {
+                        return (<InputField key={Object.keys(obj)[0]} keys={Object.keys(obj)[0]}/> );
+                    })}
+                </div>
+                <input className="submitBtn" type='submit' value='log in' onSubmit={handleSumbit} /> 
             </form>
             <button className='alternateBtn' onClick={() => {setStatus('signup')}}>Doesn't have an account? Sign up here.</button>
         </div>
@@ -44,12 +45,15 @@ const Signup = () => {
 
     return (
         <div className='pageWrapper'>
-            <form className="signupForm" onSubmit={handleSumbit}>
-                {info.map(obj => {
-                    return (<InputField key={Object.keys(obj)[0]} keys={Object.keys(obj)[0]}/> );
-                })}
-                <div className="inputWarning">*You must use a ucla email to register</div>
-                <input type='submit' value='create account' onSubmit={handleSumbit} /> 
+            <div className="navBar">Sign up</div>
+            <form className="registerForm" onSubmit={handleSumbit}>
+                <div className="inputWrapper">
+                    {info.map(obj => {
+                        return (<InputField key={Object.keys(obj)[0]} keys={Object.keys(obj)[0]}/> );
+                    })}
+                </div>
+                <div id="inputWarning">*You must use a ucla email to register</div>
+                <input className="submitBtn" type='submit' value='create account' onSubmit={handleSumbit} /> 
             </form>
             <button className='alternateBtn' onClick={() => {setStatus('login')}}>Already have an account? Log in here.</button>
         </div>

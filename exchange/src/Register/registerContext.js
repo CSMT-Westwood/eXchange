@@ -5,7 +5,7 @@ export const RegisterContext = createContext();
 
 const RegisterContextProvider = (props) => {
     const [status, setStatus] = useState(props.status)
-    const [info, setInfo] = useState([{'Username': ''}, {'Email': ''}, {'Passward': ''}, {'Confirm Password': ''}])
+    const [info, setInfo] = useState([{'Username': ''}, {'Email': ''}, {'Password': ''}, {'Confirm Password': ''}])
     
     const handleSumbit = (e) => {
         e.preventDefault();
