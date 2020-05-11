@@ -7,6 +7,7 @@ export class Form extends React.Component {
 			offerChecked: true,
 			textbookChecked: true,
 			course: '',
+			itemName: '',
 
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -96,10 +97,65 @@ export class Form extends React.Component {
 					<label htmlFor="course">Course</label>
 					<input
 						className="form-control"
-						id="name"
-						name="name"
+						id="course"
+						name="course"
 						value={this.state.name}
-						placeholder="CS97"
+						placeholder="CS33"
+						onChange={this.handleChange}
+					/>
+					<label htmlFor="Item">Item</label>
+					<input
+						className="form-control"
+						id="item"
+						name="itemName"
+						value={this.state.name}
+						placeholder="Computer Systems: A Programmer's Perspective"
+						onChange={this.handleChange}
+					/>
+
+					<fieldset class="form-group">
+						<div class="row">
+							<legend class="col-form-label col-sm-2 pt-0">Condition</legend>
+							<div class="col-sm-10">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"/>
+									<label class="form-check-label" for="gridRadios1">
+										New
+          </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" />
+									<label class="form-check-label" for="gridRadios2">
+										Like New
+          </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"/>
+									<label class="form-check-label" for="gridRadios3">
+										Fair
+          </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" />
+									<label class="form-check-label" for="gridRadios3">
+										Poor
+          </label>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<label htmlFor="Description">Description</label>
+					<textarea
+						className="form-control"
+						id="description"
+						name="description"
+						type="textarea"
+						maxlength="140"
+						rows="2"
+
+						value={this.state.description}
+						placeholder="You have 140 chars to describe it..."
 						onChange={this.handleChange}
 					/>
 				</div>
