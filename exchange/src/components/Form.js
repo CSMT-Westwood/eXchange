@@ -9,7 +9,8 @@ export class Form extends React.Component {
 			course: '',
 			itemName: '',
 			condition: 0, //from 0 (best) to 3 (worst)
-			description: ''
+			description: '',
+			link:''
 
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -206,10 +207,21 @@ export class Form extends React.Component {
 						onChange={this.handleChange}
 					/>
 				</div>
+				<label htmlFor="Link to notes">Link to notes</label>
+				<input
+					className="form-control" //TODO: this is currently tot React-y and slow on DOM but does the job
+					disabled={ this.state.typeOfItem !==1}
+					id="link"
+					name="link"
+					value={this.state.link}
+					placeholder={this.state.typeOfItem === 1 ? "http://drive.google.com/blah": "N/A"}
+					onChange={this.handleChange}
+				/>
 
-				<div className="form-group">
-					<button className="form-control btn btn-primary" type="submit">
-						Submit
+				
+					<div className="form-group pt-5">
+						<button className="form-control btn btn-primary" type="submit">
+							Submit
         </button>
 				</div>
 			</form>
