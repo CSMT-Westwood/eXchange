@@ -3,28 +3,55 @@ import './register.css'
 
 export const RegisterContext = createContext();
 
-const RegisterContextProvider = (props) => {
-    const [status, setStatus] = useState(props.status)
-    const [info, setInfo] = useState([{'Username': ''}, {'Email': ''}, {'Password': ''}, {'Confirm Password': ''}])
+function RegisterContextProvider (props) {
+    const [status, setStatus] = useState(props.status);
+    const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
+    const [warning, setWarning] = useState("");
     
     const handleSumbit = (e) => {
         e.preventDefault();
-        if(info[3]['Confirm Password'] === ''){ // Log in scenario
-            // TODO: BACKEND
+        if(status === 'login'){ // Log in scenario
+            fetch("http://localhost:8000/user/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({...info[0], ...info[2]}),
+            }).then(response => {
+                if(!response.ok){
+                    response.json().then(data => setWarning(data.message))
+                }
+                else{
+                    response.json().then(data => {setWarning("Logging in as " + info[0]["username"] + "...");
+                    sessionStorage.setItem("token", data.token);
+                })
+                }
+            })
         }
+
         else{ // Sign up scenario
-            if (info[1]['Email'].length > 9 && info[1]['Email'].slice(-8) !== 'ucla.edu')
-                alert("You must use a valid ucla email to register! \nPlease try again.")
-            else if(info[2]['Passward'] !== info[3]['Confirm Password'])
-                alert("Passwords do not match! \nPlease try again.");
+            if(info[2]["password"] !== info[3]["confirm password"]){
+                setWarning("Passwords do not match!");
+            }
             else{ // Valid information
-                // TODO: BACKEND
+                fetch("http://localhost:8000/user/signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({...info[0], ...info[2], ...info[1]}),
+                }).then(response => {
+                    if(!response.ok){
+                        response.json().then(data => setWarning(data.message))
+                    }
+                    else{
+                        response.json().then(data => {
+                            setWarning("Signing up as " + data.username + "...");
+                        })
+                    }
+                })
             }   
         }
     }
 
     return (
-        <RegisterContext.Provider value={{info, setInfo, status, setStatus, handleSumbit}}>
+        <RegisterContext.Provider value={{info, setInfo, status, setStatus, handleSumbit, warning, setWarning}}>
             { props.children }
         </RegisterContext.Provider>
     );
