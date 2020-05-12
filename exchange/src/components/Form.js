@@ -5,9 +5,11 @@ export class Form extends React.Component {
 		super(props);
 		this.state = {
 			offerChecked: true,
-			textbookChecked: true,
+			typeOfItem: 0,
 			course: '',
 			itemName: '',
+			condition: 0, //from 0 (best) to 3 (worst)
+			description: ''
 
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -17,18 +19,26 @@ export class Form extends React.Component {
 		const target = event.target;
 		let name = target.name;
 		let value = target.value;
-		switch (name) {
+		switch (name) { //We need to cover all nonstring cases
 			case 'offerChecked':
-			case 'textbookChecked':
 				value = true;
 				break;
 			case 'reqChecked':
-				name = 'offerChecked'
+				name = 'offerChecked';
 				value = false;
 				break;
-			case 'notesChecked':
-				name = 'textbookChecked'
-				value = false;
+			case 'typeOfItem0':
+			case 'typeOfItem1':
+			case 'typeOfItem2':
+				value = parseInt(name.slice(-1));
+				name = 'typeOfItem';
+				break;
+			case 'condChecked0':
+			case 'condChecked1':
+			case 'condChecked2':
+			case 'condChecked3':
+				value = parseInt(name.slice(-1));
+				name = 'condition';
 				break;
 			default:
 				break;
@@ -41,8 +51,11 @@ export class Form extends React.Component {
 	s
 	handleSubmit(event) {
 		console.log(this.state.offerChecked);
-		console.log(this.state.name);
-		console.log(this.state.email);
+		console.log(this.state.textbookChecked);
+		console.log(this.state.course);
+		console.log(this.state.itemName);
+		console.log(this.state.condition);
+		console.log(this.state.description);
 		event.preventDefault();
 	}
 	render() {
@@ -75,8 +88,8 @@ export class Form extends React.Component {
 						<input
 							className="form-check-input"
 							type="radio"
-							name="textbookChecked"
-							checked={this.state.textbookChecked} //check if this is checked
+							name="typeOfItem0"
+							checked={this.state.typeOfItem === 0} //check if this is checked
 							onChange={this.handleChange}
 						/>
 						<label className="form-check-label" htmlFor="textbookRadio">Textbook</label>
@@ -85,11 +98,21 @@ export class Form extends React.Component {
 						<input
 							className="form-check-input"
 							type="radio"
-							name="notesChecked"
-							checked={!this.state.textbookChecked} //check if this is checked
+							name="typeOfItem1"
+							checked={this.state.typeOfItem === 1} //check if this is checked
 							onChange={this.handleChange}
 						/>
 						<label className="form-check-label" htmlFor="notesRadio">Notes</label>
+					</div>
+					<div className="form-check form-check-inline">
+						<input
+							className="form-check-input"
+							type="radio"
+							name="typeOfItem2"
+							checked={this.state.typeOfItem === 2} //check if this is checked
+							onChange={this.handleChange}
+						/>
+						<label className="form-check-label" htmlFor="notesRadio">Skill</label>
 					</div>
 				</div>
 
@@ -113,31 +136,55 @@ export class Form extends React.Component {
 						onChange={this.handleChange}
 					/>
 
-					<fieldset class="form-group">
-						<div class="row">
-							<legend class="col-form-label col-sm-2 pt-0">Condition</legend>
-							<div class="col-sm-10">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"/>
-									<label class="form-check-label" for="gridRadios1">
+					<fieldset className="form-group">
+						<div className="row">
+							<legend className="col-form-label col-sm-2 pt-0">Condition</legend>
+							<div className="pl-4 col-sm-10">
+								<div className="form-check">
+									<input 
+									className="form-check-input" 
+									type="radio" 
+									name="condChecked0" 
+									checked={this.state.condition===0}
+									onChange={this.handleChange}
+									/>
+									<label className="form-check-label" htmlFor="gridRadios1">
 										New
           </label>
 								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" />
-									<label class="form-check-label" for="gridRadios2">
+								<div className="form-check">
+									<input
+										className="form-check-input"
+										type="radio"
+										name="condChecked1"
+										checked={this.state.condition === 1}
+										onChange={this.handleChange}
+									/>
+									<label className="form-check-label" htmlFor="gridRadios2">
 										Like New
           </label>
 								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"/>
-									<label class="form-check-label" for="gridRadios3">
+								<div className="form-check">
+									<input
+										className="form-check-input"
+										type="radio"
+										name="condChecked2"
+										checked={this.state.condition === 2}
+										onChange={this.handleChange}
+									/>
+									<label className="form-check-label" htmlFor="gridRadios3">
 										Fair
           </label>
 								</div>
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" />
-									<label class="form-check-label" for="gridRadios3">
+								<div className="form-check">
+									<input
+										className="form-check-input"
+										type="radio"
+										name="condChecked3"
+										checked={this.state.condition === 3}
+										onChange={this.handleChange}
+									/>
+									<label className="form-check-label" htmlFor="gridRadios3">
 										Poor
           </label>
 								</div>
@@ -151,24 +198,11 @@ export class Form extends React.Component {
 						id="description"
 						name="description"
 						type="textarea"
-						maxlength="140"
+						maxLength="140"
 						rows="2"
 
 						value={this.state.description}
 						placeholder="You have 140 chars to describe it..."
-						onChange={this.handleChange}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label htmlFor="email">Email address</label>
-					<input
-						className="form-control"
-						type="email"
-						id="email"
-						name="email"
-						placeholder="name@example.com"
-						value={this.state.email}
 						onChange={this.handleChange}
 					/>
 				</div>
