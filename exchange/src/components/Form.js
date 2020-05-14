@@ -5,12 +5,13 @@ export class Form extends React.Component {
 		super(props);
 		this.state = {
 			offerChecked: true,
-			typeOfItem: 0,
+			typeOfItem: 0, //0,1 = textbook, notes
 			course: '',
 			itemName: '',
 			condition: 0, //from 0 (best) to 3 (worst)
 			description: '',
-			link:''
+			link:'',
+			fulfilled: false
 
 		};
 		this.handleChange = this.handleChange.bind(this);
