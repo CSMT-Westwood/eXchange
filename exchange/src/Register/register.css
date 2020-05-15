@@ -10,7 +10,7 @@
 
 .pageWrapper::before{
     content:"";
-    background-image: url('bgi.jpg');
+    background-image: url('../imgs/bgi.jpg');
     background-size: cover;
     position: absolute;
     top: 0px;

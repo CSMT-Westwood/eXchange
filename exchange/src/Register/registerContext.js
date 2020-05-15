@@ -1,5 +1,4 @@
 import React, {useState, createContext} from 'react';
-import './register.css'
 
 export const RegisterContext = createContext();
 
