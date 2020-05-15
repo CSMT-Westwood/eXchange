@@ -1,8 +1,11 @@
+/*======== CSS for Setting Component ==== */
+
 #settingWrapper{
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 4vw;
+    left: 0;
 }
 #settingWrapper::before{
     content: "";
@@ -13,7 +16,7 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.1;
+    opacity: 0.15;
     z-index: 0;
 }
 
@@ -21,7 +24,7 @@
     width: 100vw;
     position: absolute;
     top: 12vw;
-    right: 10vw;
+    right: 0vw;
 }
 
 .settingModule{
@@ -44,9 +47,7 @@
     border-color: black;
     border-style: solid;
     border-radius: 0.3vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 #settingIcon{
@@ -58,12 +59,12 @@
 .settingName{
     width: 16vw;
     height: 2vw;
-    color: rgb(4, 12, 117);
+    color: black;
     font-size: 1.2vw;
     font-weight: 500;
     position: absolute;
     top: 1vw;
-    right: 33vw; 
+    right: 44vw; 
     text-align: left;
 }
 
@@ -81,7 +82,7 @@
     justify-content: center;
     position: absolute;
     top: 3.5vw;
-    right: 29vw;
+    right: 40vw;
 }
 
 .changeButton{
@@ -93,7 +94,7 @@
     border-width: 0.1vw;
     position: absolute;
     top: 1vw;
-    right: 29vw;
+    right: 40vw;
     font-size: 1.2vw;
     font-weight: 400;
 }
@@ -101,3 +102,5 @@
 .changeButton:hover{
     border-width: 0.25vw;
 }
+
+/*======== END CSS for Setting Component ==== */

@@ -13,6 +13,9 @@ a {
     height: 4vw;
     width: 100vw;
     background-color:rgb(10, 160, 219);
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 li {
@@ -39,8 +42,8 @@ li {
 .dropdown {
     position: absolute;
     top: 4vw;
-    left: 0.4vw;
-    width: 6vw;
+    left: 0vw;
+    width: 7vw;
     transform: transpateX(-45%);
     background-color: rgb(10, 160, 219);
     border-radius: 1vw;
@@ -50,13 +53,13 @@ li {
 }
 
 .menu-item {
-    height: 2vw;
+    height: 3vw;
     display: flex;
     align-items: center;
     border-radius: 1vw;
     transition: background var(--speed);
     padding: 0.3rem;
-    font-size: 1vw;
+    font-size: 0.8vw;
 }
 
 .menu-item:hover{

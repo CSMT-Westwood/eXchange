@@ -6,8 +6,8 @@
 import React, { useState } from 'react';
 import './profile.css'
 import useSettings from './useSettings';
-import NavBar from './navBar'
 import { ReactComponent as SettingsIcon } from '../imgs/settings.svg'
+import NavBar from "../components/NavBar"
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
@@ -28,10 +28,7 @@ function SettingModule (props) {
 
 function SettingsWrapper (props) {
     return ([
-        <span id="settingTitle">
-            <SettingsIcon id="settingIcon"/>
-            {"Settings"}
-            </span>,
+        <span id="settingTitle">settings</span>,
         <div className="fieldWrapper">
             {props.settings.map( setting => { return (
                 <div>
