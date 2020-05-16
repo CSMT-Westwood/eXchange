@@ -14,6 +14,7 @@ import { ReactComponent as LogoutIcon } from '../imgs/logout.svg'
 import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
 import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
+import useSettings from '../Profile/useSettings';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
@@ -40,7 +41,8 @@ function DropDownMenu () {
 
     return (
         <div className="dropdown">
-            <DropdownItem icon={<FeedIcon/>}>Feed</DropdownItem>
+            <DropdownItem icon={<FeedIcon/>}>Profile</DropdownItem>
+            <DropdownItem icon={<FeedIcon/>}>Feeds</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>}>Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>}>Log out</DropdownItem>
         </div>
@@ -48,13 +50,17 @@ function DropDownMenu () {
 }
 
 export default function NavBar () {
+    const s = useSettings();
+
     return (
         <nav className="navbar"> 
             <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>
-            <NavItem name="userIcon" openIcon={<FeedIcon/>} closeIcon={<FeedIcon/>} />
+            <NavItem name="userIcon" openIcon={<FeedIcon/>} closeIcon={<FeedIcon/>}>
+                <div id="usernameOnBar">{s[0].username.username}</div>
+            </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
             <a href="#">
                 <LogoIcon id="logoIcon"/>

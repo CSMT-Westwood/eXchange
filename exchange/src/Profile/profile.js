@@ -1,5 +1,7 @@
 /*
     Profile Component:
+    <Profile status="*status*" />
+        status: userinfo, settings, following
 */
 
 import React from 'react';
@@ -9,7 +11,7 @@ import UserInfo from './userInfo';
 
 export default function Profile (props) { 
     switch (props.status) {
-        case "userInfo": return (<UserInfo />)
+        case "userinfo": return (<UserInfo />)
         case "settings": return (<Settings />)
     }
 }

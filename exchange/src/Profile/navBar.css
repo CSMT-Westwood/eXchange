@@ -42,11 +42,14 @@ li {
 .dropdown {
     position: absolute;
     top: 4vw;
-    left: 0vw;
-    width: 7vw;
+    left: 0.5vw;
+    width: 8vw;
     transform: transpateX(-45%);
     background-color: rgb(10, 160, 219);
-    border-radius: 1vw;
+    border-radius: 0.3vw;
+    border-width: 0.15vw;
+    border-color: black;
+    border-style: solid;
     padding: 0.5rem;
     overflow: hidden;
     z-index: 1;
@@ -59,7 +62,13 @@ li {
     border-radius: 1vw;
     transition: background var(--speed);
     padding: 0.3rem;
-    font-size: 0.8vw;
+    font-size: 1vw;
+    font-weight: 500;
+}
+
+.menu-item:link, .menu-item:hover{
+    color: black;
+    text-decoration: none;
 }
 
 .menu-item:hover{
@@ -99,4 +108,16 @@ li {
     position: absolute;
     top: 0.5vw;
     left: 44vw;
+}
+
+#usernameOnBar{
+    width: 10vw;
+    height: 4vw;
+    position: absolute;
+    left: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1vw;
 }
