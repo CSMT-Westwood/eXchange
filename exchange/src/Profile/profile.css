@@ -87,6 +87,10 @@
     border-color: blue;
     border-radius: 1.3vw;
     border-width: 0.6vw;
+    background-color: #fff;
+}
+.infoField:hover{
+    background-color: rgba(0, 98, 255, 0.3);
 }
 
 .infoName{

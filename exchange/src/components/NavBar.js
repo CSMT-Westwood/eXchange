@@ -8,6 +8,7 @@ import '../Profile/navBar.css'
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
 import { ReactComponent as SearchIcon } from '../imgs/search.svg'
+import { ReactComponent as ProfileIcon } from '../imgs/profile.svg'
 import { ReactComponent as FeedIcon } from '../imgs/feed.svg'
 import { ReactComponent as SettingsIcon } from '../imgs/settings.svg'
 import { ReactComponent as LogoutIcon } from '../imgs/logout.svg'
@@ -41,7 +42,7 @@ function DropDownMenu () {
 
     return (
         <div className="dropdown">
-            <DropdownItem icon={<FeedIcon/>}>Profile</DropdownItem>
+            <DropdownItem icon={<ProfileIcon/>}>Profile</DropdownItem>
             <DropdownItem icon={<FeedIcon/>}>Feeds</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>}>Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>}>Log out</DropdownItem>
@@ -58,7 +59,7 @@ export default function NavBar () {
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>
-            <NavItem name="userIcon" openIcon={<FeedIcon/>} closeIcon={<FeedIcon/>}>
+            <NavItem name="userIcon" openIcon={<ProfileIcon/>} closeIcon={<ProfileIcon/>}>
                 <div id="usernameOnBar">{s[0].username.username}</div>
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
