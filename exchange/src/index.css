@@ -29,9 +29,9 @@ body {
 }
 
 .App {
-	width: 90%;
-	max-width: 700px;
-	margin: 2em auto;
+	width: 100vw;
+	/* max-width: 700px; */
+	/* margin: 2em auto; */
 }
 
 p.lorem-text {
@@ -116,4 +116,3 @@ p.lorem-text {
 	overflow: hidden;
 	margin-right: 17px;
 }
-

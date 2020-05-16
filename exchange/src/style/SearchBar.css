@@ -1,0 +1,23 @@
+.search-bar-wrapper {
+    display: inline-block;
+}
+
+.search-bar {
+    --height: 6vh;
+    height: var(--height);
+    border-radius: calc(var(--height) / 2);
+    border: 1px solid silver;
+    width: 30vw;
+    padding: 0 calc(var(--height)/2);
+}
+
+#search-button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+/* eliminate default behavior */
+.search-bar:focus {
+    outline-width: 0px;
+}
