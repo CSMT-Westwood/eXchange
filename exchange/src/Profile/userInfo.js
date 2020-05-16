@@ -1,14 +1,15 @@
-import React from 'react';
-import useSettings from './useSettings';
+import React, { useContext } from 'react';
 import "./profile.css"
+import { RenderingContext } from '../renderingContext';
 
 function BasicInfo () {
-    const s = useSettings();
+    const {settings} = useContext(RenderingContext);
+
     return (
         <div>
             <div id="userPhoto"></div>
-            <span id="userName">{s[0].username.username}</span>
-            <span id="userEmail">{s[0].email.email}</span>
+            <span id="userName">{settings.username.username}</span>
+            <span id="userEmail">{settings.email.email}</span>
         </div>
     );
 }
@@ -24,17 +25,18 @@ function InfoField (props) {
 
 
 export default function UserInfo () {
-    const s = useSettings();
+    const { settings } = useContext(RenderingContext);
+    console.log(settings);
     return (
         <div id="profileWrapper">
             <BasicInfo />
             <div id="userInfoWrapper">
                 <div id="userInfoLeft">
-                    <InfoField name="Reputation" value={s[0].rp.rp} />
+                    <InfoField name="Reputation" value={settings.rp.rp} />
                     <InfoField name="Activity" value="0" />
                 </div>
                 <div id="userInfoRight">
-                    <InfoField name="Following" value={s[0].preferences.preferences.length} />
+                    <InfoField name="Following" value={settings.preferences.preferences.length} />
                     <InfoField name="Other" value="0" />
                 </div>
             </div>

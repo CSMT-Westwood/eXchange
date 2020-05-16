@@ -39,7 +39,6 @@
     position: absolute;
     top: 14vw;
     left: 38vw;
-    background: lightslategray;
     font-size: 2.5vw;
     font-weight: 600;
     text-align: center;
@@ -49,9 +48,8 @@
     width: 24vw;
     height: 2vw;
     position: absolute;
-    top: 17.5vw;
+    top: 18vw;
     left: 38vw;
-    background: lightgrey;
     font-size: 1.5vw;
     font-weight: 600;
     text-align: center;

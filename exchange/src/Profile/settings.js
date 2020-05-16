@@ -3,27 +3,29 @@
         Username, Email, Photo, Password, Theme 
 */
 
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './profile.css'
 import uuid from "uuid/v1"
-import useSettings from './useSettings';
+import { RenderingContext } from '../renderingContext';
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
-    const s = useSettings();
-    const [privateInfo, setPrivateInfo] = useState(props.value);
+    const {settings, setSettings, changeInfo} = useContext(RenderingContext);
+    const [privateInfo, setPrivateInfo] = useState(settings[props.name][props.name]);
+
     return (
         <form className="settingModule" onSubmit={(e)=>{
             e.preventDefault();
             if (state){
-                s[2]({[props.name]: privateInfo});
+                if(privateInfo!==settings[props.name][props.name])
+                    changeInfo({[props.name]: privateInfo});
             } 
             setState(!state);
         }}>
             <div className="settingName">{props.name + ":"}</div>
             {state 
                 ? props.name==="theme" 
-                ? <input type="range" min="0" max="100" className="settingField" value={s[0].theme.theme}onChange={(e)=>s[1].theme({"theme": e.target.value})} />
+                ? <input type="range" min="0" max="100" className="settingField" value={settings.theme.theme} onChange={(e)=>setSettings.theme({"theme": e.target.value})} />
                 : <input type="text" className="settingField" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)}></input>
                 : <div className="settingField">{privateInfo}</div> 
             }
@@ -33,7 +35,7 @@ function SettingModule (props) {
 }
 
 function SettingsWrapper () {
-    const s = useSettings();
+    const { settings } = useContext(RenderingContext);
 
     return ([
         <span id="settingTitle" key={uuid()} >settings</span>,
@@ -43,7 +45,7 @@ function SettingsWrapper () {
                 <div id="photoWrapper"> </div>
                 <button className="changeButton">Change</button>
             </div>
-            {Object.values(s[0]).slice(0,3).map( setting => { return (
+            {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>

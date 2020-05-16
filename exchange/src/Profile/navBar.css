@@ -114,13 +114,13 @@ li {
 }
 
 #usernameOnBar{
-    width: 10vw;
+    width: 15vw;
     height: 4vw;
     position: absolute;
-    left: 3vw;
+    left: 4vw;
     display: flex;
-    justify-content: center;
     align-items: center;
     font-weight: 500;
     font-size: 1.1vw;
+    text-align: left;
 }

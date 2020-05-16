@@ -8,6 +8,7 @@
 import React, { useContext } from 'react';
 import './register.css'
 import RegisterContextProvider, { RegisterContext } from './registerContext';
+import { RenderingContext } from '../renderingContext';
 
 function InputField (props) {
     const {info, setInfo} = useContext(RegisterContext);
@@ -21,6 +22,7 @@ function InputField (props) {
 
 function Login () {
     const {info, warning, setWarning, setStatus, handleSumbit} = useContext(RegisterContext);
+    const {setPage} = useContext(RenderingContext);
     
     return (
         <div className='pageWrapper'>
@@ -35,8 +37,9 @@ function Login () {
                 <input className="submitBtn" type='submit' value='log in' onSubmit={handleSumbit} /> 
             </form>
             <button className='alternateBtn' onClick={() => {
-                setStatus('signup');
-                setWarning("")
+                setWarning("");
+                setStatus("signup");
+                setPage("signup");
             }}>Doesn't have an account? Sign up here.</button>
         </div>
     );
@@ -45,6 +48,7 @@ function Login () {
 
 function Signup () {
     const {info, warning, setWarning, setStatus, handleSumbit} = useContext(RegisterContext);
+    const {setPage} = useContext(RenderingContext);
 
     return (
         <div className='pageWrapper'>
@@ -61,8 +65,10 @@ function Signup () {
                 <input className="submitBtn" type='submit' value='create account' onSubmit={handleSumbit} /> 
             </form>
             <button className='alternateBtn' onClick={() => {
-                setStatus('login');
-                setWarning("")}}>Already have an account? Log in here.</button>
+                setWarning("");
+                setStatus("login");
+                setPage("login");
+                }}>Already have an account? Log in here.</button>
         </div>
     );
 }
@@ -72,7 +78,7 @@ function Signup () {
 function Register (props) { 
     const StatusHandler = () => {
         const {status} = useContext(RegisterContext);
-        return (status === 'login' ? <Login /> : <Signup /> );
+        return (status === "login" ? <Login /> : <Signup /> );
     }
     return (
         <RegisterContextProvider status={props.status}>

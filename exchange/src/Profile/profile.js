@@ -1,7 +1,6 @@
 /*
     Profile Component:
     <Profile status="*status*" />
-        status: userinfo, settings, following
 */
 
 import React from 'react';

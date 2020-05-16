@@ -15,7 +15,6 @@ import { ReactComponent as LogoutIcon } from '../imgs/logout.svg'
 import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
 import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
-import useSettings from '../Profile/useSettings';
 import { RenderingContext } from '../renderingContext';
 
 function NavItem (props) {
@@ -31,11 +30,22 @@ function NavItem (props) {
     )
 }
 
-function DropDownMenu (props) {
+function DropDownMenu () {
     function DropdownItem (props) {
-        const {setPage} = useContext(RenderingContext);
+        const {setPage, setSettings} = useContext(RenderingContext);
         return (
-            <button onClick={()=>setPage(props.name)} className="menu-item">
+            <button onClick={()=>{
+                setPage(props.name);
+                if (props.name==="login") {
+                    sessionStorage.setItem("token", "");
+                    setSettings.username({"username": "You are not logged in"});
+                    setSettings.email({"email": ""});
+                    setSettings.rp({"rp": 0});
+                    setSettings.preferences({"preferences": []});
+                    setSettings.photo({"photo": null});
+                    alert("you have successfully logged out!");
+                }
+            }} className="menu-item">
                 <span> {props.icon} </span>
                 {props.children}
             </button>
@@ -53,7 +63,7 @@ function DropDownMenu (props) {
 }
 
 export default function NavBar () {
-    const s = useSettings();
+    const {settings} = useContext(RenderingContext);
 
     return (
         <nav className="navbar"> 
@@ -62,7 +72,7 @@ export default function NavBar () {
                 <DropDownMenu />
             </NavItem>
             <NavItem name="userIcon" openIcon={<ProfileIcon/>} closeIcon={<ProfileIcon/>}>
-                <div id="usernameOnBar">{s[0].username.username}</div>
+                <div id="usernameOnBar">{settings.username.username}</div>
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
             <a href="#">

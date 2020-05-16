@@ -1,5 +1,4 @@
 import React, {useState, createContext, useContext} from 'react';
-import useSettings from '../Profile/useSettings';
 import { RenderingContext } from '../renderingContext';
 
 export const RegisterContext = createContext();
@@ -8,8 +7,7 @@ function RegisterContextProvider (props) {
     const [status, setStatus] = useState(props.status);
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
-    const s = useSettings();
-    const { setPage } = useContext(RenderingContext);
+    const { settings, setSettings, setPage } = useContext(RenderingContext);
 
     const handleSumbit = (e) => {
         e.preventDefault();
@@ -26,13 +24,11 @@ function RegisterContextProvider (props) {
                     response.json().then(data => {
                         setWarning("Logging in as " + info[0]["username"] + "...");
                         sessionStorage.setItem("token", data.token);
-                        s[1].preferences(data.preferences)
-                        s[1].rp(data.rp)
-                        s[1].username(data.username)
-                        s[1].email(data.email)
-                        console.log(data.username)
+                        setSettings.preferences({"preferences": data.preferences})
+                        setSettings.rp({"rp": data.rp})
+                        setSettings.username({"username": data.username})
+                        setSettings.email({"email": data.email})
                         setPage("userinfo");
-                        console.log(s[0].username.username)
                 })
                 }
             })
