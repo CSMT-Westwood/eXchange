@@ -29,7 +29,6 @@ const App = () => {
 		<div className="App">
 			<Filler />
 			<Container triggerText={triggerText} onSubmit={onSubmit} />
-			<Card post={examplePost} />
 			<Filler />
 		</div>
 	);

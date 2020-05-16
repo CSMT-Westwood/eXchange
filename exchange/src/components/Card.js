@@ -1,15 +1,23 @@
 import React from 'react';
 import './Card.css';
+import Modal from './Modal';
 
 export class Card extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			modal: Modal({onClickOutside=})
+		}
 	}
 	
 	render() { //TODO: change offer/req indicator to be color of card
 		return (<div>
 			<div className="row">
-				<div className="card w-25 bg-light mb-3">
+				<div 
+				className="card w-25 bg-light mb-3"
+				onClick={this.props.showModal}
+					style={{ cursor: 'pointer' }}
+				>
 					<div className="card-header">
 						<div> {this.props.post.course} </div>
 						<span class="badge badge-primary float-left">Offer</span>
