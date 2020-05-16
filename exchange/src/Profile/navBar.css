@@ -57,6 +57,7 @@ li {
 
 .menu-item {
     height: 3vw;
+    width: 6.5vw;
     display: flex;
     align-items: center;
     border-radius: 1vw;
@@ -64,6 +65,8 @@ li {
     padding: 0.3rem;
     font-size: 1vw;
     font-weight: 500;
+    background: rgb(10, 160, 219);
+    border-width: 0;
 }
 
 .menu-item:link, .menu-item:hover{

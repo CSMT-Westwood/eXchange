@@ -12,8 +12,8 @@ import Feeds from './feeds';
 
 export default function Profile (props) { 
     switch (props.status) {
-        case "userinfo": return (<UserInfo />)
-        case "settings": return (<Settings />)
-        case "feeds": return (<Feeds />)
+        case "userinfo": return (<UserInfo />);
+        case "settings": return (<Settings />);
+        case "feeds": return (<Feeds />);
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import Register from './Register/register';
@@ -6,12 +6,12 @@ import Profile from './Profile/profile';
 import { Container } from './components/Container';
 import { Filler } from './components/Filler';
 import { Card } from './components/Card'
-import useRenderingSetting from './renderingSetting';
-
+import RenderingContextProvider, { RenderingContext } from './renderingContext';
 
 function RenderingComponent () {
-    const r = useRenderingSetting();
-    switch(r.page) {
+    const {page} = useContext(RenderingContext);
+
+    switch(page) {
         case "login":
             return (<Register status="login" />); 
         case "signup":
@@ -20,18 +20,22 @@ function RenderingComponent () {
             return (<Profile status="settings" />);
         case "userinfo":
             return (<Profile status="userinfo" />);
+        case "feeds":
+            return (<Profile status="feeds" />);
         default:
-            return (<Register status="login" />);
+            return (<Profile status="login" />);
     }    
 }
 
 function App() {
-    const r = useRenderingSetting();
-
+    
     return (
         <div className="App">
-            <NavBar />
-            <RenderingComponent status={r.page}/>           
+            <RenderingContextProvider>
+                <NavBar />
+                <RenderingComponent/>   
+            </RenderingContextProvider>
+        
         </div>
     );
 }

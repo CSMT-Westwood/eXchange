@@ -3,7 +3,7 @@
         4vw * 100vw
 */
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../Profile/navBar.css'
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
@@ -16,6 +16,7 @@ import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
 import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
 import useSettings from '../Profile/useSettings';
+import { RenderingContext } from '../renderingContext';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
@@ -30,22 +31,23 @@ function NavItem (props) {
     )
 }
 
-function DropDownMenu () {
+function DropDownMenu (props) {
     function DropdownItem (props) {
+        const {setPage} = useContext(RenderingContext);
         return (
-            <a href="#" className="menu-item">
+            <button onClick={()=>setPage(props.name)} className="menu-item">
                 <span> {props.icon} </span>
                 {props.children}
-            </a>
+            </button>
         );
     }
 
     return (
         <div className="dropdown">
-            <DropdownItem icon={<ProfileIcon/>}>Profile</DropdownItem>
-            <DropdownItem icon={<FeedIcon/>}>Feeds</DropdownItem>
-            <DropdownItem icon={<SettingsIcon/>}>Settings</DropdownItem>
-            <DropdownItem icon={<LogoutIcon/>}>Log out</DropdownItem>
+            <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
+            <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
+    <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
+            <DropdownItem icon={<LogoutIcon/>} name="login">Log out</DropdownItem>
         </div>
     );
 }
