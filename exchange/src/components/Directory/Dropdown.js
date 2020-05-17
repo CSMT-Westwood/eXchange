@@ -19,7 +19,7 @@ function Dropdown(props) {
     }
 
     return (
-        <select onChange={updateValue} className="dropdownMenu">
+        <select onChange={updateValue} className={`dropdown-dropdown ${props.className}`}>
             {createOptionTags()}
         </select>
     )

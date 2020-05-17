@@ -28,19 +28,19 @@ function SearchBar(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        e.target.classList.toggle("mousedown");
-        e.target.classList.toggle("mouseup");
+        e.target.classList.toggle("s-mousedown");
+        e.target.classList.toggle("s-mouseup");
     }
 
     return (
-        <div className="search-bar-wrapper">
+        <div className={`search-bar-wrapper ${props.className}`}>
             <Dropdown options={options} onChange={handleDropdownChange}
-                className="dropdownMenu"/>
-            <input type="text" className="search-bar"
+                className="search-bar-dropdown"/>
+            <input type="text" className="search-bar-search-bar"
                 value={searchQuery} onChange={handleTextFieldChange}
                 onKeyPress={submit} />
             <img src={searchButton} alt="search-button"
-                className="mouseup search-button" onClick={submit}
+                className="search-bar-mouseup search-bar-search-button" onClick={submit}
                 onMouseDown={handleClick}
                 onMouseUp={handleClick} />
         </div>

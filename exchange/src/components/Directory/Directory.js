@@ -14,7 +14,7 @@ function Directory(props) {
 
     return (
         <div className="body">
-            <SearchBar handleSearch={handleSearch}/>
+            <SearchBar handleSearch={handleSearch} className="directory-search-bar"/>
         </div>
     )
 }
