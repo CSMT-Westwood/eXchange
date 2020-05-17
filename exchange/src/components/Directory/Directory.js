@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
-import '../App.css';
+import '../../App.css';
+import './directory.css';
 
 
 function Directory(props) {
-    const [queryText, setQueryText] = useState("");
+    const [queryObject, setQueryObject] = useState({});
 
     const handleSearch = (value) => {
-        setQueryText(value);
+        setQueryObject(value);
+        console.log(value);
     }
 
     return (

@@ -1,5 +1,6 @@
 .search-bar-wrapper {
     display: inline-block;
+    padding: 10px;
 }
 
 .search-bar {
@@ -11,11 +12,29 @@
     padding: 0 calc(var(--height)/2);
 }
 
-#search-button {
+.search-button {
     margin-left: 10px;
     cursor: pointer;
+    opacity: 1;
+}
+.mousedown {
+    animation: lessen 0.2s alternate forwards;
+}
+.mouseup {
+    animation: thicken 0.2s alternate forwards;
+}
+@keyframes thicken {
+    0% {opacity: 0.3;}
+    100% {opacity: 1;}
+}
+@keyframes lessen {
+    100% {opacity: 0.3;}
+    0% {opacity: 1;}
 }
 
+.dropdownMenu {
+    margin-right: 10px;
+}
 
 /* eliminate default behavior */
 .search-bar:focus {

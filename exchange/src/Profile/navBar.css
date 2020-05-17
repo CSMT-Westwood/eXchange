@@ -10,7 +10,7 @@ a {
 }
 
 .navbar{
-    height: 4vw;
+    height: 7vh;
     width: 100vw;
     background-color:rgb(10, 160, 219);
     position: absolute;
@@ -19,7 +19,7 @@ a {
 }
 
 li {
-    height: 4vw;
+    height: 7vh;
     width: 4vw;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ li {
 
 .dropdown {
     position: absolute;
-    top: 4vw;
+    top: 7vh;
     left: 0vw;
     width: 7vw;
     transform: transpateX(-45%);
@@ -94,9 +94,9 @@ li {
 }
 
 #logoIcon{
-    height: 3vw;
+    height: 5vh;
     width: 12vw;
     position: absolute;
-    top: 0.5vw;
+    top: 1vh;
     left: 44vw;
 }
