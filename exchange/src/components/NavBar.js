@@ -4,7 +4,7 @@
 */
 
 import React, { useState, useContext } from 'react';
-import '../Profile/navBar.css'
+import './navBar.css'
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
 import { ReactComponent as SearchIcon } from '../imgs/search.svg'

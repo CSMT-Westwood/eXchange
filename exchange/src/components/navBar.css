@@ -10,7 +10,7 @@ a {
 }
 
 .navbar{
-    height: 7vh;
+    height: var(--navbar-height);
     width: 100vw;
     background-color:rgb(10, 160, 219);
     position: absolute;
@@ -19,7 +19,7 @@ a {
 }
 
 li {
-    height: 7vh;
+    height: var(--navbar-height);
     width: 4vw;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ li {
 
 .dropdown {
     position: absolute;
-    top: 7vh;
+    top: var(--navbar-height);
     left: 0;
     width: 10vw;
     transform: transpateX(-45%);

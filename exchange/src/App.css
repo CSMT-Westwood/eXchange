@@ -1,9 +1,13 @@
+:root {
+    --navbar-height: 7vh;
+}
+
 .body {
     width: 100vw;
     position: absolute;
-    top: 7vh;
+    top: var(--navbar-height);
 }
 
 html {
-    overflow: hidden;
+    overflow-x: hidden;
 }
