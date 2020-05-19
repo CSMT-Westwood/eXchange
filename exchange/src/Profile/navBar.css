@@ -1,0 +1,102 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.navbar{
+    height: 7vh;
+    width: 100vw;
+    background-color:rgb(10, 160, 219);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+li {
+    height: 7vh;
+    width: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-button {
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1vw;
+}
+
+.icon-button:hover{
+    background: #3b7aa5;
+}
+
+.dropdown {
+    position: absolute;
+    top: 7vh;
+    left: 0vw;
+    width: 7vw;
+    transform: transpateX(-45%);
+    background-color: rgb(10, 160, 219);
+    border-radius: 1vw;
+    padding: 0.5rem;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.menu-item {
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    border-radius: 1vw;
+    transition: background var(--speed);
+    padding: 0.3rem;
+    font-size: 0.8vw;
+}
+
+.menu-item:hover{
+    background-color: #3b7aa5;
+}
+
+#searchIcon{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#menuIcon{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#userIcon{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 3vw;
+}
+
+#alertIcon{
+    position: absolute;
+    top: 0;
+    right: 3vw;
+    display: flex;
+}
+
+#logoIcon{
+    height: 5vh;
+    width: 12vw;
+    position: absolute;
+    top: 1vh;
+    left: 44vw;
+}

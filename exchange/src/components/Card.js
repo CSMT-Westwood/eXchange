@@ -6,14 +6,14 @@ export class Card extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modal: Modal({onClickOutside=})
+			// modal: Modal({onClickOutside=})
 		}
 	}
-	
+
 	render() { //TODO: change offer/req indicator to be color of card
 		return (<div>
 			<div className="row">
-				<div 
+				<div
 				className="card w-25 bg-light mb-3"
 				onClick={this.props.showModal}
 					style={{ cursor: 'pointer' }}
@@ -37,7 +37,7 @@ export class Card extends React.Component {
 		</div>);
 
 	}
-	
+
 }
 export default Card;
 //Use this method - it does handle double digits correctly

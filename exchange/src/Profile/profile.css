@@ -1,0 +1,106 @@
+/*======== CSS for Setting Component ==== */
+
+#settingWrapper{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 4vw;
+    left: 0;
+}
+#settingWrapper::before{
+    content: "";
+    background-image: url("../imgs/settingBgi.svg");
+    background-size: initial;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.fieldWrapper{
+    width: 100vw;
+    position: absolute;
+    top: 12vw;
+    right: 0vw;
+}
+
+.settingModule{
+    width: 100vw;
+    height: 9vw;
+    position: relative;
+    margin: auto;   
+}
+
+#settingTitle{
+    height: 3vw;
+    width: 16vw;
+    font-size: 2vw;
+    position: absolute;
+    top: 5vw;
+    left: 42vw;
+    font-family: "Lucida Console", Courier, monospace;
+    font-weight: 700;
+    border-width: 0.2vw;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0.3vw;
+    text-align: center;
+}
+
+#settingIcon{
+    width: 1.7vw;
+    height: 1.7vw;
+    padding: 0 1vw;
+}
+
+.settingName{
+    width: 16vw;
+    height: 2vw;
+    color: black;
+    font-size: 1.2vw;
+    font-weight: 500;
+    position: absolute;
+    top: 1vw;
+    right: 44vw; 
+    text-align: left;
+}
+
+.settingField{
+    border-color: blue;
+    border-radius: 0.6vw;
+    border-width: 0.1vw;
+    width: 20vw;
+    height: 2.5vw;
+    font-size: 1.3vw;
+    border-style: solid;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 3.5vw;
+    right: 40vw;
+}
+
+.changeButton{
+    width: 6vw;
+    height: 1.8vw;
+    background: white;
+    border-radius: 0.4vw;
+    border-color: blue;
+    border-width: 0.1vw;
+    position: absolute;
+    top: 1vw;
+    right: 40vw;
+    font-size: 1.2vw;
+    font-weight: 400;
+}
+
+.changeButton:hover{
+    border-width: 0.25vw;
+}
+
+/*======== END CSS for Setting Component ==== */
