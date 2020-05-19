@@ -9,7 +9,7 @@
 
 .search-bar-search-bar {
     height: var(--search-bar-component-height);
-    border-radius: calc(var(--search-bar-component-height) / 2);
+    border-radius: calc(var(--search-bar-component-height) / 4);
     border: 1px solid silver;
     width: 30vw;
     padding: 0 calc(var(--search-bar-component-height)/2);

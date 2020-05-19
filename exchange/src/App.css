@@ -3,3 +3,7 @@
     position: absolute;
     top: 7vh;
 }
+
+html {
+    overflow: hidden;
+}

@@ -54,9 +54,10 @@ function DropDownMenu () {
 
     return (
         <div className="dropdown">
+            <DropdownItem icon={<SearchIcon/>} name="directory">Directory</DropdownItem>
             <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
-    <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
+            <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>} name="login">Log out</DropdownItem>
         </div>
     );
@@ -66,8 +67,8 @@ export default function NavBar () {
     const {settings} = useContext(RenderingContext);
 
     return (
-        <nav className="navbar"> 
-            <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
+        <nav className="navbar">
+            {/*<NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />*/}
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>

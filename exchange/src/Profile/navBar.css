@@ -42,25 +42,22 @@ li {
 .dropdown {
     position: absolute;
     top: 7vh;
-    left: 0vw;
-    width: 7vw;
+    left: 0;
+    width: 10vw;
     transform: transpateX(-45%);
     background-color: rgb(10, 160, 219);
-    border-radius: 0.3vw;
-    border-width: 0.15vw;
-    border-color: black;
-    border-style: solid;
-    padding: 0.5rem;
+    border-top: 1px black solid;
+    padding: 0;
     overflow: hidden;
     z-index: 1;
 }
 
 .menu-item {
     height: 3vw;
-    width: 6.5vw;
+    width: 10vw;
     display: flex;
     align-items: center;
-    border-radius: 1vw;
+    border-radius: 0;
     transition: background var(--speed);
     padding: 0.3rem;
     font-size: 1vw;
@@ -101,7 +98,7 @@ li {
 #alertIcon{
     position: absolute;
     top: 0;
-    right: 3vw;
+    right: 0;
     display: flex;
 }
 

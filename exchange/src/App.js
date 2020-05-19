@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Register from './Register/register';
 import Profile from './Profile/profile';
+import Directory from './components/Directory/Directory';
 import { Container } from './components/Container';
 import { Filler } from './components/Filler';
 import { Card } from './components/Card'
@@ -22,6 +23,8 @@ function RenderingComponent () {
             return (<Profile status="userinfo" />);
         case "feeds":
             return (<Profile status="feeds" />);
+        case "directory":
+            return (<Directory />);
         default:
             return (<Profile status="login" />);
     }
