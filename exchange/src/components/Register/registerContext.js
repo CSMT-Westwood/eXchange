@@ -1,5 +1,5 @@
 import React, {useState, createContext, useContext} from 'react';
-import { RenderingContext } from '../renderingContext';
+import { RenderingContext } from '../../renderingContext';
 
 export const RegisterContext = createContext();
 
@@ -54,7 +54,7 @@ function RegisterContextProvider (props) {
                         })
                     }
                 })
-            }   
+            }
         }
     }
 
@@ -64,5 +64,5 @@ function RegisterContextProvider (props) {
         </RegisterContext.Provider>
     );
 }
- 
+
 export default RegisterContextProvider;

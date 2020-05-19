@@ -55,8 +55,8 @@ function DropDownMenu () {
     return (
         <div className="dropdown">
             <DropdownItem icon={<SearchIcon/>} name="directory">Directory</DropdownItem>
-            <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
+            <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>} name="login">Log out</DropdownItem>
         </div>

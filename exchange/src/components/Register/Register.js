@@ -8,7 +8,7 @@
 import React, { useContext } from 'react';
 import './register.css'
 import RegisterContextProvider, { RegisterContext } from './registerContext';
-import { RenderingContext } from '../renderingContext';
+import { RenderingContext } from '../../renderingContext';
 
 function InputField (props) {
     const {info, setInfo} = useContext(RegisterContext);

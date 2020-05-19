@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import "./profile.css"
-import { RenderingContext } from '../renderingContext';
+import { RenderingContext } from '../../renderingContext';
 
 function BasicInfo () {
     const {settings} = useContext(RenderingContext);

@@ -15,9 +15,9 @@
     left: 0;
     width: 100vw;
     height: calc(100vh - 4vw);
-    background-image: url(../imgs/profileBgi.jpg);
+    background-image: url("../../imgs/profileBgi.jpg");
     background-size: initial;
-    opacity: 0.2;   
+    opacity: 0.2;
 }
 
 #userPhoto{
@@ -118,7 +118,7 @@
 }
 #settingWrapper::before{
     content: "";
-    background-image: url("../imgs/settingBgi.svg");
+    background-image: url("../../imgs/settingBgi.svg");
     background-size: initial;
     position: absolute;
     top: 0px;
@@ -140,7 +140,7 @@
     width: 100vw;
     height: 10vw;
     position: relative;
-    margin: auto;   
+    margin: auto;
 }
 
 #settingTitle{
@@ -184,7 +184,7 @@
     font-weight: 500;
     position: absolute;
     top: 1vw;
-    right: 44vw; 
+    right: 44vw;
     text-align: left;
 }
 
