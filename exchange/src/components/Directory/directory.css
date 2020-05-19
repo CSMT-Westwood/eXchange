@@ -1,3 +1,19 @@
+.directory-body {
+    background: url("../../imgs/directoryBgi.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    height: 93vh;
+}
+.directory-search-bar-first {
+    margin-top: 10vh;
+}
 .directory-search-bar {
-    margin-top: 20px;
+    margin-top: 10px;
+}
+.directory-welcome-text {
+    margin-top: 20vh;
+    text-align: center;
+}
+.directory-welcome-text-hidden {
+    display: none;
 }

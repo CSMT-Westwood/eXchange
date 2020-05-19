@@ -10,7 +10,7 @@ a {
 }
 
 .navbar{
-    height: 7vh;
+    height: var(--navbar-height);
     width: 100vw;
     background-color:rgb(10, 160, 219);
     position: absolute;
@@ -19,7 +19,7 @@ a {
 }
 
 li {
-    height: 7vh;
+    height: var(--navbar-height);
     width: 4vw;
     display: flex;
     justify-content: center;
@@ -41,25 +41,34 @@ li {
 
 .dropdown {
     position: absolute;
-    top: 7vh;
-    left: 0vw;
-    width: 7vw;
+    top: var(--navbar-height);
+    left: 0;
+    width: 10vw;
     transform: transpateX(-45%);
     background-color: rgb(10, 160, 219);
-    border-radius: 1vw;
-    padding: 0.5rem;
+    border-top: 1px black solid;
+    padding: 0;
     overflow: hidden;
     z-index: 1;
 }
 
 .menu-item {
     height: 3vw;
+    width: 10vw;
     display: flex;
     align-items: center;
-    border-radius: 1vw;
+    border-radius: 0;
     transition: background var(--speed);
     padding: 0.3rem;
-    font-size: 0.8vw;
+    font-size: 1vw;
+    font-weight: 500;
+    background: rgb(10, 160, 219);
+    border-width: 0;
+}
+
+.menu-item:link, .menu-item:hover{
+    color: black;
+    text-decoration: none;
 }
 
 .menu-item:hover{
@@ -89,7 +98,7 @@ li {
 #alertIcon{
     position: absolute;
     top: 0;
-    right: 3vw;
+    right: 0;
     display: flex;
 }
 
@@ -99,4 +108,16 @@ li {
     position: absolute;
     top: 1vh;
     left: 44vw;
+}
+
+#usernameOnBar{
+    width: 15vw;
+    height: 4vw;
+    position: absolute;
+    left: 4vw;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1vw;
+    text-align: left;
 }
