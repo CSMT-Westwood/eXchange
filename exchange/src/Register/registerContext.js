@@ -1,4 +1,5 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext, useContext} from 'react';
+import { RenderingContext } from '../renderingContext';
 
 export const RegisterContext = createContext();
 
@@ -6,7 +7,8 @@ function RegisterContextProvider (props) {
     const [status, setStatus] = useState(props.status);
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
-    
+    const { settings, setSettings, setPage } = useContext(RenderingContext);
+
     const handleSumbit = (e) => {
         e.preventDefault();
         if(status === 'login'){ // Log in scenario
@@ -19,8 +21,14 @@ function RegisterContextProvider (props) {
                     response.json().then(data => setWarning(data.message))
                 }
                 else{
-                    response.json().then(data => {setWarning("Logging in as " + info[0]["username"] + "...");
-                    sessionStorage.setItem("token", data.token);
+                    response.json().then(data => {
+                        setWarning("Logging in as " + info[0]["username"] + "...");
+                        sessionStorage.setItem("token", data.token);
+                        setSettings.preferences({"preferences": data.preferences})
+                        setSettings.rp({"rp": data.rp})
+                        setSettings.username({"username": data.username})
+                        setSettings.email({"email": data.email})
+                        setPage("userinfo");
                 })
                 }
             })
@@ -42,6 +50,7 @@ function RegisterContextProvider (props) {
                     else{
                         response.json().then(data => {
                             setWarning("Signing up as " + data.username + "...");
+                            setPage("login");
                         })
                     }
                 })

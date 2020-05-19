@@ -46,7 +46,10 @@ li {
     width: 7vw;
     transform: transpateX(-45%);
     background-color: rgb(10, 160, 219);
-    border-radius: 1vw;
+    border-radius: 0.3vw;
+    border-width: 0.15vw;
+    border-color: black;
+    border-style: solid;
     padding: 0.5rem;
     overflow: hidden;
     z-index: 1;
@@ -54,12 +57,21 @@ li {
 
 .menu-item {
     height: 3vw;
+    width: 6.5vw;
     display: flex;
     align-items: center;
     border-radius: 1vw;
     transition: background var(--speed);
     padding: 0.3rem;
-    font-size: 0.8vw;
+    font-size: 1vw;
+    font-weight: 500;
+    background: rgb(10, 160, 219);
+    border-width: 0;
+}
+
+.menu-item:link, .menu-item:hover{
+    color: black;
+    text-decoration: none;
 }
 
 .menu-item:hover{
@@ -99,4 +111,16 @@ li {
     position: absolute;
     top: 1vh;
     left: 44vw;
+}
+
+#usernameOnBar{
+    width: 15vw;
+    height: 4vw;
+    position: absolute;
+    left: 4vw;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1vw;
+    text-align: left;
 }
