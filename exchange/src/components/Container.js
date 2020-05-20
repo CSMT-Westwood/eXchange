@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Modal } from './Modal';
 import {Card} from './Card';
 import TriggerButton from './TriggerButton';
@@ -17,11 +17,18 @@ let examplePost = {
 	author: 'Tommy', 		// the author’s username
 }
 
-export class Container extends Component {
+export class Container extends React.Component {
 	//Strat: possibly have Container be the single source of truth for
 	//whether every modal is open or not. Maintain a dict of identity
 	//to 1 or 0
-	state = { isShown: false };
+	constructor(props) {
+		super(props);
+		this.state = { 
+			isShown: false 
+			
+		};
+	}
+	
 	showModal = () => {
 		this.setState({ isShown: true }, () => {
 			this.closeButton.focus();
@@ -56,14 +63,29 @@ export class Container extends Component {
 				/>
 				{this.state.isShown ? (
 					<Modal
-						modalRef={(n) => (this.modal = n)}
+						modalRef={(n) => (this.modal = n)} //React convention for passing by reference
 						buttonRef={(n) => (this.closeButton = n)}
 						closeModal={this.closeModal}
 						onKeyDown={this.onKeyDown}
 						onClickOutside={this.onClickOutside}
 						modalContent={<Form onSubmit={this.props.onSubmit} />}
 					/>
-				) : null}s
+				) : null}
+				<TriggerButton
+					showModal={this.showModal}
+					buttonRef={(n) => (this.TriggerButton = n)}
+					triggerText={this.props.triggerText}
+				/>
+				{/* {this.state.isShown ? (
+					<Modal
+						modalRef={(n) => (this.modal = n)} //React convention for passing by reference
+						buttonRef={(n) => (this.closeButton = n)}
+						closeModal={this.closeModal}
+						onKeyDown={this.onKeyDown}
+						onClickOutside={this.onClickOutside}
+						modalContent="Second."
+					/>
+				) : null} */}
 				<Card 
 				post={examplePost} 
 				/>

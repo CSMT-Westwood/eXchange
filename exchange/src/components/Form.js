@@ -61,7 +61,7 @@ export class Form extends React.Component {
 		console.log(this.state.itemName);
 		console.log(this.state.condition);
 		console.log(this.state.description);
-		this.props.closeModal();
+		//this.props.closeModal();
 		event.preventDefault();
 	}
 	render() {
