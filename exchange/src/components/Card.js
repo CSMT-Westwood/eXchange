@@ -1,21 +1,48 @@
 import React from 'react';
 import './Card.css';
 import Modal from './Modal';
-
+import classNames from 'classnames';
 export class Card extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 
 		}
+		this.cardClasses = classNames(
+			'bg-light',
+			'mb-3',
+			'card',
+			{
+				'w-25': !this.props.inModal,
+				'w-250': this.props.inModal, 
+				'h-250': this.props.inModal
+			}
+
+		)
+		this.cardTextClasses = classNames(
+			'card-text',
+			{
+				'card-text-minimized': !this.props.inModal,
+				'card-text-expanded': this.props.inModal
+			}
+		)
+		this.postTypeClasses = classNames( 
+			'badge',
+			'float-left',
+			{
+				'badge-primary': this.props.post.typeOfPost===0,
+				'badge-danger': this.props.post.typeOfPost===1
+			}
+		)
 	}
+
 
 	render() { //TODO: change offer/req indicator to be color of card
 		return (
 			<div>
 				<div className="row">
 					<div
-						className="card w-25 bg-light mb-3"
+						className={this.cardClasses}
 						onClick={() => {
 							if(this.props.modalID != undefined) {
 								this.props.showModal(this.props.modalID);
@@ -25,13 +52,13 @@ export class Card extends React.Component {
 					>
 						<div className="card-header">
 							<div> {this.props.post.course} </div>
-							<span class="badge badge-primary float-left">Offer</span>
+							<span class={this.postTypeClasses}>{this.props.post.typeOfPost===0 ? 'Offer': 'Request'}</span>
 							<span> {this.props.post.publication_date.toISOString().slice(0, 10)} </span>
 						</div>
 
 						<div className="card-body">
 							<h5 className="card-title">{this.props.post.itemName}</h5>
-							<p className="card-text">{this.props.post.description}</p>
+							<p className={this.cardTextClasses}>{this.props.post.description}</p>
 							<span class="badge  float-left">By {this.props.post.author}</span>
 							<span class="badge badge-purple float-right">100 RP</span>
 
@@ -39,6 +66,7 @@ export class Card extends React.Component {
 					</div>
 
 				</div>
+				
 			</div>);
 
 	}
