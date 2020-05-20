@@ -3,8 +3,9 @@
         Username, Email, Photo, Password, Theme
 */
 
-import React, { useState, useContext, useEffect } from 'react';
-import './profile.css'
+import React, { useState, useContext } from 'react';
+import './background.css'
+import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
 
@@ -14,7 +15,7 @@ function SettingModule (props) {
     const [privateInfo, setPrivateInfo] = useState(settings[props.name][props.name]);
 
     return (
-        <form className="settingModule" onSubmit={(e)=>{
+        <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
             if (state){
                 if(privateInfo!==settings[props.name][props.name])
@@ -22,15 +23,15 @@ function SettingModule (props) {
             }
             setState(!state);
         }}>
-            <div className="settingName">{props.name + ":"}</div>
+            <Style.SettingName>{props.name + ":"}</Style.SettingName>
             {state
                 ? props.name==="theme"
-                ? <input type="range" min="0" max="100" className="settingField" value={settings.theme.theme} onChange={(e)=>setSettings.theme({"theme": e.target.value})} />
-                : <input type="text" className="settingField" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)}></input>
-                : <div className="settingField">{privateInfo}</div>
+                ? <Style.SettingField type="range" min="0" max="100" value={settings.theme.theme} onChange={(e)=>setSettings.theme({"theme": e.target.value})} />
+                : <Style.SettingField type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
+                : <Style.SettingField as='div'>{privateInfo}</Style.SettingField>
             }
-            <input type="submit" className="changeButton" value={state ? "Confirm" : "Change"}/>
-        </form>
+            <Style.ChangeButton as='input' type="submit" value={state ? "Confirm" : "Change"}/>
+        </Style.SettingModule>
     );
 }
 
@@ -38,19 +39,19 @@ function SettingsWrapper () {
     const { settings } = useContext(RenderingContext);
 
     return ([
-        <span id="settingTitle" key={uuid()} >settings</span>,
-        <div className="fieldWrapper" key={uuid()} >
-            <div className="settingModule" key={uuid()}>
-                <span className="settingName">photo:</span>
-                <div id="photoWrapper"> </div>
-                <button className="changeButton">Change</button>
-            </div>
+        <Style.SettingTitle key={uuid()}>settings</Style.SettingTitle>,
+        <Style.FieldWrapper key={uuid()} >
+            <Style.SettingModule as='div' key={uuid()}>
+                <Style.SettingName>photo:</Style.SettingName>
+                <Style.PhotoWrapper />
+                <Style.ChangeButton>Change</Style.ChangeButton>
+            </Style.SettingModule>
             {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>
             )})}
-        </div>
+        </Style.FieldWrapper>
     ]);
 }
 
