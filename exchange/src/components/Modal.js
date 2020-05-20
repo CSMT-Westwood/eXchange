@@ -17,7 +17,7 @@ export class Modal extends React.Component {
 					tabIndex="-1"
 					aria-modal="true"
 					className="modal-cover"
-					onClick={() => this.props.closeModal(this.props.modalID)}
+					//onClick={() => this.props.closeModal(this.props.modalID)}
 				>
 					<div className="modal-area" ref={this.props.modalRef}>
 						<button
@@ -55,7 +55,7 @@ export class Modal extends React.Component {
 					tabIndex="-1"
 					aria-modal="true"
 					className="modal-cover"
-					onClick={() => this.props.closeModal(this.props.modalID)}
+					//onClick={() => this.props.closeModal(this.props.modalID)}
 				>
 					<div className="modal-area" ref={this.props.modalRef}>
 						<button
