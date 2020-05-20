@@ -1,47 +1,52 @@
-ul {
+import styled from 'styled-components';
+import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
+
+export const UL = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
-}
+`;
 
-a {
-    color: var(--text-color);
+export const BTN = styled.button`
+    border-width: 0;
+`;
+
+export const A = styled.a`
     text-decoration: none;
-}
+`;
 
-.navbar{
-    height: var(--navbar-height);
+export const Navbar = styled.nav`
+    height: 3.5vw;
     width: 100vw;
     background-color:rgb(10, 160, 219);
     position: absolute;
     top: 0;
     left: 0;
-}
+`;
 
-li {
-    height: var(--navbar-height);
-    width: 4vw;
+export const LI = styled.li`
+    height: 3.5vw;
+    width: 3.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+`;
 
-.icon-button {
+export const IconBtn = styled(A)`
     width: 3vw;
     height: 3vw;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1vw;
-}
+    &:hover{
+        background: #3b7aa5;
+    }
+`;
 
-.icon-button:hover{
-    background: #3b7aa5;
-}
-
-.dropdown {
+export const Dropdown = styled.div`
     position: absolute;
-    top: var(--navbar-height);
+    top: 3.5vw;
     left: 0;
     width: 10vw;
     transform: transpateX(-45%);
@@ -50,9 +55,9 @@ li {
     padding: 0;
     overflow: hidden;
     z-index: 1;
-}
+`;
 
-.menu-item {
+export const MenuItem = styled(BTN)`
     height: 3vw;
     width: 10vw;
     display: flex;
@@ -64,55 +69,40 @@ li {
     font-weight: 500;
     background: rgb(10, 160, 219);
     border-width: 0;
-}
+    
+    &:link{
+        color: black;
+        text-decoration: none;
+    }
+    &:hover{
+        color: black;
+        text-decoration: none;
+        background-color: #3b7aa5;
+    }
+`;
 
-.menu-item:link, .menu-item:hover{
-    color: black;
-    text-decoration: none;
-}
 
-.menu-item:hover{
-    background-color: #3b7aa5;
-}
-
-#searchIcon{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-#menuIcon{
+export const MenuIcon=styled(LI)`
     display: flex;
     position: absolute;
     top: 0;
-    left: 0;
-}
+    left: ${(props) => (props.name==='menu' ? '0' : props.name==='user' ? '3vw' : '')};
+    right: ${(props) => (props.name==='aler' ? '0' : '')};
+    
+`;
 
-#userIcon{
-    display: flex;
-    position: absolute;
-    top: 0;
-    left: 3vw;
-}
-
-#alertIcon{
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-}
-
-#logoIcon{
-    height: 5vh;
+export const Logo = styled(LogoIcon)`
+    height: 3.5vw;
     width: 12vw;
     position: absolute;
-    top: 1vh;
+    top: 0;
     left: 44vw;
-}
+    display: flex;
+`;
 
-#usernameOnBar{
+export const UsernameOnBar = styled.div`
     width: 15vw;
-    height: 4vw;
+    height: 3.5vw;
     position: absolute;
     left: 4vw;
     display: flex;
@@ -120,4 +110,4 @@ li {
     font-weight: 500;
     font-size: 1.1vw;
     text-align: left;
-}
+`;

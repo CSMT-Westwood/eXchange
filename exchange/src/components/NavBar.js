@@ -4,7 +4,7 @@
 */
 
 import React, { useState, useContext } from 'react';
-import './navBar.css'
+import * as Style from "./navBarStyle"
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
 import { ReactComponent as SearchIcon } from '../imgs/search.svg'
@@ -21,12 +21,12 @@ function NavItem (props) {
     const [open, setOpen] = useState(false);
 
     return (
-        <li id={props.name}>
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+        <Style.MenuIcon name={props.name.slice(0,4)}>
+            <Style.IconBtn onClick={() => setOpen(!open)}>
                 {open ? props.openIcon : props.closeIcon}
-            </a>
+            </Style.IconBtn>
             {open && props.children}
-        </li>
+        </Style.MenuIcon>
     )
 }
 
@@ -34,7 +34,7 @@ function DropDownMenu () {
     function DropdownItem (props) {
         const {setPage, setSettings} = useContext(RenderingContext);
         return (
-            <button onClick={()=>{
+            <Style.MenuItem onClick={()=>{
                 setPage(props.name);
                 if (props.name==="login") {
                     sessionStorage.setItem("token", "");
@@ -45,21 +45,21 @@ function DropDownMenu () {
                     setSettings.photo({"photo": null});
                     alert("you have successfully logged out!");
                 }
-            }} className="menu-item">
+            }}>
                 <span> {props.icon} </span>
                 {props.children}
-            </button>
+            </Style.MenuItem>
         );
     }
 
     return (
-        <div className="dropdown">
+        <Style.Dropdown>
             <DropdownItem icon={<SearchIcon/>} name="directory">Directory</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
             <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>} name="login">Log out</DropdownItem>
-        </div>
+        </Style.Dropdown>
     );
 }
 
@@ -67,18 +67,17 @@ export default function NavBar () {
     const {settings} = useContext(RenderingContext);
 
     return (
-        <nav className="navbar">
-            {/*<NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />*/}
+        <Style.Navbar>
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>
             <NavItem name="userIcon" openIcon={<ProfileIcon/>} closeIcon={<ProfileIcon/>}>
-                <div id="usernameOnBar">{settings.username.username}</div>
+                <Style.UsernameOnBar>{settings.username.username}</Style.UsernameOnBar>
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
-            <a href="#">
-                <LogoIcon id="logoIcon"/>
-            </a>
-        </nav>
+            <Style.BTN>
+                <Style.Logo id="logoIcon"/>
+            </Style.BTN>
+        </Style.Navbar>
     );
 }

@@ -7,7 +7,7 @@ function RegisterContextProvider (props) {
     const [status, setStatus] = useState(props.status);
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
-    const { settings, setSettings, setPage } = useContext(RenderingContext);
+    const { setSettings, setPage } = useContext(RenderingContext);
 
     const handleSumbit = (e) => {
         e.preventDefault();
