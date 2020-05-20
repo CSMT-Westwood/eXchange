@@ -1,0 +1,123 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.navbar{
+    height: var(--navbar-height);
+    width: 100vw;
+    background-color:rgb(10, 160, 219);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+li {
+    height: var(--navbar-height);
+    width: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-button {
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1vw;
+}
+
+.icon-button:hover{
+    background: #3b7aa5;
+}
+
+.dropdown {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    width: 10vw;
+    transform: transpateX(-45%);
+    background-color: rgb(10, 160, 219);
+    border-top: 1px black solid;
+    padding: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.menu-item {
+    height: 3vw;
+    width: 10vw;
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    transition: background var(--speed);
+    padding: 0.3rem;
+    font-size: 1vw;
+    font-weight: 500;
+    background: rgb(10, 160, 219);
+    border-width: 0;
+}
+
+.menu-item:link, .menu-item:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.menu-item:hover{
+    background-color: #3b7aa5;
+}
+
+#searchIcon{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#menuIcon{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#userIcon{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 3vw;
+}
+
+#alertIcon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+}
+
+#logoIcon{
+    height: 5vh;
+    width: 12vw;
+    position: absolute;
+    top: 1vh;
+    left: 44vw;
+}
+
+#usernameOnBar{
+    width: 15vw;
+    height: 4vw;
+    position: absolute;
+    left: 4vw;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1vw;
+    text-align: left;
+}

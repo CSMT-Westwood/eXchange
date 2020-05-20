@@ -6,7 +6,6 @@ export class Card extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
 		}
 		this.cardClasses = classNames(
 			'bg-light',

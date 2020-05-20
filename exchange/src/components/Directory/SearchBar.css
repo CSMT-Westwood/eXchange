@@ -1,0 +1,48 @@
+:root {
+    --search-bar-component-height: 6vh;
+}
+
+.search-bar-wrapper {
+    text-align: center;
+    padding: 10px;
+}
+
+.search-bar-search-bar {
+    height: var(--search-bar-component-height);
+    border-radius: calc(var(--search-bar-component-height) / 2);
+    border: 1px solid silver;
+    width: 30vw;
+    padding: 0 calc(var(--search-bar-component-height)/2);
+}
+
+.search-bar-search-button {
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: 1;
+}
+.search-bar-mousedown {
+    animation: lessen 0.2s alternate forwards;
+}
+.search-bar-mouseup {
+    animation: thicken 0.2s alternate forwards;
+}
+@keyframes thicken {
+    0% {opacity: 0.3;}
+    100% {opacity: 1;}
+}
+@keyframes lessen {
+    100% {opacity: 0.3;}
+    0% {opacity: 1;}
+}
+
+.search-bar-dropdown {
+    margin-right: 10px;
+    height: var(--search-bar-component-height);
+    border-bottom: 1px silver solid;
+    font-size: larger;
+}
+
+/* eliminate default behavior */
+.search-bar-search-bar:focus {
+    outline-width: 0px;
+}
