@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from './Modal';
 import {Card} from './Card';
 import TriggerButton from './TriggerButton';
+import Form from './Form';
 
 let examplePost = {
 	typeOfPost: 0, //0,1 = offer, request
@@ -17,6 +18,9 @@ let examplePost = {
 }
 
 export class Container extends Component {
+	//Strat: possibly have Container be the single source of truth for
+	//whether every modal is open or not. Maintain a dict of identity
+	//to 1 or 0
 	state = { isShown: false };
 	showModal = () => {
 		this.setState({ isShown: true }, () => {
@@ -52,14 +56,14 @@ export class Container extends Component {
 				/>
 				{this.state.isShown ? (
 					<Modal
-						onSubmit={this.props.onSubmit}
 						modalRef={(n) => (this.modal = n)}
 						buttonRef={(n) => (this.closeButton = n)}
 						closeModal={this.closeModal}
 						onKeyDown={this.onKeyDown}
 						onClickOutside={this.onClickOutside}
+						modalContent={<Form onSubmit={this.props.onSubmit} />}
 					/>
-				) : null}
+				) : null}s
 				<Card 
 				post={examplePost} 
 				/>
