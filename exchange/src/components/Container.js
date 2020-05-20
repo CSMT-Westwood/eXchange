@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from './Modal';
-import {Card} from './Card';
+import { Card } from './Card';
 import TriggerButton from './TriggerButton';
 import Form from './Form';
 
@@ -23,32 +23,49 @@ export class Container extends React.Component {
 	//to 1 or 0
 	constructor(props) {
 		super(props);
-		this.state = { 
-			isShown: false 
-			
+		this.state = {
+			visibility: { //0 for uninit, 1 for nonvisible, 2 for visible
+				modal0: false,
+				modal1: false
+			}
 		};
+		this.showModal = this.showModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 	}
-	
-	showModal = () => {
-		this.setState({ isShown: true }, () => {
-			this.closeButton.focus();
-		});
-		this.toggleScrollLock();
-	};
-	closeModal = () => {
-		this.setState({ isShown: false });
-		this.TriggerButton.focus();
-		this.toggleScrollLock();
-	};
-	onKeyDown = (event) => {
-		if (event.keyCode === 27) {
-			this.closeModal();
+
+
+
+	// showModal = () => {
+	// 	this.setState({ isShown: true }, () => {
+	// 		this.closeButton.focus();
+	// 	});
+	// 	this.toggleScrollLock();
+	// };
+	showModal(modalID) {
+		if (modalID in this.state.visibility) {
+			this.setState(
+				(prevState) => {
+					return {
+						visibility: { ...prevState.visibility, [modalID]: true }
+					};
+				});
 		}
+		this.toggleScrollLock();
+	}
+
+
+	closeModal(modalID) {
+		if (modalID in this.state.visibility) {
+			this.setState(
+				(prevState) => {
+					return {
+						visibility: { ...prevState.visibility, [modalID]: false }
+					};
+				});
+		}
+		this.toggleScrollLock();
 	};
-	onClickOutside = (event) => {
-		if (this.modal && this.modal.contains(event.target)) return;
-		this.closeModal();
-	};
+
 
 	toggleScrollLock = () => {
 		document.querySelector('html').classList.toggle('scroll-lock');
@@ -61,33 +78,27 @@ export class Container extends React.Component {
 					buttonRef={(n) => (this.TriggerButton = n)}
 					triggerText={this.props.triggerText}
 				/>
-				{this.state.isShown ? (
-					<Modal
-						modalRef={(n) => (this.modal = n)} //React convention for passing by reference
-						buttonRef={(n) => (this.closeButton = n)}
-						closeModal={this.closeModal}
-						onKeyDown={this.onKeyDown}
-						onClickOutside={this.onClickOutside}
-						modalContent={<Form onSubmit={this.props.onSubmit} />}
-					/>
-				) : null}
-				<TriggerButton
-					showModal={this.showModal}
-					buttonRef={(n) => (this.TriggerButton = n)}
-					triggerText={this.props.triggerText}
+
+				<Modal
+					modalRef={(n) => (this.modal = n)} //React convention for passing by reference
+					buttonRef={(n) => (this.closeButton = n)} //MODALREF AND BUTTONREF ARE PROB OBSOLETE BUT DONT REMOVE FOR NOW
+					modalID="modal0"
+					isVisible={this.state.visibility["modal0"]}
+					closeModal={this.closeModal}
+					modalContent={<Form onSubmit={this.props.onSubmit} />}
 				/>
-				{/* {this.state.isShown ? (
-					<Modal
-						modalRef={(n) => (this.modal = n)} //React convention for passing by reference
-						buttonRef={(n) => (this.closeButton = n)}
-						closeModal={this.closeModal}
-						onKeyDown={this.onKeyDown}
-						onClickOutside={this.onClickOutside}
-						modalContent="Second."
-					/>
-				) : null} */}
-				<Card 
-				post={examplePost} 
+				<Card
+					post={examplePost}
+					modalID="modal1"
+					showModal={this.showModal}
+				/>
+				<Modal
+					modalRef={(n) => (this.modal = n)} //React convention for passing by reference
+					buttonRef={(n) => (this.closeButton = n)} //MODALREF AND BUTTONREF ARE PROB OBSOLETE BUT DONT REMOVE FOR NOW
+					modalID="modal1"
+					isVisible={this.state.visibility["modal1"]}
+					closeModal={this.closeModal}
+					modalContent="Expanded post content. Do you want to accept this offer/req?"
 				/>
 			</React.Fragment>
 		);

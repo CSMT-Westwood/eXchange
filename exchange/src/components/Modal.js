@@ -5,9 +5,13 @@ import FocusTrap from 'focus-trap-react';
 export class Modal extends React.Component {
 	constructor(props) {
 		super(props);
+	
 	}
 
 	render() {
+		if(!this.props.isVisible) {
+			return null;
+		}
 		return ReactDOM.createPortal(
 			<FocusTrap>
 				<aside
@@ -16,8 +20,8 @@ export class Modal extends React.Component {
 					tabIndex="-1"
 					aria-modal="true"
 					className="modal-cover"
-					onClick={this.props.onClickOutside}
-					onKeyDown={this.props.onKeyDown}
+					onClick={() => this.props.closeModal(this.props.modalID)}
+					onKeyDown={() => this.props.onKeyDown(this.props.modalID)}
 				>
 					<div className="modal-area" ref={this.props.modalRef}>
 						<button
@@ -25,7 +29,8 @@ export class Modal extends React.Component {
 							aria-label="Close Modal"
 							aria-labelledby="close-modal"
 							className="_modal-close"
-							onClick={this.props.closeModal}
+							onClick={() => this.props.closeModal(this.props.modalID)
+								}
 						>
 							<span id="close-modal" className="_hide-visual">
 								Close

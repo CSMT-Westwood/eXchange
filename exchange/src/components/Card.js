@@ -16,7 +16,11 @@ export class Card extends React.Component {
 				<div className="row">
 					<div
 						className="card w-25 bg-light mb-3"
-						onClick={this.props.showModal}
+						onClick={() => {
+							if(this.props.modalID != undefined) {
+								this.props.showModal(this.props.modalID);
+							}
+						}}
 						style={{ cursor: 'pointer' }}
 					>
 						<div className="card-header">
