@@ -18,10 +18,14 @@ export const A = styled.a`
 export const Navbar = styled.nav`
     height: 3.5vw;
     width: 100vw;
-    background: linear-gradient(
-        rgb(${(props) => 10 + props.color}, ${(props) => 100 - props.color}, ${(props) => 230 - props.color}), 
-        rgb(${(props) => 50 + props.color}, ${(props) => 180 - props.color}, ${(props) => 230 - props.color})
-        );
+    background: linear-gradient( 30deg,
+        rgb(${(props) => (255 * Math.sin(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
+            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
+        rgb(${(props) => (255 * Math.cos(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
+    );
     position: absolute;
     top: 0;
     left: 0;
@@ -52,8 +56,10 @@ export const Dropdown = styled.div`
     top: 3.5vw;
     left: 0;
     width: 10vw;
-    transform: transpateX(-45%);
-    background-color: rgb(10, 160, 219);
+    background-color:rgb(
+        ${(props) => (255 * Math.sin(props.color / 40))},
+        ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
+        ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) });
     border-top: 1px black solid;
     padding: 0;
     overflow: hidden;
@@ -70,7 +76,7 @@ export const MenuItem = styled(BTN)`
     padding: 0.3rem;
     font-size: 1vw;
     font-weight: 500;
-    background: rgb(10, 160, 219);
+    background: rgba(10, 160, 219, 0);
     border-width: 0;
     
     &:link{

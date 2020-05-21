@@ -8,7 +8,7 @@ function BasicInfo () {
 
     return (
         <div>
-            <Style.UserPhoto></Style.UserPhoto>
+            <Style.UserPhoto>{Image}</Style.UserPhoto>
             <Style.UserName>{settings.username.username}</Style.UserName>
             <Style.UserEmail>{settings.email.email}</Style.UserEmail>
         </div>
@@ -17,7 +17,7 @@ function BasicInfo () {
 
 function InfoField (props) {
     return (
-        <Style.InfoField>
+        <Style.InfoField color={window.color}>
             <Style.Info>{props.name}</Style.Info>
             <Style.Info>{props.value}</Style.Info>
         </Style.InfoField>
@@ -45,6 +45,7 @@ export default function UserInfo () {
             setMount(!mount);
         }
     })
+
     return (
         <div id="profileWrapper">
             <BasicInfo />

@@ -7,14 +7,13 @@ export const UserPhoto=styled.div`
     top: 2vw;
     left: 44vw;
     border-radius: 50%;
-    background: lightgrey;
     &: before{
         content: "";
         position: absolute;
-        top: -0.3vw; left: -0.3vw;
-        width: 12.6vw; height: 12.6vw;
+        top: -0.5vw; left: -0.5vw;
+        width: 13vw; height: 13vw;
         z-index: -1;
-        border-radius: 50%;
+        // border-radius: 50%;
         background: linear-gradient(180deg, blue, aqua);
     }
 `;
@@ -57,7 +56,14 @@ export const InfoField=styled.div`
     height: 8vw;
     position: relative;
     border-style: solid;
-    border-image: linear-gradient(180deg, blue, aqua) 1;
+    border-image: linear-gradient( 270deg,
+        rgb(${(props) => (255 * Math.cos(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }), 
+        rgb(${(props) => (255 * Math.sin(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 127, 2) * -254 / (127*127) + 254) }, 
+            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
+    ) 1;
     border-radius: 0.6vw;
     border-width: 0.4vw;
     background-color: #fff;

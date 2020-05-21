@@ -3,7 +3,7 @@
         4vw * 100vw
 */
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import * as Style from "./navBarStyle"
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
@@ -29,6 +29,7 @@ function NavItem (props) {
 }
 
 function DropDownMenu () {
+    const [pColor, setPcolor] = useState(window.color);
     function DropdownItem (props) {
         const {setPage, setSettings} = useContext(RenderingContext);
         return (
@@ -50,8 +51,16 @@ function DropDownMenu () {
         );
     }
 
+    useEffect(() => {
+        
+        const interval = setInterval(() => {
+            setPcolor(window.color);
+        }, 30);
+        return () => clearInterval(interval);
+    });
+
     return (
-        <Style.Dropdown>
+        <Style.Dropdown color={pColor}> 
             <DropdownItem icon={<SearchIcon/>} name="directory">Directory</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
             <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
@@ -61,11 +70,21 @@ function DropDownMenu () {
     );
 }
 
-export default function NavBar () {
+export default function NavBar (props) {
     const {settings} = useContext(RenderingContext);
+    const [pColor, setPcolor] = useState(window.color);
+
+    useEffect(() => {
+        if(props.setting){
+            const interval = setInterval(() => {
+                setPcolor(window.color);
+            }, 30);
+            return () => clearInterval(interval);
+        }
+    });
 
     return (
-        <Style.Navbar color={settings.theme.theme}>
+        <Style.Navbar color={pColor}>
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>

@@ -3,15 +3,14 @@ import React, { useState, createContext } from 'react';
 export const RenderingContext = createContext();
 
 function RenderingContextProvider (props) {
-    const [page, setPage] = useState("login");
+    const [page, setPage] = useState("settings");
     const [username, setUsername] = useState({"username": "You are not logged in"});
     const [email, setEmail] = useState({"email": "joebruin@ucla.edu"});
     const [rp, setRp] = useState({"rp": 0});
-    const [photo, setPhoto] = useState({"photo": "../../imgs/profile.jpg"});
+    const [photo, setPhoto] = useState({"photo": "../../imgs/profile.svg"});
     const [preferences, setPreferences] = useState({"preferences": []})
     const [theme, setTheme] = useState({"theme": 0});
     const [posts, setPosts] = useState({"posts": []});
-
     const settings = {
         "theme": theme, 
         "username": username, 

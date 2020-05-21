@@ -1,32 +1,37 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './background.css'
 import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
 
+window.color = 0;
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
     const {settings, setSettings, changeInfo} = useContext(RenderingContext);
     const [privateInfo, setPrivateInfo] = useState(settings[props.name][props.name]);
-    
+
     return (
         <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
             if (state){
                 if(privateInfo!==settings[props.name][props.name])
+                if(props.name !== "theme")
                     changeInfo({[props.name]: privateInfo});
+                else
+                    setSettings.theme({"theme" : window.color})
+                    window.color = privateInfo;
             }
             setState(!state);
         }}>
             <Style.SettingName>{props.name + ":"}</Style.SettingName>
             {state
                 ? props.name==="theme"
-                ? <Style.SettingField type="range" min="0" max="100" value={settings.theme.theme} onChange={(e)=>setSettings.theme({"theme": e.target.value})} />
-                : <Style.SettingField type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
-                : <Style.SettingField as='div'>{privateInfo}</Style.SettingField>
+                ? <Style.SettingField color={window.color} type="range" min="0" max="254" value={privateInfo} onChange={(e)=>{setPrivateInfo( e.target.value ); window.color=e.target.value; }} />
+                : <Style.SettingField  color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
+                : <Style.SettingField  color={window.color} as='div'>{privateInfo}</Style.SettingField>
             }
-            <Style.ChangeBtn type="submit" value={state ? "Confirm" : "Change"}/>
+            <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
         </Style.SettingModule>
     );
 }
@@ -56,14 +61,14 @@ function SettingsWrapper () {
     }
 
     return ([
-        <Style.SettingTitle key={uuid()}>settings</Style.SettingTitle>,
+        <Style.SettingTitle key={uuid()}>Settings</Style.SettingTitle>,
         <Style.FieldWrapper key={uuid()} >
             <Style.SettingModule key={uuid()} action="userAvatar/avatar" method="post" enctype="multipart/form-data" onSubmit={uploadPhoto} >
                 <Style.SettingName>photo:</Style.SettingName>
                 <Style.PhotoWrapper photo={settings.photo.photo}/>
                 <Style.ChangePhoto type="file" name="image" onChange={(e) => {                
                     setPhoto(e.target.files[0])}} />
-                <Style.ChangeBtn type="submit" value="upload" />
+                <Style.ChangeBtn color={window.color} type="submit" value="upload" />
             </Style.SettingModule>
             {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >

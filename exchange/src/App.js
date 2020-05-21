@@ -30,14 +30,22 @@ function RenderingComponent () {
     }
 }
 
+function DisplayWrapper () {
+    const {page} = useContext(RenderingContext);
+    return(
+      <div>
+          <NavBar setting={page !== "settings" ? false: true} />
+          <RenderingComponent />
+      </div>  
+    );
+}
+
 function App() {
     return (
         <div className="App">
             <RenderingContextProvider>
-                <NavBar />
-                <RenderingComponent />
+                <DisplayWrapper />        
             </RenderingContextProvider>
-
         </div>
     );
 }

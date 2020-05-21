@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Container from '../Container';
 
 export const FeedWrapper = styled.div`
     width: 100vw;
@@ -18,4 +19,10 @@ export const FeedTitle = styled.div`
     font-weight: 500;
     font-size: 2.7vw;
     font-family: Arial, Helvetica, sans-serif;
+`;
+
+export const NewContainer = styled(Container)`
+    background: black;
+    width: 100vw;
+    height: 100vh;
 `;

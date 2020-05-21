@@ -17,16 +17,12 @@ export const SettingModule = styled.form`
 export const SettingTitle = styled.span`
     height: 3vw;
     width: 16vw;
-    font-size: 2vw;
+    font-size: 3vw;
     position: absolute;
-    top: 5vw;
+    top: 4vw;
     left: 42vw;
     font-family: "Lucida Console", Courier, monospace;
     font-weight: 700;
-    border-width: 0.2vw;
-    border-color: black;
-    border-style: solid;
-    border-radius: 0.5vw;
     text-align: center;
 `;
 
@@ -64,9 +60,16 @@ export const SettingName = styled.span`
 `;
 
 export const SettingField = styled.input`
-    border-color: blue;
-    border-radius: 0.6vw;
-    border-width: 0.1vw;
+    border-image: linear-gradient( 90deg,
+        rgb(${(props) => (255 * Math.sin(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
+            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
+        rgb(${(props) => (255 * Math.cos(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
+    ) 1;
+
+    border-width: 0.25vw;
     width: 20vw;
     height: 2.5vw;
     font-size: 1.3vw;
@@ -83,19 +86,33 @@ export const SettingField = styled.input`
 
 export const ChangeBtn = styled.input`
     width: 6vw;
-    height: 1.8vw;
-    background: white;
+    height: 1.9vw;
+    border-style: solid;
+    border-image: linear-gradient( 30deg,
+        rgb(${(props) => (255 * Math.cos(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }), 
+        rgb(${(props) => (255 * Math.sin(props.color / 40))},
+            ${(props) => (Math.pow(props.color - 127, 2) * -254 / (127*127) + 254) }, 
+            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
+    ) 1;
+
     border-radius: 0.4vw;
-    border-color: blue;
-    border-width: 0.1vw;
+    border-width: 0.2vw;
     position: absolute;
     top: 1vw;
     right: 40vw;
     font-size: 1.2vw;
     font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0);
 
     &:hover{
         border-width: 0.25vw;
+        background-color: rgba(255,255,255,0.4);
     }
 `;
 
