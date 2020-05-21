@@ -11,6 +11,7 @@ function Container(props) {
 	const showModal = (i) => {
 		setPostIndex(i);
 		setModalVisibility(true);
+		toggleScrollLock();
 	}
 
 	const closeModal = () => {
@@ -24,7 +25,6 @@ function Container(props) {
 
 	var cards = [];
 	for (let i = 0; i < props.posts.length; i++) {
-		console.log(props.posts[i]);
 		cards.push(<Card
 			post={props.posts[i]}
 			key={i}
