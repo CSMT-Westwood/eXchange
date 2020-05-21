@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import SearchBar from './SearchBar';
+import Container from '../Container';
 import '../../App.css';
 import './directory.css';
-
 
 function Directory(props) {
     const [queryObject, setQueryObject] = useState({});
     const [firstVisit, setFirstVisit] = useState(true);
     const [results, setResults] = useState([]);
+    const [resultsClass, setResultsClass] = useState("");
 
     const handleSearch = (value) => {
         // get query results
@@ -17,6 +18,7 @@ function Directory(props) {
         // change the page layout
         if (firstVisit) {
             setFirstVisit(false);
+            setTimeout(()=>setResultsClass("directory-result-shown"), 2000);
         }
 
         // fetch the query
@@ -24,17 +26,15 @@ function Directory(props) {
             let url = new URL("http://localhost:8000/post/search");
             let params = value;
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-            console.log(url);
             fetch(url, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
             })
             .then(a => a.json())
-            .then(b => console.log(b));
+            .then(b => setResults(b));
         } catch (e) {
             console.log(e);
         }
-
     }
 
     return (
@@ -49,6 +49,9 @@ function Directory(props) {
                 className={
                     firstVisit ? "directory-search-bar-first" : "directory-search-bar"
                 }/>
+            <Container triggerText="YEET"
+                className={`directory-result-box ${resultsClass}`}
+                posts={results}></Container>
         </div>
     )
 }
