@@ -14,9 +14,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: calc(100vh - 4vw);
-    background-image: url("../../imgs/profileBgi.jpg");
-    background-size: initial;
+    height: calc(100vh - var(--navbar-height));
     opacity: 0.2;
 }
 

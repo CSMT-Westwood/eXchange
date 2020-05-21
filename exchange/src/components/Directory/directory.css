@@ -1,8 +1,8 @@
-.directory-body {
+html {
     background: url("../../imgs/directoryBgi.jpg");
     background-attachment: fixed;
     background-size: cover;
-    height: 93vh;
+    background-repeat: repeat-y;
 }
 .directory-search-bar-first {
     position: absolute;
@@ -36,10 +36,15 @@
 .directory-result-box {
     opacity: 0;
     position: absolute;
-    top: calc(var(--search-bar-height) + 20px);
-    width: 100%;
-    background: green;
+    top: calc(var(--search-bar-height) + 5vh);
+    left: 10vw;
+    width: 80%;
+    /* background: green; */
     z-index: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 .directory-result-shown {
     animation: show-search-results 2s forwards;

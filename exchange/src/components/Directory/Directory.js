@@ -49,7 +49,7 @@ function Directory(props) {
                 className={
                     firstVisit ? "directory-search-bar-first" : "directory-search-bar"
                 }/>
-            <Container triggerText="YEET"
+            <Container
                 className={`directory-result-box ${resultsClass}`}
                 posts={results}></Container>
         </div>
