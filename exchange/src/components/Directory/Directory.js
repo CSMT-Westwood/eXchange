@@ -15,7 +15,10 @@ function Directory(props) {
         console.log(value);
 
         // change the page layout
-        setFirstVisit(false);
+        if (firstVisit) {
+            setFirstVisit(false);
+        }
+        
     }
 
     return (
