@@ -7,17 +7,19 @@ function RenderingContextProvider (props) {
     const [username, setUsername] = useState({"username": "You are not logged in"});
     const [email, setEmail] = useState({"email": "joebruin@ucla.edu"});
     const [rp, setRp] = useState({"rp": 0});
-    const [photo, setPhoto] = useState({"photo": null});
+    const [photo, setPhoto] = useState({"photo": "../../imgs/profile.jpg"});
     const [preferences, setPreferences] = useState({"preferences": []})
     const [theme, setTheme] = useState({"theme": 0});
-    
+    const [posts, setPosts] = useState({"posts": []});
+
     const settings = {
+        "theme": theme, 
         "username": username, 
         "email": email, 
-        "theme": theme, 
         "rp": rp, 
         "photo": photo, 
-        "preferences": preferences
+        "preferences": preferences,
+        "posts": posts
     };
     
     const setSettings = {
@@ -26,7 +28,8 @@ function RenderingContextProvider (props) {
         "theme": setTheme, 
         "rp": setRp, 
         "photo": setPhoto,
-        "preferences": setPreferences
+        "preferences": setPreferences,
+        "posts": setPosts
     };
     
     function changeInfo (props) {
@@ -41,7 +44,7 @@ function RenderingContextProvider (props) {
             else{
                 response.json().then(data => {
                     alert("Your change is successfully made!");
-                    console.log(data);
+                    // console.log(data);
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email})
                     setSettings.preferences({"preferences": data.preferences})

@@ -37,13 +37,17 @@ export const PhotoSetting = styled.div`
     background: green;
 `;
 
+
 export const PhotoWrapper = styled.div`
     width: 6vw;
     height: 6vw;
     position: absolute;
     left: 47vw;
-    top: 3vw;
-    background: grey;
+    top: 4vw;
+    background-image: ${(props) => `url(${props.photo})`});
+    background-size: contain;
+    border-width: 0.4vw;
+    border-style: solid;
     border-radius: 50%;
 `;
 
@@ -77,7 +81,7 @@ export const SettingField = styled.input`
 `;
 
 
-export const ChangeButton = styled.button`
+export const ChangeBtn = styled.input`
     width: 6vw;
     height: 1.8vw;
     background: white;
@@ -93,4 +97,8 @@ export const ChangeButton = styled.button`
     &:hover{
         border-width: 0.25vw;
     }
+`;
+
+export const ChangePhoto = styled(ChangeBtn)`
+    right: 46.5vw;
 `;

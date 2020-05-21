@@ -12,14 +12,12 @@ import { ReactComponent as ProfileIcon } from '../imgs/profile.svg'
 import { ReactComponent as FeedIcon } from '../imgs/feed.svg'
 import { ReactComponent as SettingsIcon } from '../imgs/settings.svg'
 import { ReactComponent as LogoutIcon } from '../imgs/logout.svg'
-import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
 import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
 import { RenderingContext } from '../renderingContext';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
-
     return (
         <Style.MenuIcon name={props.name.slice(0,4)}>
             <Style.IconBtn onClick={() => setOpen(!open)}>
@@ -67,7 +65,7 @@ export default function NavBar () {
     const {settings} = useContext(RenderingContext);
 
     return (
-        <Style.Navbar>
+        <Style.Navbar color={settings.theme.theme}>
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>

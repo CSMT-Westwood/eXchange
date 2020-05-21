@@ -46,6 +46,19 @@
     opacity: 0.2;
 }
 
+.test{
+    width: 6vw;
+    height: 6vw;
+    position: absolute;
+    left: 47vw;
+    top: 4vw;
+    background-image: url("../../imgs/profile.svg");
+    background-size: contain;
+    border-width: 0.4vw;
+    border-style: solid;
+    border-radius: 50%;
+}        
+
 /*======== END CSS for UserInfo ===========*/
 
 

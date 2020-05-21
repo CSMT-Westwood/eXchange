@@ -29,8 +29,7 @@ function RegisterContextProvider (props) {
                         setSettings.username({"username": data.username})
                         setSettings.email({"email": data.email})
                         setPage("directory");
-                })
-                }
+                })}
             })
         }
 

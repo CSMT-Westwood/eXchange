@@ -26,17 +26,16 @@ function RenderingComponent () {
         case "directory":
             return (<Directory />);
         default:
-            return (<Profile status="login" />);
+            return (<Register status="login" />);
     }
 }
 
 function App() {
-
     return (
         <div className="App">
             <RenderingContextProvider>
                 <NavBar />
-                <RenderingComponent/>
+                <RenderingComponent />
             </RenderingContextProvider>
 
         </div>

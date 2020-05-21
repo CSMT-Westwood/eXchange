@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as Style from "./userInfoStyle"
 import "./background.css"
 import { RenderingContext } from '../../renderingContext';
@@ -26,14 +26,31 @@ function InfoField (props) {
 
 
 export default function UserInfo () {
-    const { settings } = useContext(RenderingContext);
-    console.log(settings);
+    const { settings, setSettings } = useContext(RenderingContext);
+    const [mount, setMount] = useState(true);
+    useEffect ( () => {
+        if(mount){
+            fetch("http://localhost:8000/user/self", {
+                method: "GET",
+                headers: { "Content-Type": "application/json", "token":sessionStorage.getItem("token") },
+            }).then(response => {
+                if(!response.ok)
+                    response.json().then(data => alert(data.message))
+                else{
+                    response.json().then(data => {
+                        setSettings.posts({"posts": data.posts});
+                    })
+                }          
+            })
+            setMount(!mount);
+        }
+    })
     return (
         <div id="profileWrapper">
             <BasicInfo />
             <Style.UserInfo left>
                 <InfoField name="Reputation" value={settings.rp.rp} />
-                <InfoField name="Activity" value="0" />
+                <InfoField name="Activity" value={settings.posts.posts.length} />
             </Style.UserInfo>
             <Style.UserInfo>
                 <InfoField name="Following" value={settings.preferences.preferences.length} />

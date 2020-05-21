@@ -18,7 +18,10 @@ export const A = styled.a`
 export const Navbar = styled.nav`
     height: 3.5vw;
     width: 100vw;
-    background-color:rgb(10, 160, 219);
+    background: linear-gradient(
+        rgb(${(props) => 10 + props.color}, ${(props) => 100 - props.color}, ${(props) => 230 - props.color}), 
+        rgb(${(props) => 50 + props.color}, ${(props) => 180 - props.color}, ${(props) => 230 - props.color})
+        );
     position: absolute;
     top: 0;
     left: 0;

@@ -1,12 +1,19 @@
-import React from 'react';
-import './userData.css';
+import React, { useEffect, useContext } from 'react';
+import * as Style from './feedStyle'
+import { RenderingContext } from '../../renderingContext';
 
-function Feed () {
+function Feeds () {
+    
+    const {settings} = useContext(RenderingContext);
+    useEffect( () => {
+
+    })
+
     return (
-        <div id="feedWarpper">
-            <span id="feedTitle">Personal Feed</span>
-        </div>
+        <Style.FeedWrapper>
+            <Style.FeedTitle>Personal Feed</Style.FeedTitle>
+        </Style.FeedWrapper>
     );
 }
 
-export default Feed;
+export default Feeds;

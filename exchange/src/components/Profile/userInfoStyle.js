@@ -7,10 +7,16 @@ export const UserPhoto=styled.div`
     top: 2vw;
     left: 44vw;
     border-radius: 50%;
-    border-color: blue;
-    border-width: 0.3vw;
-    border-style: solid;
-    background: grey;
+    background: lightgrey;
+    &: before{
+        content: "";
+        position: absolute;
+        top: -0.3vw; left: -0.3vw;
+        width: 12.6vw; height: 12.6vw;
+        z-index: -1;
+        border-radius: 50%;
+        background: linear-gradient(180deg, blue, aqua);
+    }
 `;
 
 export const UserName=styled.span`
@@ -50,10 +56,10 @@ export const InfoField=styled.div`
     width: 25vw;
     height: 8vw;
     position: relative;
-    border-style: double;
-    border-color: blue;
-    border-radius: 1.3vw;
-    border-width: 0.6vw;
+    border-style: solid;
+    border-image: linear-gradient(180deg, blue, aqua) 1;
+    border-radius: 0.6vw;
+    border-width: 0.4vw;
     background-color: #fff;
     &:hover{
         background-color: rgba(0, 98, 255, 0.3);
