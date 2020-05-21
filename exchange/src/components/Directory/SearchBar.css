@@ -1,5 +1,6 @@
 :root {
     --search-bar-component-height: 6vh;
+    --search-bar-height: calc(var(--search-bar-component-height) + 30px)
 }
 
 .search-bar-wrapper {

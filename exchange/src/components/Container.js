@@ -1,71 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Modal } from './Modal';
-import {Card} from './Card';
+import { Card } from './Card';
 import TriggerButton from './TriggerButton';
+import Form from './Form';
 
-let examplePost = {
-	typeOfPost: 0, //0,1 = offer, request
-	typeOfItem: 0, //0,1 = textbook, notes		
-	course: 'CS33',
-	itemName: 'Computer Organization: A Perspective!',
-	condition: 0, //from 0 (best) to 3 (worst)
-	description: 'Awesome. I dropped this off at your house when I went to the',
-	link: '',
-	fulfilled: 0, //Unfulfilled, Pending (matched w at least 1 other person), Fulfilled (marked for deletion). On the backend, we will switch pending to fulfilled after 2 weeks have passed.
-	publication_date: new Date(2023, 4, 13),
-	author: 'Tommy', 		// the author’s username
-}
+function Container(props) {
+	const [modalVisibility, setModalVisibility] = useState(false);
+	const [postIndex, setPostIndex] = useState(0);
 
-export class Container extends Component {
-	state = { isShown: false };
-	showModal = () => {
-		this.setState({ isShown: true }, () => {
-			this.closeButton.focus();
-		});
-		this.toggleScrollLock();
-	};
-	closeModal = () => {
-		this.setState({ isShown: false });
-		this.TriggerButton.focus();
-		this.toggleScrollLock();
-	};
-	onKeyDown = (event) => {
-		if (event.keyCode === 27) {
-			this.closeModal();
-		}
-	};
-	onClickOutside = (event) => {
-		if (this.modal && this.modal.contains(event.target)) return;
-		this.closeModal();
-	};
+	const showModal = (i) => {
+		setPostIndex(i);
+		setModalVisibility(true);
+	}
 
-	toggleScrollLock = () => {
+	const closeModal = () => {
+		setModalVisibility(false);
+		toggleScrollLock();
+	}
+
+	const toggleScrollLock = () => {
 		document.querySelector('html').classList.toggle('scroll-lock');
 	};
-	render() {
-		return (
-			<React.Fragment>
-				<TriggerButton
-					showModal={this.showModal}
-					buttonRef={(n) => (this.TriggerButton = n)}
-					triggerText={this.props.triggerText}
-				/>
-				{this.state.isShown ? (
-					<Modal
-						onSubmit={this.props.onSubmit}
-						modalRef={(n) => (this.modal = n)}
-						buttonRef={(n) => (this.closeButton = n)}
-						closeModal={this.closeModal}
-						onKeyDown={this.onKeyDown}
-						onClickOutside={this.onClickOutside}
-					/>
-				) : null}
-				<Card 
-				post={examplePost} 
-				/>
-			</React.Fragment>
-		);
+
+	var cards = [];
+	for (let i = 0; i < props.posts.length; i++) {
+		console.log(props.posts[i]);
+		cards.push(<Card
+			post={props.posts[i]}
+			key={i}
+			inModal={false}
+			showModal={() => {showModal(i)}}
+		/>);
 	}
+
+	return (
+		<div className={props.className}>
+			<Modal
+				isVisible={modalVisibility} //we pass a bool value
+				closeModal={closeModal} //we pass a reference to a function
+				hasAccept={true}
+				modalContent={<Card
+					post={props.posts[postIndex]}
+					inModal={true}
+					showModal={() => {}}
+				/>}
+			/>
+			{cards}
+
+		</div>
+	)
 }
 
 export default Container;

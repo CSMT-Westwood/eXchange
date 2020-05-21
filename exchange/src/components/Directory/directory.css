@@ -1,25 +1,29 @@
-.directory-body {
+html {
     background: url("../../imgs/directoryBgi.jpg");
     background-attachment: fixed;
     background-size: cover;
-    height: 93vh;
+    background-repeat: repeat-y;
 }
 .directory-search-bar-first {
     position: absolute;
     top: 55vh;
+    z-index: 1;
 }
 .directory-search-bar {
     position: absolute;
     top: 55vh;
+    z-index: 1;
     animation: forwards move-search-bar 2s;
 }
 .directory-welcome-text {
     margin-top: 20vh;
     text-align: center;
+    z-index: 0;
 }
 .directory-welcome-text-hidden {
     margin-top: 20vh;
     text-align: center;
+    z-index: 0;
     animation: forwards hide-welcome-text 1s;
 }
 @keyframes hide-welcome-text {
@@ -27,6 +31,25 @@
     100% {opacity: 0;}
 }
 @keyframes move-search-bar {
-    0% {top: 55vh;}
-    100% {top: 10px;}
+    100% {transform: translate3d(0px, calc(-55vh + 10px), 0px);}
+}
+.directory-result-box {
+    opacity: 0;
+    position: absolute;
+    top: calc(var(--search-bar-height) + 5vh);
+    left: 10vw;
+    width: 80%;
+    /* background: green; */
+    z-index: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.directory-result-shown {
+    animation: show-search-results 2s forwards;
+}
+@keyframes show-search-results {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }

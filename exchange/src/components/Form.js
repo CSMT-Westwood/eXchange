@@ -1,5 +1,8 @@
 import React from 'react';
-
+/**
+ * Currently suited for only Offer-Req Form.
+ * IT'S NOT A GENERIC FORM COMPONENT.
+ */
 export class Form extends React.Component {
 	constructor(props) {
 		super(props);
@@ -58,6 +61,7 @@ export class Form extends React.Component {
 		console.log(this.state.itemName);
 		console.log(this.state.condition);
 		console.log(this.state.description);
+		//this.props.closeModal();
 		event.preventDefault();
 	}
 	render() {
