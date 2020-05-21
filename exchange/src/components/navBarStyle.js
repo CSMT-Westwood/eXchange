@@ -47,7 +47,9 @@ export const IconBtn = styled(A)`
     justify-content: center;
     border-radius: 1vw;
     &:hover{
-        background: #3b7aa5;
+        cursor: pointer;
+        background: ${(props) => props.name==="user" ? `rgba(255,255,255,0)` : 
+        `rgba(255,255,255,0.6)`};
     }
 `;
 
@@ -86,7 +88,7 @@ export const MenuItem = styled(BTN)`
     &:hover{
         color: black;
         text-decoration: none;
-        background-color: #3b7aa5;
+        background-color: lightgrey;
     }
 `;
 

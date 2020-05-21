@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import './background.css'
 import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
@@ -55,7 +55,8 @@ function SettingsWrapper () {
                 response.json().then(data => {
                     console.log(data);
                     alert("You have successfully changed your photo!");
-                    setSettings.photo(data.url)
+                    alert(data.url);    
+                    setSettings.photo({"photo": data.url})
             })}
         });
     }
@@ -65,10 +66,10 @@ function SettingsWrapper () {
         <Style.FieldWrapper key={uuid()} >
             <Style.SettingModule key={uuid()} action="userAvatar/avatar" method="post" enctype="multipart/form-data" onSubmit={uploadPhoto} >
                 <Style.SettingName>photo:</Style.SettingName>
-                <Style.PhotoWrapper photo={settings.photo.photo}/>
-                <Style.ChangePhoto type="file" name="image" onChange={(e) => {                
-                    setPhoto(e.target.files[0])}} />
-                <Style.ChangeBtn color={window.color} type="submit" value="upload" />
+                <Style.PhotoWrapper src={settings.photo.photo} />
+                <Style.ChangePhoto as="label" htmlFor="testtest">Choose</Style.ChangePhoto>
+                <input id="testtest" type="file" name="image" onChange={(e) => {         setPhoto(e.target.files[0])}} />
+                <Style.ChangeBtn color={window.color} type="submit" value="Upload" />
             </Style.SettingModule>
             {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >

@@ -34,16 +34,13 @@ export const PhotoSetting = styled.div`
 `;
 
 
-export const PhotoWrapper = styled.div`
+export const PhotoWrapper = styled.img`
     width: 6vw;
     height: 6vw;
     position: absolute;
     left: 47vw;
     top: 4vw;
-    background-image: ${(props) => `url(${props.photo})`});
     background-size: contain;
-    border-width: 0.4vw;
-    border-style: solid;
     border-radius: 50%;
 `;
 
@@ -103,7 +100,7 @@ export const ChangeBtn = styled.input`
     top: 1vw;
     right: 40vw;
     font-size: 1.2vw;
-    font-weight: 400;
+    font-weight: 500;
     text-align: center;
     display: flex;
     align-items: center;
@@ -118,4 +115,5 @@ export const ChangeBtn = styled.input`
 
 export const ChangePhoto = styled(ChangeBtn)`
     right: 46.5vw;
+    cursor: pointer;
 `;

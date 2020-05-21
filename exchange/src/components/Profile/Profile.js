@@ -6,6 +6,7 @@ import { RenderingContext } from '../../renderingContext';
 
 export default function Profile (props) { 
     const {setPage} = useContext(RenderingContext);
+    
     if(sessionStorage.getItem("token")===""){
         alert("You must log in to view this page!");
         setPage('login');

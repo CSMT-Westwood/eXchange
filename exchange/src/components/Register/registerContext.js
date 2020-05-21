@@ -7,14 +7,36 @@ function RegisterContextProvider (props) {
     const [status, setStatus] = useState(props.status);
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
-    const { setSettings, setPage } = useContext(RenderingContext);
+    const { settings, setSettings, setPage } = useContext(RenderingContext);
+
+    function getUserInfo (props) {
+        fetch("http://localhost:8000/user/self", {
+            method: "GET",
+            headers: { "Content-Type": "application/json", "token": props.token},
+        }).then(response => {
+            if(!response.ok){
+                response.json().then(data => setWarning(data.message));
+            }
+            else{
+                response.json().then(data => {
+                    setSettings.preferences({"preferences": data.preferences});
+                    setSettings.rp({"rp": data.rp});
+                    setSettings.username({"username": data.username});
+                    setSettings.email({"email": data.email});
+                    setSettings.photo({"photo": data.avatar === "" ? settings.photo.photo : data.avatar});
+                    setSettings.posts({"posts" : data.posts});
+                    setPage("directory");
+            })}
+        })
+    }
+
 
     const handleSumbit = (e) => {
         e.preventDefault();
         if(status === 'login'){ // Log in scenario
             fetch("http://localhost:8000/user/login", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json"},
                 body: JSON.stringify({...info[0], ...info[2]}),
             }).then(response => {
                 if(!response.ok){
@@ -22,13 +44,9 @@ function RegisterContextProvider (props) {
                 }
                 else{
                     response.json().then(data => {
-                        setWarning("Logging in as " + info[0]["username"] + "...");
                         sessionStorage.setItem("token", data.token);
-                        setSettings.preferences({"preferences": data.preferences})
-                        setSettings.rp({"rp": data.rp})
-                        setSettings.username({"username": data.username})
-                        setSettings.email({"email": data.email})
-                        setPage("directory");
+                        setWarning("Logging in as " + info[0]["username"] + "...");
+                        getUserInfo({"token": data.token});
                 })}
             })
         }

@@ -1,21 +1,12 @@
 import styled from 'styled-components';
 
-export const UserPhoto=styled.div`
+export const UserPhoto=styled.img`
     width: 12vw;
     height: 12vw;
     position: absolute;
     top: 2vw;
     left: 44vw;
     border-radius: 50%;
-    &: before{
-        content: "";
-        position: absolute;
-        top: -0.5vw; left: -0.5vw;
-        width: 13vw; height: 13vw;
-        z-index: -1;
-        // border-radius: 50%;
-        background: linear-gradient(180deg, blue, aqua);
-    }
 `;
 
 export const UserName=styled.span`

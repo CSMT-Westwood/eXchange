@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import * as Style from "./userInfoStyle"
 import "./background.css"
 import { RenderingContext } from '../../renderingContext';
 
 function BasicInfo () {
     const {settings} = useContext(RenderingContext);
-
     return (
         <div>
-            <Style.UserPhoto>{Image}</Style.UserPhoto>
+            <Style.UserPhoto src={settings.photo.photo} />
             <Style.UserName>{settings.username.username}</Style.UserName>
             <Style.UserEmail>{settings.email.email}</Style.UserEmail>
         </div>
@@ -26,25 +25,7 @@ function InfoField (props) {
 
 
 export default function UserInfo () {
-    const { settings, setSettings } = useContext(RenderingContext);
-    const [mount, setMount] = useState(true);
-    useEffect ( () => {
-        if(mount){
-            fetch("http://localhost:8000/user/self", {
-                method: "GET",
-                headers: { "Content-Type": "application/json", "token":sessionStorage.getItem("token") },
-            }).then(response => {
-                if(!response.ok)
-                    response.json().then(data => alert(data.message))
-                else{
-                    response.json().then(data => {
-                        setSettings.posts({"posts": data.posts});
-                    })
-                }          
-            })
-            setMount(!mount);
-        }
-    })
+    const { settings } = useContext(RenderingContext);
 
     return (
         <div id="profileWrapper">

@@ -72,4 +72,8 @@
     z-index: 0;
 }
 
+input[type="file"] {
+    display: none;
+}
+
 /*======== END CSS for Setting ==== */

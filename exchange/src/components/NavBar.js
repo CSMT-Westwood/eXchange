@@ -20,7 +20,7 @@ function NavItem (props) {
     const [open, setOpen] = useState(false);
     return (
         <Style.MenuIcon name={props.name.slice(0,4)}>
-            <Style.IconBtn onClick={() => setOpen(!open)}>
+            <Style.IconBtn name={props.name.slice(0,4)} onClick={() => setOpen(!open)}>
                 {open ? props.openIcon : props.closeIcon}
             </Style.IconBtn>
             {open && props.children}
@@ -30,6 +30,7 @@ function NavItem (props) {
 
 function DropDownMenu () {
     const [pColor, setPcolor] = useState(window.color);
+
     function DropdownItem (props) {
         const {setPage, setSettings} = useContext(RenderingContext);
         return (
@@ -41,7 +42,7 @@ function DropDownMenu () {
                     setSettings.email({"email": ""});
                     setSettings.rp({"rp": 0});
                     setSettings.preferences({"preferences": []});
-                    setSettings.photo({"photo": null});
+                    setSettings.photo({"photo": process.env.PUBLIC_URL + "/profile.svg"});
                     alert("you have successfully logged out!");
                 }
             }}>
@@ -65,13 +66,13 @@ function DropDownMenu () {
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
             <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
-            <DropdownItem icon={<LogoutIcon/>} name="login">Log out</DropdownItem>
+            <DropdownItem icon={<LogoutIcon/>} name="login">{sessionStorage.getItem("token")==="" ? "Log in" : "Log out"}</DropdownItem>
         </Style.Dropdown>
     );
 }
 
 export default function NavBar (props) {
-    const {settings} = useContext(RenderingContext);
+    const {settings, setPage} = useContext(RenderingContext);
     const [pColor, setPcolor] = useState(window.color);
 
     useEffect(() => {
@@ -88,11 +89,15 @@ export default function NavBar (props) {
             <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
                 <DropDownMenu />
             </NavItem>
-            <NavItem name="userIcon" openIcon={<ProfileIcon/>} closeIcon={<ProfileIcon/>}>
+            <NavItem name="userIcon" 
+                openIcon={<img src={settings.photo.photo}  
+                    style={{borderRadius: `50%`, height: `1.5vw`, width: `1.5vw`}}/>} 
+                closeIcon={<img src={settings.photo.photo} 
+                    style={{borderRadius: `50%`, height: `1.5vw`, width: `1.5vw`}}/>}>
                 <Style.UsernameOnBar>{settings.username.username}</Style.UsernameOnBar>
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
-            <Style.BTN>
+            <Style.BTN onClick={() => {setPage("directory")}}>
                 <Style.Logo id="logoIcon"/>
             </Style.BTN>
         </Style.Navbar>
