@@ -54,8 +54,7 @@ function SettingsWrapper () {
             else{
                 response.json().then(data => {
                     console.log(data);
-                    alert("You have successfully changed your photo!");
-                    alert(data.url);    
+                    alert("You have successfully changed your photo!");   
                     setSettings.photo({"photo": data.url})
             })}
         });
