@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 export const RenderingContext = createContext();
 
 function RenderingContextProvider (props) {
-    const [page, setPage] = useState("feeds");
+    const [page, setPage] = useState("directory");
     const [username, setUsername] = useState({"username": "You are not logged in"});
     const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});

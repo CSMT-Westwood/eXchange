@@ -80,6 +80,7 @@ export const MenuItem = styled(BTN)`
     font-weight: 500;
     background: rgba(10, 160, 219, 0);
     border-width: 0;
+    z-index: 2;
     
     &:link{
         color: black;
