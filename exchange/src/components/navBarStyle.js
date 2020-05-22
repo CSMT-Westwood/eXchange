@@ -115,7 +115,7 @@ export const UsernameOnBar = styled.div`
     width: 15vw;
     height: 3.5vw;
     position: absolute;
-    left: 4vw;
+    left: 3.5vw;
     display: flex;
     align-items: center;
     font-weight: 500;

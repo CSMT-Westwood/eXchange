@@ -64,6 +64,7 @@ function SettingsWrapper () {
     return ([
         <Style.SettingTitle key={uuid()}>Settings</Style.SettingTitle>,
         <Style.FieldWrapper key={uuid()} >
+
             <Style.SettingModule key={uuid()} action="userAvatar/avatar" method="post" enctype="multipart/form-data" onSubmit={uploadPhoto} >
                 <Style.SettingName>photo:</Style.SettingName>
                 <Style.PhotoWrapper src={settings.photo.photo} />
@@ -71,11 +72,14 @@ function SettingsWrapper () {
                 <input id="testtest" type="file" name="image" onChange={(e) => {         setPhoto(e.target.files[0])}} />
                 <Style.ChangeBtn color={window.color} type="submit" value="Upload" />
             </Style.SettingModule>
+
             {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>
             )})}
+
+            
         </Style.FieldWrapper>
     ]);
 }

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Settings from './settings';
 import UserInfo from './userInfo';
-import Feeds from './feeds';
+import Feeds from '../Feed/feeds';
 import { RenderingContext } from '../../renderingContext';
 
 export default function Profile (props) { 

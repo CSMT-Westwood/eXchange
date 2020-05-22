@@ -57,9 +57,36 @@ export const InfoField=styled.div`
     ) 1;
     border-radius: 0.6vw;
     border-width: 0.4vw;
-    background-color: #fff;
+    z-index: 2;
     &:hover{
-        background-color: rgba(0, 98, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+`;
+
+export const InfoFieldWrapper=styled(InfoField)`
+    background-size: 25vw 8vw;
+    background-image: url(${ (props) => {
+        switch (props.name){
+            case "Reputation": 
+            return (require (`../../imgs/reputation.jpg`)); break;
+            case "Activity": 
+            return (require (`../../imgs/activities.jpg`)); break;
+            case "Following": 
+            return (require (`../../imgs/following.jpg`)); break;
+            case "Posts": 
+            return (require (`../../imgs/posts.jpg`)); break;
+            default: return(""); break;
+    }}});
+    opacity: 0.2;
+    padding: 0;
+    border: none;
+    width: 24.25vw;
+    height: 7.25vw;
+    border-radius: 0;
+    z-index: 1;
+    top: -7vw; left: 0;
+    &:hover{
+        opacity: 0.3;
     }
 `;
 
@@ -67,4 +94,7 @@ export const Info=styled.div`
     text-align: center;
     font-size: 1.7vw;
     font-weight: 500;
+    height: 3.5vw;
+    position: relative;
+    z-index: 3;
 `;

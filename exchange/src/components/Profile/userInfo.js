@@ -16,11 +16,12 @@ function BasicInfo () {
 
 function InfoField (props) {
     return (
-        <Style.InfoField color={window.color}>
+        <Style.InfoField  color={window.color}>
             <Style.Info>{props.name}</Style.Info>
             <Style.Info>{props.value}</Style.Info>
+            <Style.InfoFieldWrapper name={props.name} />
         </Style.InfoField>
-    );
+    )
 }
 
 
@@ -32,11 +33,11 @@ export default function UserInfo () {
             <BasicInfo />
             <Style.UserInfo left>
                 <InfoField name="Reputation" value={settings.rp.rp} />
-                <InfoField name="Activity" value={settings.posts.posts.length} />
+                <InfoField name="Activity" value={settings.activities.activities.length} />
             </Style.UserInfo>
             <Style.UserInfo>
                 <InfoField name="Following" value={settings.preferences.preferences.length} />
-                <InfoField name="Other" value="0" />
+                <InfoField name="Posts" value={settings.posts.posts.length} />
             </Style.UserInfo>
         </div>
     );

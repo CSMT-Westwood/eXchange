@@ -25,6 +25,8 @@ function RegisterContextProvider (props) {
                     setSettings.email({"email": data.email});
                     setSettings.photo({"photo": data.avatar === "" ? settings.photo.photo : data.avatar});
                     setSettings.posts({"posts" : data.posts});
+                    setSettings.activities({"activities": data.activities});
+                    setSettings.followed({"followed": data.followedPosts});
                     setPage("directory");
             })}
         })
@@ -43,9 +45,9 @@ function RegisterContextProvider (props) {
                     response.json().then(data => setWarning(data.message))
                 }
                 else{
+                    setWarning("Logging in as " + info[0]["username"] + "...");
                     response.json().then(data => {
                         sessionStorage.setItem("token", data.token);
-                        setWarning("Logging in as " + info[0]["username"] + "...");
                         getUserInfo({"token": data.token});
                 })}
             })
