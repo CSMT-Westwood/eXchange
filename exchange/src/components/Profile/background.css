@@ -77,3 +77,15 @@ input[type="file"] {
 }
 
 /*======== END CSS for Setting ==== */
+
+
+.Test{
+    position: absolute;
+    height: 10vw;
+    width: 100vw;
+    top: 12vw;
+    left: 0;
+    font-size: 2vw;
+    font-weight: 400;
+    text-align: center;
+}
