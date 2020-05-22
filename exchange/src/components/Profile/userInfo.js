@@ -1,45 +1,44 @@
 import React, { useContext } from 'react';
-import "./profile.css"
+import * as Style from "./userInfoStyle"
+import "./background.css"
 import { RenderingContext } from '../../renderingContext';
 
 function BasicInfo () {
     const {settings} = useContext(RenderingContext);
-
     return (
         <div>
-            <div id="userPhoto"></div>
-            <span id="userName">{settings.username.username}</span>
-            <span id="userEmail">{settings.email.email}</span>
+            <Style.UserPhoto src={settings.photo.photo} />
+            <Style.UserName>{settings.username.username}</Style.UserName>
+            <Style.UserEmail>{settings.email.email}</Style.UserEmail>
         </div>
     );
 }
 
 function InfoField (props) {
     return (
-        <div className="infoField">
-            <div className="infoName">{props.name}</div>
-            <div className="infoValue">{props.value}</div>
-        </div>
-    );
+        <Style.InfoField  color={window.color}>
+            <Style.Info>{props.name}</Style.Info>
+            <Style.Info>{props.value}</Style.Info>
+            <Style.InfoFieldWrapper name={props.name} />
+        </Style.InfoField>
+    )
 }
 
 
 export default function UserInfo () {
     const { settings } = useContext(RenderingContext);
-    console.log(settings);
+
     return (
         <div id="profileWrapper">
             <BasicInfo />
-            <div id="userInfoWrapper">
-                <div id="userInfoLeft">
-                    <InfoField name="Reputation" value={settings.rp.rp} />
-                    <InfoField name="Activity" value="0" />
-                </div>
-                <div id="userInfoRight">
-                    <InfoField name="Following" value={settings.preferences.preferences.length} />
-                    <InfoField name="Other" value="0" />
-                </div>
-            </div>
+            <Style.UserInfo left>
+                <InfoField name="Reputation" value={settings.rp.rp} />
+                <InfoField name="Activity" value={settings.activities.activities.length} />
+            </Style.UserInfo>
+            <Style.UserInfo>
+                <InfoField name="Following" value={settings.preferences.preferences.length} />
+                <InfoField name="Posts" value={settings.posts.posts.length} />
+            </Style.UserInfo>
         </div>
     );
 }

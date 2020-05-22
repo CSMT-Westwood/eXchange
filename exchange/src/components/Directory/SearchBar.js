@@ -6,7 +6,7 @@ import './SearchBar.css';
 
 function SearchBar(props) {
     const [searchQuery, setSearchQuery] = useState("");
-    const [searchTag, setSearchTag] = useState("Textbooks");
+    const [searchTag, setSearchTag] = useState(0);
     const options = ["Textbooks", "Notes", "Skills"];
 
     const handleTextFieldChange = (e) =>{
@@ -21,7 +21,7 @@ function SearchBar(props) {
         if (e.type === "keypress" && e.key !== "Enter") return;
         const res = {
             query: searchQuery,
-            tag: searchTag
+            typeOfItem: searchTag
         };
         props.handleSearch(res);
     }

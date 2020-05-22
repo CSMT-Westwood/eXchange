@@ -13,7 +13,7 @@ export class Card extends React.Component {
 			'card',
 			{
 				'w-25': !this.props.inModal,
-				'w-250': this.props.inModal, 
+				'w-250': this.props.inModal,
 				'h-250': this.props.inModal
 			}
 
@@ -25,7 +25,7 @@ export class Card extends React.Component {
 				'card-text-expanded': this.props.inModal
 			}
 		)
-		this.postTypeClasses = classNames( 
+		this.postTypeClasses = classNames(
 			'badge',
 			'float-left',
 			{
@@ -38,35 +38,26 @@ export class Card extends React.Component {
 
 	render() { //TODO: change offer/req indicator to be color of card
 		return (
-			<div>
-				<div className="row">
-					<div
-						className={this.cardClasses}
-						onClick={() => {
-							if(this.props.modalID != undefined) {
-								this.props.showModal(this.props.modalID);
-							}
-						}}
-						style={{ cursor: 'pointer' }}
-					>
-						<div className="card-header">
-							<div> {this.props.post.course} </div>
-							<span class={this.postTypeClasses}>{this.props.post.typeOfPost===0 ? 'Offer': 'Request'}</span>
-							<span> {this.props.post.publication_date.toISOString().slice(0, 10)} </span>
-						</div>
+			<div
+				className={`${this.cardClasses} full-card`}
+				onClick={this.props.showModal}
+				style={{ cursor: 'pointer' }}
+			>
+				<div className="card-header">
+					<div> {this.props.post.course} </div>
+					<span className={this.postTypeClasses}>{this.props.post.typeOfPost===0 ? 'Offer': 'Request'}</span>
+					<span> {this.props.post.publication_date.slice(0, 10)} </span>
+				</div>
 
-						<div className="card-body">
-							<h5 className="card-title">{this.props.post.itemName}</h5>
-							<p className={this.cardTextClasses}>{this.props.post.description}</p>
-							<span class="badge  float-left">By {this.props.post.author}</span>
-							<span class="badge badge-purple float-right">100 RP</span>
-
-						</div>
-					</div>
+				<div className="card-body">
+					<h5 className="card-title">{this.props.post.itemName}</h5>
+					<p className={this.cardTextClasses}>{this.props.post.description}</p>
+					<span className="badge  float-left">By {this.props.post.author}</span>
+					<span className="badge badge-purple float-right">100 RP</span>
 
 				</div>
-				
-			</div>);
+			</div>
+		);
 
 	}
 

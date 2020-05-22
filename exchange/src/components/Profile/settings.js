@@ -1,12 +1,10 @@
-/*
-    <Settings /> Compoment:
-        Username, Email, Photo, Password, Theme
-*/
-
-import React, { useState, useContext, useEffect } from 'react';
-import './profile.css'
+import React, { useState, useContext } from 'react';
+import './background.css'
+import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
+
+window.color = 0;
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
@@ -14,43 +12,75 @@ function SettingModule (props) {
     const [privateInfo, setPrivateInfo] = useState(settings[props.name][props.name]);
 
     return (
-        <form className="settingModule" onSubmit={(e)=>{
+        <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
             if (state){
                 if(privateInfo!==settings[props.name][props.name])
+                if(props.name !== "theme")
                     changeInfo({[props.name]: privateInfo});
+                else
+                    setSettings.theme({"theme" : window.color})
+                    window.color = privateInfo;
             }
             setState(!state);
         }}>
-            <div className="settingName">{props.name + ":"}</div>
+            <Style.SettingName>{props.name + ":"}</Style.SettingName>
             {state
                 ? props.name==="theme"
-                ? <input type="range" min="0" max="100" className="settingField" value={settings.theme.theme} onChange={(e)=>setSettings.theme({"theme": e.target.value})} />
-                : <input type="text" className="settingField" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)}></input>
-                : <div className="settingField">{privateInfo}</div>
+                ? <Style.SettingField color={window.color} type="range" min="0" max="254" value={privateInfo} onChange={(e)=>{setPrivateInfo( e.target.value ); window.color=e.target.value; }} />
+                : <Style.SettingField  color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
+                : <Style.SettingField  color={window.color} as='div'>{privateInfo}</Style.SettingField>
             }
-            <input type="submit" className="changeButton" value={state ? "Confirm" : "Change"}/>
-        </form>
+            <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
+        </Style.SettingModule>
     );
 }
 
 function SettingsWrapper () {
-    const { settings } = useContext(RenderingContext);
+    const { settings, setSettings } = useContext(RenderingContext);
+    const [photo, setPhoto] = useState(null);
+
+    function uploadPhoto (e) {
+        e.preventDefault();
+        const data = new FormData();
+        data.append("image", photo);
+        fetch("http://localhost:8000/userAvatar/avatar", {
+            method: "POST",
+            headers: { "token": sessionStorage.getItem("token") },
+            body: data,
+        }).then(response => {
+            if(!response.ok)
+                response.json().then(data => alert(data.message))
+            else{
+                response.json().then(data => {
+                    console.log(data);
+                    alert("You have successfully changed your photo!");
+                    alert(data.url);    
+                    setSettings.photo({"photo": data.url})
+            })}
+        });
+    }
 
     return ([
-        <span id="settingTitle" key={uuid()} >settings</span>,
-        <div className="fieldWrapper" key={uuid()} >
-            <div className="settingModule" key={uuid()}>
-                <span className="settingName">photo:</span>
-                <div id="photoWrapper"> </div>
-                <button className="changeButton">Change</button>
-            </div>
+        <Style.SettingTitle key={uuid()}>Settings</Style.SettingTitle>,
+        <Style.FieldWrapper key={uuid()} >
+
+            <Style.SettingModule key={uuid()} action="userAvatar/avatar" method="post" enctype="multipart/form-data" onSubmit={uploadPhoto} >
+                <Style.SettingName>photo:</Style.SettingName>
+                <Style.PhotoWrapper src={settings.photo.photo} />
+                <Style.ChangePhoto as="label" htmlFor="testtest">Choose</Style.ChangePhoto>
+                <input id="testtest" type="file" name="image" onChange={(e) => {         setPhoto(e.target.files[0])}} />
+                <Style.ChangeBtn color={window.color} type="submit" value="Upload" />
+            </Style.SettingModule>
+
             {Object.values(settings).slice(0,3).map( setting => { return (
                 <div key={uuid()} >
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>
             )})}
-        </div>
+
+            
+        </Style.FieldWrapper>
     ]);
 }
 

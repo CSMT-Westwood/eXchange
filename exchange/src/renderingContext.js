@@ -3,21 +3,27 @@ import React, { useState, createContext } from 'react';
 export const RenderingContext = createContext();
 
 function RenderingContextProvider (props) {
-    const [page, setPage] = useState("login");
+    const [page, setPage] = useState("directory");
     const [username, setUsername] = useState({"username": "You are not logged in"});
-    const [email, setEmail] = useState({"email": "joebruin@ucla.edu"});
+    const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});
-    const [photo, setPhoto] = useState({"photo": null});
-    const [preferences, setPreferences] = useState({"preferences": []})
+    const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
     const [theme, setTheme] = useState({"theme": 0});
-    
+    const [preferences, setPreferences] = useState({"preferences": []});
+    const [posts, setPosts] = useState({"posts": []});
+    const [activities, setActivities] = useState({"activities": []});
+    const [followed, setFollowed] = useState({"followed" : []});
+
     const settings = {
+        "theme": theme, 
         "username": username, 
         "email": email, 
-        "theme": theme, 
         "rp": rp, 
         "photo": photo, 
-        "preferences": preferences
+        "preferences": preferences,
+        "posts": posts,
+        "activities": activities,
+        "followed": followed
     };
     
     const setSettings = {
@@ -26,7 +32,10 @@ function RenderingContextProvider (props) {
         "theme": setTheme, 
         "rp": setRp, 
         "photo": setPhoto,
-        "preferences": setPreferences
+        "preferences": setPreferences,
+        "posts": setPosts,
+        "activities": setActivities,
+        "followed": setFollowed
     };
     
     function changeInfo (props) {
@@ -41,7 +50,7 @@ function RenderingContextProvider (props) {
             else{
                 response.json().then(data => {
                     alert("Your change is successfully made!");
-                    console.log(data);
+                    // console.log(data);
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email})
                     setSettings.preferences({"preferences": data.preferences})
