@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Form } from './Form';
 import FocusTrap from 'focus-trap-react';
+import "./modal.css";
 export class Modal extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            responseText: ""
+        };
     }
 
     returnModal() {
@@ -25,7 +28,10 @@ export class Modal extends React.Component {
                             aria-label="Close Modal"
                             aria-labelledby="close-modal"
                             className="_modal-close"
-                            onClick={this.props.closeModal}>
+                            onClick={()=>{
+                                this.setState({responseText: ""});
+                                this.props.closeModal();
+                            }}>
                             <span id="close-modal" className="_hide-visual">
                                 Close
                             </span>
@@ -64,13 +70,13 @@ export class Modal extends React.Component {
             }).then(data => data.json());	
             if (result.message === "Show Link") {
                 this.props.showLink();
+            } else {
+                this.setState({responseText: result.message});
             }
             		
 		} catch (error) {
 			console.log(error);
 		}
-		// close the modal
-		// this.props.closeModal();
 		return;
     }
 
@@ -91,7 +97,10 @@ export class Modal extends React.Component {
                             aria-label="Close Modal"
                             aria-labelledby="close-modal"
                             className="_modal-close"
-                            onClick={this.props.closeModal}>
+                            onClick={() => {
+                                this.setState({responseText: ""});
+                                this.props.closeModal();
+                            }}>
                             <span id="close-modal" className="_hide-visual">
                                 Close
                             </span>
@@ -101,6 +110,7 @@ export class Modal extends React.Component {
                         </button>
                         <div className="modal-body">
                             {this.props.modalContent}
+                            <p className="modal-response-text">{this.state.responseText}</p>
                             <div className="form-group pt-5">
                                 <button className="form-control btn btn-primary" 
                                     type="submit" onClick={this.acceptOfferReq}>
@@ -121,7 +131,7 @@ export class Modal extends React.Component {
         if(!this.props.isVisible) {
             return null;
         }
-        if(this.props.hasAccept) {
+        if(this.props.hasAccept && sessionStorage.hasOwnProperty("token")) {
             return this.returnModalWithAccept();
         } else {
             return this.returnModal();

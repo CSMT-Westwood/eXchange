@@ -18,6 +18,7 @@ function Container(props) {
     const closeModal = () => {
         setModalVisibility(false);
         toggleScrollLock();
+        setLinkDisplay(false);
     }
 
     const toggleScrollLock = () => {
