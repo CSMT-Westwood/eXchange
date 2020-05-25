@@ -1,6 +1,5 @@
 import React from 'react';
 import './Card.css';
-import Modal from './Modal';
 import classNames from 'classnames';
 export class Card extends React.Component {
 	constructor(props) {
@@ -46,7 +45,7 @@ export class Card extends React.Component {
 				<div className="card-header">
 					<div> {this.props.post.course} </div>
 					<span className={this.postTypeClasses}>{this.props.post.typeOfPost===0 ? 'Offer': 'Request'}</span>
-					<span> {this.props.post.publication_date.slice(0, 10)} </span>
+					<span> {this.props.post.publication_date.toString().slice(0, 10)} </span>
 				</div>
 
 				<div className="card-body">

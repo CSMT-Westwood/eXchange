@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { Card } from './Card';
+import TriggerButton from './TriggerButton';
+import Form from './Form';
 
+//To be used as a sibling to a Card rather than a parent
 function Container(props) {
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [postIndex, setPostIndex] = useState(0);
 
 	const showModal = (i) => {
-		setPostIndex(i); //TODO: What does this do?
+		setPostIndex(i);
 		setModalVisibility(true);
 		toggleScrollLock();
 	}
@@ -22,14 +25,14 @@ function Container(props) {
 	};
 
 	var cards = [];
-	for (let i = 0; i < props.posts.length; i++) {
-		cards.push(<Card
-			post={props.posts[i]}
-			key={i}
-			inModal={false}
-			showModal={() => {showModal(i)}}
-		/>);
-	}
+	// for (let i = 0; i < props.posts.length; i++) {
+	// 	cards.push(<Card
+	// 		post={props.posts[i]}
+	// 		key={i}
+	// 		inModal={false}
+	// 		showModal={() => {showModal(i)}}
+	// 	/>);
+	// }
 
 	return (
 		<div className={props.className}>
@@ -40,11 +43,9 @@ function Container(props) {
 				modalContent={<Card
 					post={props.posts[postIndex]}
 					inModal={true}
-					showModal={() => {}}
+					showModal={() => {}} //TODO: what does the bracket expresion mean
 				/>}
 			/>
-
-			{props.displayCards ? cards: null}
 
 		</div>
 	)
