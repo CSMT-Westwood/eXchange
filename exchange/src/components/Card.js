@@ -6,6 +6,7 @@ export class Card extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			linkClass: "card-link-hidden"
 		}
 		this.cardClasses = classNames(
 			'bg-light',
@@ -35,7 +36,6 @@ export class Card extends React.Component {
 		)
 	}
 
-
 	render() { //TODO: change offer/req indicator to be color of card
 		return (
 			<div
@@ -52,8 +52,12 @@ export class Card extends React.Component {
 				<div className="card-body">
 					<h5 className="card-title">{this.props.post.itemName}</h5>
 					<p className={this.cardTextClasses}>{this.props.post.description}</p>
-					<span className="badge  float-left">By {this.props.post.author}</span>
-					<span className="badge badge-purple float-right">100 RP</span>
+					<div className={this.props.showLink ? "card-link-shown" : "card-link-hidden"}>
+						<a className={this.cardTextClasses} 
+							href={`https://${this.props.post.link}`} target="_blank">{this.props.post.link}</a>
+					</div>
+					<span className="badge  float-left">By {this.props.post.author.username}</span>
+					<span className="badge badge-purple float-right">{this.props.post.author.rp} RP</span>
 
 				</div>
 			</div>

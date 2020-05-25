@@ -20,3 +20,10 @@
 .full-card {
 	margin: 0 10px;
 }
+.card-link-hidden {
+	display: none;
+}
+.card-link-shown {
+	display: block;
+	margin-bottom: 1rem;
+}
