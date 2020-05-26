@@ -1,10 +1,9 @@
 
 
 .scrolling-wrapper {
-
-	margin-top: 2em;
 	height: 35%;
 	width: 100%;
+	margin-top: 5vw;
 	position: relative;
 	top: 50%;
 	left: 50%;
@@ -29,9 +28,15 @@
 
 .dashboard {
 	position: absolute;
-	top: 20vw;
+	top: 16vw;
 	left: 40vw;
 	width: 55%;
 
 	z-index: 0;
+}
+.wrapper-title {
+	z-index: 0;
+	bottom: 8vw;
+	position: relative;
+	font-weight: bold;
 }

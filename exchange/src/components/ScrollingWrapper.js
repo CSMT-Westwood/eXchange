@@ -16,26 +16,21 @@ let examplePost = {
 }
 
 export default function ScrollingWrapper(props) {
+	var cards = [];
+	const coll = props.collection;
+	for (let i = 0; i < props.posts.length; i++) {
+		cards.push(<Card
+			post={props.posts[i]}
+			key={i}
+			inModal={false}
+			showModal={() => props.showModal(coll, i)}
+		/>);
+	}
 	return (
 		<React.Fragment>
-			
-		<div class="scrolling-wrapper">
-				<h1 className="display-6">TRAIN</h1>
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
-			{<Card post={examplePost}> </Card>}
+			<span className="display-4 wrapper-title"><h1>{props.title}</h1></span>
+		<div className="scrolling-wrapper">
+			{cards}
 		</div>
 		</React.Fragment>
 	);

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const UserPhoto=styled.img`
-    width: 12vw;
-    height: 12vw;
-    position: absolute;
-    top: 2vw;
-    left: 44vw;
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+    top: 7vw;
+	left: 13vw;
     border-radius: 50%;
 `;
 
@@ -32,18 +32,18 @@ export const UserEmail=styled.span`
 `;
 
 export const UserInfo=styled.div`
-    width: 30vw;
-    height: 20vw;
-    position: absolute;
-    top: 25vw;
-    left: ${(props) => (props.left ? '20vw' : '50vw')};
+    width: 5vw;
+    height: 0vw;
+    position: relative;
+    top: 8vw;
+    left: ${(props) => (props.left ? '5vw' : '25vw')};
     display: flex;
     flex-wrap: wrap;
     justify-content: ${(props) => (props.left ? '' : 'flex-end')};
 `;
 
 export const InfoField=styled.div`
-    width: 25vw;
+    width: 21w;
     height: 8vw;
     position: relative;
     border-style: solid;
@@ -64,7 +64,7 @@ export const InfoField=styled.div`
 `;
 
 export const InfoFieldWrapper=styled(InfoField)`
-    background-size: 25vw 8vw;
+    background-size: 10vw 10vw;
     background-image: url(${ (props) => {
         switch (props.name){
             case "Reputation": 
@@ -80,8 +80,8 @@ export const InfoFieldWrapper=styled(InfoField)`
     opacity: 0.2;
     padding: 0;
     border: none;
-    width: 24.25vw;
-    height: 7.25vw;
+    width: 10vw;
+    height: 100%;
     border-radius: 0;
     z-index: 1;
     top: -7vw; left: 0;
