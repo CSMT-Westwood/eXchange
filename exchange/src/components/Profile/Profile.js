@@ -8,7 +8,7 @@ export default function Profile (props) {
     const {setPage} = useContext(RenderingContext);
     
     if(sessionStorage.getItem("token")===""){
-        alert("You must log in to view this page!");
+        alert("Please log in first!");
         setPage('login');
     } 
     switch (props.status) {
