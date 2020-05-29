@@ -23,10 +23,7 @@ function RegisterContextProvider (props) {
                     setSettings.rp({"rp": data.rp});
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email});
-                    setSettings.photo({"photo": data.avatar === "" ? settings.photo.photo : data.avatar});
-                    setSettings.posts({"posts" : data.posts});
-                    setSettings.activities({"activities": data.activities});
-                    setSettings.followed({"followed": data.followedPosts});
+                    setSettings.photo({"photo": data.avatar === null ? settings.photo.photo : data.avatar});
                     setPage("directory");
             })}
         })

@@ -43,7 +43,7 @@ function DropDownMenu () {
         return (
             <Style.MenuItem onClick={()=>{
                 setPage(props.name);
-                if (props.name==="login") {
+                if (props.name==="login" && sessionStorage.getItem("token") !=="") {
                     sessionStorage.setItem("token", "");
                     setSettings.username({"username": "User"});
                     setSettings.email({"email": ""});

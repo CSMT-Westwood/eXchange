@@ -4,7 +4,7 @@ import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
 
-window.color = 20;
+window.color = 0;
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
@@ -15,12 +15,14 @@ function SettingModule (props) {
         <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
             if (state){
-                if(privateInfo!==settings[props.name][props.name])
-                if(props.name !== "theme")
-                    changeInfo({[props.name]: privateInfo});
-                else
-                    setSettings.theme({"theme" : window.color})
-                    window.color = privateInfo;
+                if(privateInfo!==settings[props.name][props.name]){
+                    if(props.name !== "theme")
+                        changeInfo({[props.name]: privateInfo});
+                    else{
+                        setSettings.theme({"theme" : window.color})
+                        window.color = privateInfo;
+                    }
+                }
             }
             setState(!state);
         }}>
@@ -28,8 +30,8 @@ function SettingModule (props) {
             {state
                 ? props.name==="theme"
                 ? <Style.SettingField color={window.color} type="range" min="0" max="100" value={privateInfo} onChange={(e)=>{setPrivateInfo( e.target.value ); window.color=e.target.value; }} />
-                : <Style.SettingField  color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
-                : <Style.SettingField  color={window.color} as='div'>{privateInfo}</Style.SettingField>
+                : <Style.SettingField color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
+                : <Style.SettingField color={window.color} as='div'>{privateInfo}</Style.SettingField>
             }
             <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
         </Style.SettingModule>

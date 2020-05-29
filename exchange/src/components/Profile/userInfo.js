@@ -33,11 +33,11 @@ export default function UserInfo () {
             <BasicInfo />
             <Style.UserInfo left>
                 <InfoField name="Reputation" value={settings.rp.rp} />
-                <InfoField name="Activity" value={settings.activities.activities.length} />
+                <InfoField name="Activity" value={0} />
             </Style.UserInfo>
             <Style.UserInfo>
-                <InfoField name="Following" value={settings.preferences.preferences.length} />
-                <InfoField name="Posts" value={settings.posts.posts.length} />
+                <InfoField name="Following" value={0} />
+                <InfoField name="Posts" value={0} />
             </Style.UserInfo>
         </div>
     );

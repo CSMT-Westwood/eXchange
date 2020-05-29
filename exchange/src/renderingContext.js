@@ -10,9 +10,7 @@ function RenderingContextProvider (props) {
     const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
     const [theme, setTheme] = useState({"theme": 245});
     const [preferences, setPreferences] = useState({"preferences": []});
-    const [posts, setPosts] = useState({"posts": []});
-    const [activities, setActivities] = useState({"activities": []});
-    const [followed, setFollowed] = useState({"followed" : []});
+    
 
     const settings = {
         "theme": theme, 
@@ -21,9 +19,6 @@ function RenderingContextProvider (props) {
         "rp": rp, 
         "photo": photo, 
         "preferences": preferences,
-        "posts": posts,
-        "activities": activities,
-        "followed": followed
     };
     
     const setSettings = {
@@ -33,9 +28,6 @@ function RenderingContextProvider (props) {
         "rp": setRp, 
         "photo": setPhoto,
         "preferences": setPreferences,
-        "posts": setPosts,
-        "activities": setActivities,
-        "followed": setFollowed
     };
     
     function changeInfo (props) {
@@ -52,13 +44,13 @@ function RenderingContextProvider (props) {
                     alert("Your change is successfully made!");
                     // console.log(data);
                     setSettings.username({"username": data.username});
-                    setSettings.email({"email": data.email})
-                    setSettings.preferences({"preferences": data.preferences})
-                    setSettings.rp({"rp": data.rp})
-                    console.log(settings)
+                    setSettings.email({"email": data.email});
+                    setSettings.preferences({"preferences": data.preferences});
+                    setSettings.rp({"rp": data.rp});
+                    console.log(settings);
                 })
             }
-            })
+        })
     }
 
     return (
