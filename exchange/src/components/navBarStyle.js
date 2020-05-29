@@ -10,6 +10,7 @@ export const UL = styled.ul`
 
 export const BTN = styled.button`
     border-width: 0;
+    padding: 0;
 `;
 
 export const A = styled.a`
