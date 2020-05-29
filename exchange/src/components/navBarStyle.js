@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
+import {Link} from 'react-router-dom';
 
 export const UL = styled.ul`
     list-style: none;
@@ -56,12 +57,12 @@ export const IconBtn = styled(A)`
 export const Dropdown = styled.div`
     position: absolute;
     top: 3.5vw;
-    left: 0;
-    width: 10vw;
+    right: 0vw;
+    width: 8vw;
     background-color:rgb(
-        ${(props) => (255 * Math.sin(props.color / 40))},
-        ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-        ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) });
+        ${(props) => (255 * Math.cos(props.color / 40))},
+        ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) });
     border-top: 1px black solid;
     padding: 0;
     overflow: hidden;
@@ -72,10 +73,10 @@ export const MenuItem = styled(BTN)`
     height: 3vw;
     width: 10vw;
     display: flex;
-    align-items: center;
+    align-item: center;
     border-radius: 0;
     transition: background var(--speed);
-    padding: 0.3rem;
+    padding: 0.75vw 0.3vw;
     font-size: 1vw;
     font-weight: 500;
     background: rgba(10, 160, 219, 0);
@@ -98,9 +99,8 @@ export const MenuIcon=styled(LI)`
     display: flex;
     position: absolute;
     top: 0;
-    left: ${(props) => (props.name==='menu' ? '0' : props.name==='user' ? '3vw' : '')};
-    right: ${(props) => (props.name==='aler' ? '0' : '')};
-    
+    right: ${(props) => (props.name==='user' ? '0' : props.name==='aler' ? '3vw' : 
+        props.name==='sear' ? '6vw' : '9vw')};
 `;
 
 export const Logo = styled(LogoIcon)`
@@ -112,14 +112,9 @@ export const Logo = styled(LogoIcon)`
     display: flex;
 `;
 
-export const UsernameOnBar = styled.div`
-    width: 15vw;
-    height: 3.5vw;
-    position: absolute;
-    left: 3.5vw;
+export const ItemTxtDiv = styled.div`
     display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 1.1vw;
-    text-align: left;
+    text-align: center;
+    align-item: center;
+    padding: 0 0.5vw;
 `;

@@ -14,13 +14,19 @@ import { ReactComponent as SettingsIcon } from '../imgs/settings.svg'
 import { ReactComponent as LogoutIcon } from '../imgs/logout.svg'
 import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
+import { ReactComponent as AddIcon } from '../imgs/addIcon.svg'
 import { RenderingContext } from '../renderingContext';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
+    const {setPage} = useContext(RenderingContext);
+
     return (
         <Style.MenuIcon name={props.name.slice(0,4)}>
-            <Style.IconBtn name={props.name.slice(0,4)} onClick={() => setOpen(!open)}>
+            <Style.IconBtn name={props.name.slice(0,4)} onClick={() => {
+                setOpen(!open);
+                if(props.name=="searchIcon") setPage("directory");
+                }}>
                 {open ? props.openIcon : props.closeIcon}
             </Style.IconBtn>
             {open && props.children}
@@ -30,6 +36,7 @@ function NavItem (props) {
 
 function DropDownMenu () {
     const [pColor, setPcolor] = useState(window.color);
+    const {settings} = useContext(RenderingContext);
 
     function DropdownItem (props) {
         const {setPage, setSettings} = useContext(RenderingContext);
@@ -38,7 +45,7 @@ function DropDownMenu () {
                 setPage(props.name);
                 if (props.name==="login") {
                     sessionStorage.setItem("token", "");
-                    setSettings.username({"username": "You are not logged in"});
+                    setSettings.username({"username": "User"});
                     setSettings.email({"email": ""});
                     setSettings.rp({"rp": 0});
                     setSettings.preferences({"preferences": []});
@@ -47,7 +54,7 @@ function DropDownMenu () {
                 }
             }}>
                 <span> {props.icon} </span>
-                {props.children}
+                <Style.ItemTxtDiv>{props.children}</Style.ItemTxtDiv>
             </Style.MenuItem>
         );
     }
@@ -62,9 +69,8 @@ function DropDownMenu () {
 
     return (
         <Style.Dropdown color={pColor}> 
-            <DropdownItem icon={<SearchIcon/>} name="directory">Directory</DropdownItem>
+            <DropdownItem icon={<ProfileIcon/>} name="userinfo">{settings.username.username}</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
-            <DropdownItem icon={<ProfileIcon/>} name="userinfo">Profile</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
             <DropdownItem icon={<LogoutIcon/>} name="login">{sessionStorage.getItem("token")==="" ? "Log in" : "Log out"}</DropdownItem>
         </Style.Dropdown>
@@ -86,17 +92,16 @@ export default function NavBar (props) {
 
     return (
         <Style.Navbar color={pColor}>
-            <NavItem name="menuIcon" openIcon={<MenuOpenIcon/>} closeIcon={<MenuCloseIcon/>}>
-                <DropDownMenu />
-            </NavItem>
             <NavItem name="userIcon" 
                 openIcon={<img src={settings.photo.photo}  
                     style={{borderRadius: `50%`, height: `1.5vw`, width: `1.5vw`}}/>} 
                 closeIcon={<img src={settings.photo.photo} 
                     style={{borderRadius: `50%`, height: `1.5vw`, width: `1.5vw`}}/>}>
-                <Style.UsernameOnBar>{settings.username.username}</Style.UsernameOnBar>
+                <DropDownMenu />
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
+            <NavItem name="createIcon" openIcon={<AddIcon/>} closeIcon={<AddIcon/>} />
+            <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
             <Style.BTN onClick={() => {setPage("directory")}}>
                 <Style.Logo id="logoIcon"/>
             </Style.BTN>

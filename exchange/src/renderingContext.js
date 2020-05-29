@@ -4,11 +4,11 @@ export const RenderingContext = createContext();
 
 function RenderingContextProvider (props) {
     const [page, setPage] = useState("directory");
-    const [username, setUsername] = useState({"username": "You are not logged in"});
+    const [username, setUsername] = useState({"username": "User"});
     const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});
     const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
-    const [theme, setTheme] = useState({"theme": 0});
+    const [theme, setTheme] = useState({"theme": 245});
     const [preferences, setPreferences] = useState({"preferences": []});
     const [posts, setPosts] = useState({"posts": []});
     const [activities, setActivities] = useState({"activities": []});
