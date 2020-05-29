@@ -2,19 +2,17 @@ import React, { useState, useContext } from 'react';
 import * as Style from "./userInfoStyle";
 import "./background.css";
 import { RenderingContext } from '../../renderingContext';
-import Container from '../Container';
-import ScrollingWrapper from '../ScrollingWrapper';
-import '../ScrollingWrapper.css';
-import './Profile.css';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard'
 
 function BasicInfo() {
 	const { settings } = useContext(RenderingContext);
 	return (
 		<div>
+
 			<Style.UserPhoto src={settings.photo.photo} />
 			<Style.UserName>{settings.username.username}</Style.UserName>
 			<Style.UserEmail>{settings.email.email}</Style.UserEmail>
+		
 		</div>
 	);
 }
@@ -85,7 +83,6 @@ export default function UserInfo() {
 	}
 	let unfulfilledPostsTest = posts;
 	let pendingPostsTest = posts;
-	let processingPostsTest = posts;
 	let fulfilledPostsTest = posts;
 
 	return (
@@ -101,13 +98,13 @@ export default function UserInfo() {
 					<InfoField name="Posts" value={settings.posts.posts.length} />
 				</Style.UserInfo>
 			</div>
-
+			
 			<Dashboard
 				unfulfilledPosts={unfulfilledPostsTest}
 				pendingPosts={pendingPostsTest}
-				processingPosts={processingPostsTest}
 				fulfilledPosts={fulfilledPostsTest}
-			></Dashboard>
+			>
+			</Dashboard>
 		</div>
 	);
 }

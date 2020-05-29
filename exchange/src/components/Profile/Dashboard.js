@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import Card from '../Card';
 import ScrollingWrapper from '../ScrollingWrapper';
+import Toggle from '../Toggle';
+import '../Dashboard.css';
+
 
 let examplePost = {
 	typeOfPost: 0, //0,1 = offer, request
@@ -16,10 +19,58 @@ let examplePost = {
 	author: 'Tommy', 		// the author’s username
 }
 
+function myPosts(props, showModal) {
+	return (
+		<React.Fragment>
+			<ScrollingWrapper
+				posts={props.unfulfilledPosts}
+				collection={0}
+				showModal={
+					showModal
+				}
+				title="Unfulfilled">
+			</ScrollingWrapper>
+			<ScrollingWrapper
+				posts={props.pendingPosts}
+				collection={1}
+				showModal={
+					showModal
+				} title="Pending"></ScrollingWrapper>
+			<ScrollingWrapper
+				posts={props.fulfilledPosts}
+				collection={2}
+				showModal={
+					showModal
+				} title="Fulfilled">
+
+			</ScrollingWrapper>
+		</React.Fragment>);
+}
+
+function interestedPosts(props, showModal) {
+	return (
+		<React.Fragment>
+			<ScrollingWrapper
+				posts={props.pendingPosts}
+				collection={0}
+				showModal={
+					showModal
+				} title="Pending"></ScrollingWrapper>
+			<ScrollingWrapper
+				posts={props.fulfilledPosts}
+				collection={1}
+				showModal={
+					showModal
+				} title="Fulfilled">
+			</ScrollingWrapper>
+		</React.Fragment>);
+}
+
 export default function Dashboard(props) {
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [postIndex, setPostIndex] = useState(0);
 	const [postCollection, setPostCollection] = useState(0);
+	const [viewMyPosts, setViewMyPosts] = useState(false);
 
 	const showModal = (collection, i) => { //collection is 0, 1, 2, or 3
 		setPostCollection(collection);
@@ -36,48 +87,37 @@ export default function Dashboard(props) {
 	const toggleScrollLock = () => {
 		document.querySelector('html').classList.toggle('scroll-lock');
 	};
+
+	const toggleMyPosts = () => {
+		setViewMyPosts(!viewMyPosts);
+	}
+
+
+
 	let allPosts = [props.unfulfilledPosts, props.pendingPosts, props.processingPosts, props.fulfilledPosts];
 	return (
 
 		<React.Fragment>
-
 			<div className="dashboard" >
-				<ScrollingWrapper
-					posts={props.unfulfilledPosts}
-					collection={0}
-					showModal={
-						showModal
-					}
-					title="Unfulfilled">
-				</ScrollingWrapper>
-				<ScrollingWrapper 
-				posts={props.pendingPosts} 
-				collection={1}
-				showModal={
-					showModal
-				} title="Pending"></ScrollingWrapper>
-				<ScrollingWrapper posts={props.processingPosts}
-					collection={2}
-					 showModal={
-						 showModal
-				} title="Processing"></ScrollingWrapper>
-				<ScrollingWrapper 
-				posts={props.fulfilledPosts} 
-					collection={3}
-				showModal={
-					showModal
-				} title="Fulfilled"></ScrollingWrapper>
+				<Toggle
+					on={!viewMyPosts}
+					offText='My posts'
+					onText="Posts I'm interested in"
+					onChange={toggleMyPosts}>
+				>
+				</Toggle>
+				{viewMyPosts? myPosts(props, showModal): interestedPosts(props, showModal)}
+				<Modal
+					isVisible={modalVisibility} //we pass a bool value
+					closeModal={closeModal} //we pass a reference to a function
+					hasAccept={true}
+					modalContent={<Card
+						post={allPosts[postCollection][postIndex]}
+						inModal={true}
+						showModal={() => { }}
+					/>}
+				/>
 			</div>
-			<Modal
-				isVisible={modalVisibility} //we pass a bool value
-			closeModal={closeModal} //we pass a reference to a function
-			hasAccept={true}
-			modalContent={<Card
-					post={allPosts[postCollection][postIndex]}
-					inModal={true}
-					showModal={() => {}}
-				/>}
-			/>
 		</React.Fragment>
 	);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import './ScrollingWrapper.css';
 import Card from './Card';
+import './Dashboard.css';
 
 let examplePost = {
 	typeOfPost: 0, //0,1 = offer, request

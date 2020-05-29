@@ -12,9 +12,9 @@ export const UserPhoto=styled.img`
 export const UserName=styled.span`
     width: 24vw;
     height: 4vw;
-    position: absolute;
-    top: 14vw;
-    left: 38vw;
+    position: relative;
+    top: 16vw;
+    left: 4vw;
     font-size: 2.5vw;
     font-weight: 600;
     text-align: center;
@@ -23,9 +23,9 @@ export const UserName=styled.span`
 export const UserEmail=styled.span`
     width: 24vw;
     height: 2vw;
-    position: absolute;
+    position: relative;
     top: 18vw;
-    left: 38vw;
+    left: 2vw;
     font-size: 1.5vw;
     font-weight: 600;
     text-align: center;
@@ -35,7 +35,7 @@ export const UserInfo=styled.div`
     width: 5vw;
     height: 0vw;
     position: relative;
-    top: 8vw;
+    top: 14vw;
     left: ${(props) => (props.left ? '5vw' : '25vw')};
     display: flex;
     flex-wrap: wrap;
