@@ -5,9 +5,6 @@ import NavBar from './components/NavBar';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import Directory from './components/Directory/Directory';
-import { Container } from './components/Container';
-import { Filler } from './components/Filler';
-import { Card } from './components/Card'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
 import RegisterContextProvider from './components/Register/registerContext';
 

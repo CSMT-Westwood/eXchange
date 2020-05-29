@@ -6,10 +6,10 @@ import { RenderingContext } from '../../renderingContext';
 
 window.color = 0;
 
-
-function PreferenceModule(props){
+function PreferenceModule(){
     const {settings, changeInfo} = useContext(RenderingContext);
     const [addS, setAddS] = useState("");
+    
     function changePreferences(props){
         if(props.method === "add" && addS){
                 let temp = settings.preferences.preferences;

@@ -8,7 +8,7 @@ function RenderingContextProvider (props) {
     const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});
     const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
-    const [theme, setTheme] = useState({"theme": 245});
+    const [theme, setTheme] = useState({"theme": 0});
     const [preferences, setPreferences] = useState({"preferences": []});
     
 
@@ -47,7 +47,6 @@ function RenderingContextProvider (props) {
                     setSettings.email({"email": data.email});
                     setSettings.preferences({"preferences": data.preferences});
                     setSettings.rp({"rp": data.rp});
-                    console.log(settings);
                 })
             }
         })

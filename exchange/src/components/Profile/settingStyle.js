@@ -141,7 +141,7 @@ export const PreferenceField = styled.div`
     top: 1vw;
 `;
 
-export const DeleteBtn = styled.input`
+export const DeleteBtn = styled.button`
     width: 2vw;
     height: 2vw;
     font-weight: 500;

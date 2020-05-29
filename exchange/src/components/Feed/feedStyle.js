@@ -31,9 +31,7 @@ export const FeedWrapper = styled.div`
     width: 100vw;
     height: 100vh;
     border-width: 1vw;
-    border-color: blue;
     border-style: solid;
-    bacground: rgba(0,0,0,0);
     display: flex;
 `;
 

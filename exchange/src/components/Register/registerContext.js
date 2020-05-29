@@ -24,7 +24,7 @@ function RegisterContextProvider (props) {
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email});
                     setSettings.photo({"photo": data.avatar === null ? settings.photo.photo : data.avatar});
-                    setPage("settings");
+                    setPage("directory");
             })}
         })
     }
