@@ -44,8 +44,8 @@ function DropDownMenu () {
         return (
             <Style.MenuItem onClick={()=>{
                 setPage(props.name);
-                if (props.name==="login" && sessionStorage.getItem("token") !=="") {
-                    sessionStorage.setItem("token", "");
+                if (props.name==="login" && sessionStorage.getItem("token") !==null) {
+                    sessionStorage.removeItem("token");
                     setSettings.username({"username": "User"});
                     setSettings.email({"email": ""});
                     setSettings.rp({"rp": 0});
@@ -73,7 +73,7 @@ function DropDownMenu () {
             <DropdownItem icon={<ProfileIcon/>} name="userinfo">{settings.username.username}</DropdownItem>
             <DropdownItem icon={<FeedIcon/>} name="feeds">Feeds</DropdownItem>
             <DropdownItem icon={<SettingsIcon/>} name="settings">Settings</DropdownItem>
-            <DropdownItem icon={<LogoutIcon/>} name="login">{sessionStorage.getItem("token")==="" ? "Log in" : "Log out"}</DropdownItem>
+            <DropdownItem icon={<LogoutIcon/>} name="login">{sessionStorage.getItem("token")===null ? "Log in" : "Log out"}</DropdownItem>
         </Style.Dropdown>
     );
 }
@@ -84,8 +84,9 @@ export default function NavBar (props) {
     const {getUserInfo} = useContext(RegisterContext);
 
     useEffect(() => {
-        if(settings.username.username==="User" && sessionStorage.getItem("token")!=="")
+        if(settings.username.username==="User" && sessionStorage.getItem("token")){
             getUserInfo({"token": sessionStorage.getItem("token")});
+        }
         if(props.setting){
             const interval = setInterval(() => {
                 setPcolor(window.color);

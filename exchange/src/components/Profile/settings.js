@@ -6,31 +6,40 @@ import { RenderingContext } from '../../renderingContext';
 
 window.color = 0;
 
-function PreferenceModule(){
-    const [state, setState] = useState(false);
+
+function PreferenceModule(props){
     const {settings, changeInfo} = useContext(RenderingContext);
-    const [privateInfo, setPrivateInfo] = useState(settings.preferences.preferences);
+    const [addS, setAddS] = useState("");
+    function changePreferences(props){
+        if(props.method === "add" && addS){
+                let temp = settings.preferences.preferences;
+                temp.push(addS);
+                changeInfo({"preferences":temp});
+        }
+        else{
+            let temp = settings.preferences.preferences.filter(x => x!==props.value);
+            changeInfo({"preferences":temp});
+        }
+    }
+
     return (
-        <Style.SettingModule onSubmit={(e)=>{
-            e.preventDefault();
-            if (state && privateInfo!==settings.preferences.preferences) 
-                changeInfo({["preferences"]: privateInfo});
-            setState(!state);
-        }}>
+        <Style.SettingModule as="div" >
             <Style.SettingName>{"Preferences:"}</Style.SettingName>
-            <Style.PreferenceSetting>
-                {privateInfo.map(pfs => 
+            <Style.PreferenceSetting as="div">
+                {settings.preferences.preferences.map(pfs => 
                     <div key={uuid()}>
                         <Style.PreferenceField as="div">
                             {pfs}
                         </Style.PreferenceField>
-                        {state ? <Style.DeleteBtn>-</Style.DeleteBtn> : null}
+                        <Style.DeleteBtn value="-"
+                            onClick={() => changePreferences({"method":"delete", "value": pfs})}
+                        />
                     </div>
                 )}
-                {state ? <Style.AddField color={window.color} type="text" value="" onChange={(e)=>setPrivateInfo(e.target.value)} /> : null}
-                {state ? <Style.AddBtn as="button" color={window.color}>Add</Style.AddBtn> : null}
+                <Style.AddField color={window.color} type="text" value={addS} onChange={(e)=>setAddS(e.target.value)} />
+                <Style.AddBtn as="button" color={window.color} onClick={() => changePreferences({"method": "add"})}>Add</Style.AddBtn>
+                <Style.PlaceHolder/>
             </Style.PreferenceSetting>
-            <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
         </Style.SettingModule>
     );
 }
@@ -106,7 +115,7 @@ function SettingsWrapper () {
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>
             )})}
-            <PreferenceModule />
+            <PreferenceModule/>
         </Style.FieldWrapper>
     ]);
 }

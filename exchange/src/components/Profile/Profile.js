@@ -7,7 +7,7 @@ import { RenderingContext } from '../../renderingContext';
 export default function Profile (props) { 
     const {setPage} = useContext(RenderingContext);
     
-    if(sessionStorage.getItem("token")===""){
+    if(sessionStorage.getItem("token")===null){
         alert("Please log in first!");
         setPage('login');
     } 
