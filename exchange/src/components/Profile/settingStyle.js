@@ -108,12 +108,64 @@ export const ChangeBtn = styled.input`
     background-color: rgba(0,0,0,0);
 
     &:hover{
-        border-width: 0.25vw;
-        background-color: rgba(255,255,255,0.4);
+        background-color: rgba(255,255,255,0.5);
     }
 `;
 
 export const ChangePhoto = styled(ChangeBtn)`
     right: 46.5vw;
     cursor: pointer;
+`;
+
+export const PreferenceSetting = styled(SettingModule)`
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 4vw;
+`;
+
+export const PreferenceField = styled.div`
+    width: 20vw;
+    height: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2vw;
+    font-weight: 500;
+    border-width: 0vw;
+    border-style: solid;
+    background:rgba(255,255,255,0.3);
+`;
+
+export const DeleteBtn = styled.button`
+    width: 2vw;
+    height: 2vw;
+    font-weight: 500;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 0;
+    background:rgba(255,255,255,0);
+    position: relative;
+    right: -18vw;
+    &:hover{
+        background:rgba(255,255,255,0.5);
+    }
+    position: relative;
+`;
+
+export const AddBtn = styled(ChangeBtn)`
+    position: relative;
+    top: 2vw;
+    right: -7vw;
+`;
+
+export const AddField = styled(SettingField)`
+    position: relative;
+    top: 1vw;
+    right 0vw;
 `;

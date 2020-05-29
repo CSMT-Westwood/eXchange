@@ -9,7 +9,7 @@ import { Container } from './components/Container';
 import { Filler } from './components/Filler';
 import { Card } from './components/Card'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
-
+import RegisterContextProvider from './components/Register/registerContext';
 
 
 function RenderingComponent () {
@@ -36,10 +36,10 @@ function RenderingComponent () {
 function DisplayWrapper () {
     const {page} = useContext(RenderingContext);
     return(
-      <div>
+        <RegisterContextProvider>
           <NavBar setting={page !== "settings" ? false: true} />
           <RenderingComponent />
-      </div>  
+        </RegisterContextProvider>  
     );
 }
 

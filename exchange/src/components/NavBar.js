@@ -16,6 +16,7 @@ import { ReactComponent as AlertOpenIcon } from '../imgs/alert-open.svg'
 import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
 import { ReactComponent as AddIcon } from '../imgs/addIcon.svg'
 import { RenderingContext } from '../renderingContext';
+import { RegisterContext } from './Register/registerContext';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
@@ -80,8 +81,11 @@ function DropDownMenu () {
 export default function NavBar (props) {
     const {settings, setPage} = useContext(RenderingContext);
     const [pColor, setPcolor] = useState(window.color);
+    const {getUserInfo} = useContext(RegisterContext);
 
     useEffect(() => {
+        if(settings.username.username==="User" && sessionStorage.getItem("token")!=="")
+            getUserInfo({"token": sessionStorage.getItem("token")});
         if(props.setting){
             const interval = setInterval(() => {
                 setPcolor(window.color);

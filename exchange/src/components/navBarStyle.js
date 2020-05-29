@@ -64,7 +64,7 @@ export const Dropdown = styled.div`
         ${(props) => (255 * Math.cos(props.color / 40))},
         ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
         ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }
-        , 0);
+        , 0.8);
     border-top: 1px black solid;
     border-bottom: 0.2vw black solid;
     padding: 0;

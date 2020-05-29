@@ -6,6 +6,35 @@ import { RenderingContext } from '../../renderingContext';
 
 window.color = 0;
 
+function PreferenceModule(){
+    const [state, setState] = useState(false);
+    const {settings, changeInfo} = useContext(RenderingContext);
+    const [privateInfo, setPrivateInfo] = useState(settings.preferences.preferences);
+    return (
+        <Style.SettingModule onSubmit={(e)=>{
+            e.preventDefault();
+            if (state && privateInfo!==settings.preferences.preferences) 
+                changeInfo({["preferences"]: privateInfo});
+            setState(!state);
+        }}>
+            <Style.SettingName>{"Preferences:"}</Style.SettingName>
+            <Style.PreferenceSetting>
+                {privateInfo.map(pfs => 
+                    <div key={uuid()}>
+                        <Style.PreferenceField as="div">
+                            {pfs}
+                        </Style.PreferenceField>
+                        {state ? <Style.DeleteBtn>-</Style.DeleteBtn> : null}
+                    </div>
+                )}
+                {state ? <Style.AddField color={window.color} type="text" value="" onChange={(e)=>setPrivateInfo(e.target.value)} /> : null}
+                {state ? <Style.AddBtn as="button" color={window.color}>Add</Style.AddBtn> : null}
+            </Style.PreferenceSetting>
+            <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
+        </Style.SettingModule>
+    );
+}
+
 function SettingModule (props) {
     const [state, setState] = useState(false);
     const {settings, setSettings, changeInfo} = useContext(RenderingContext);
@@ -14,14 +43,12 @@ function SettingModule (props) {
     return (
         <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
-            if (state){
-                if(privateInfo!==settings[props.name][props.name]){
-                    if(props.name !== "theme")
-                        changeInfo({[props.name]: privateInfo});
-                    else{
-                        setSettings.theme({"theme" : window.color})
-                        window.color = privateInfo;
-                    }
+            if (state && privateInfo!==settings[props.name][props.name]){
+                if(props.name !== "theme")
+                    changeInfo({[props.name]: privateInfo});
+                else{
+                    setSettings.theme({"theme" : window.color})
+                    window.color = privateInfo;
                 }
             }
             setState(!state);
@@ -79,8 +106,7 @@ function SettingsWrapper () {
                     <SettingModule name={Object.keys(setting)[0]} value={Object.values(setting)[0]}/>
                 </div>
             )})}
-
-            
+            <PreferenceModule />
         </Style.FieldWrapper>
     ]);
 }
