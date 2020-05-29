@@ -1,0 +1,9 @@
+.form_error_hidden {
+    display: none;
+}
+.form_error_shown {
+    display: block;
+    color: red;
+    text-align: center;
+    width: 100%;
+}

@@ -4,7 +4,9 @@
 */
 
 import React, { useState, useContext, useEffect } from 'react';
-import * as Style from "./navBarStyle"
+import Modal from "./Modal.js";
+import Form from "./Form.js";
+import * as Style from "./navBarStyle";
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
 import { ReactComponent as SearchIcon } from '../imgs/search.svg'
@@ -24,6 +26,8 @@ function NavItem (props) {
     return (
         <Style.MenuIcon name={props.name.slice(0,4)}>
             <Style.IconBtn name={props.name.slice(0,4)} onClick={() => {
+                if (props.onClick)
+                    props.onClick();
                 setOpen(!open);
                 if(props.name=="searchIcon") setPage("directory");
                 }}>
@@ -80,6 +84,7 @@ function DropDownMenu () {
 export default function NavBar (props) {
     const {settings, setPage} = useContext(RenderingContext);
     const [pColor, setPcolor] = useState(window.color);
+    const [modalVisibility, setModalVisibility] = useState(false);
 
     useEffect(() => {
         if(props.setting){
@@ -89,6 +94,21 @@ export default function NavBar (props) {
             return () => clearInterval(interval);
         }
     });
+
+    const showModal = () => {
+        if (sessionStorage["token"] == "") return;        
+        setModalVisibility(true);
+        toggleScrollLock();
+    }
+
+    const closeModal = () => {
+        setModalVisibility(false);
+        toggleScrollLock();
+    }
+
+    const toggleScrollLock = () => {
+        document.querySelector('html').classList.toggle('scroll-lock');
+    };
 
     return (
         <Style.Navbar color={pColor}>
@@ -100,11 +120,21 @@ export default function NavBar (props) {
                 <DropDownMenu />
             </NavItem>
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
-            <NavItem name="createIcon" openIcon={<AddIcon/>} closeIcon={<AddIcon/>} />
+            <NavItem name="createIcon" openIcon={<AddIcon/>} closeIcon={<AddIcon/>} 
+                onClick={showModal} />
             <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
             <Style.BTN onClick={() => {setPage("directory")}}>
                 <Style.Logo id="logoIcon"/>
             </Style.BTN>
+            <Modal
+                isVisible={modalVisibility} //we pass a bool value
+                closeModal={closeModal} //we pass a reference to a function
+                hasAccept={false}
+                showLink={()=>{}}   // not useful here
+                modalContent={
+                    <Form closeModal={closeModal} />
+                }
+            />
         </Style.Navbar>
     );
 }

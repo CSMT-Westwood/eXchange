@@ -50,6 +50,8 @@ export class Modal extends React.Component {
         );
     }
 
+    // ideally, this should be placed inside the card class definition...
+    // or it's better to raise all the methods up into the ancestor class.
     acceptOfferReq = async () => {
 		let currPost = this.props.modalContent.props.post;
 
@@ -60,7 +62,7 @@ export class Modal extends React.Component {
 		}
 		
 		try {
-			let result = await fetch("http://localhost:8000/post/accept", {
+			let result = await fetch("http://localhost:8000/post/follow", {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",

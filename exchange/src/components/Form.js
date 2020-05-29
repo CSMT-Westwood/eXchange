@@ -1,4 +1,5 @@
 import React from 'react';
+import "./form.css";
 /**
  * Currently suited for only Offer-Req Form.
  * IT'S NOT A GENERIC FORM COMPONENT.
@@ -14,11 +15,13 @@ export class Form extends React.Component {
 			condition: 0, //from 0 (best) to 3 (worst)
 			description: '',
 			link:'',
-			fulfilled: false
-
+			fulfilled: false,
+			error_message: "",
+			error_display_class: "form_error_hidden"
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggleErrorMessage = this.toggleErrorMessage.bind(this);
 	}
 	handleChange(event) {
 		const target = event.target;
@@ -53,72 +56,129 @@ export class Form extends React.Component {
 		});
 
 	}
-	s
-	handleSubmit(event) {
-		console.log(this.state.offerChecked);
-		console.log(this.state.textbookChecked);
-		console.log(this.state.course);
-		console.log(this.state.itemName);
-		console.log(this.state.condition);
-		console.log(this.state.description);
-		//this.props.closeModal();
-		event.preventDefault();
+
+	toggleErrorMessage(errorMessage, showError) {
+		if (!showError) {
+			this.setState(prevState => ({
+				...prevState,
+				error_display_class: "form_error_hidden",
+				error_message: ""
+			}));
+		} else {
+			this.setState(prevState => ({
+				...prevState,
+				error_display_class: "form_error_shown",
+				error_message: errorMessage
+			}));
+		}
 	}
+
+	async handleSubmit(event) {
+		event.preventDefault();
+		if (this.state.offerChecked && this.state.typeOfItem == 1 && this.state.link == "") {
+			this.toggleErrorMessage("Please input the link to your resource. Thanks!", true);
+			return;
+		}
+		if (this.state.description == "") {
+			this.toggleErrorMessage("Please give your post a description!", true);
+			return;
+		}
+
+		const newPost = {
+			typeOfPost: this.state.offerChecked ? 0 : 1,
+			typeOfItem: this.state.typeOfItem,
+			course: this.state.course,
+			itemName: this.state.itemName,
+			condition: this.state.condition,
+			description: this.state.description,
+			link: this.state.link
+		};
+
+		try {
+			await fetch("http://localhost:8000/post/new", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"token": sessionStorage["token"]
+				},
+				body: JSON.stringify(newPost)
+			});
+		} catch (e) {
+			alert("error while creating a new post.");
+		}
+
+		this.toggleErrorMessage(undefined, false);
+		this.props.closeModal();
+	}
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
+				<p className={this.state.error_display_class}>
+					{this.state.error_message}
+				</p>
 				<div className="form-group">
 					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="radio"
-							name="offerChecked"
-							checked={this.state.offerChecked} //check if this is checked
-							onChange={this.handleChange}
-						/>
-						<label className="form-check-label" htmlFor="offerRadio">Offer</label>
+						<label className="form-check-label">
+							<input
+								className="form-check-input"
+								type="radio"
+								name="offerChecked"
+								checked={this.state.offerChecked} //check if this is checked
+								onChange={this.handleChange}
+							/>
+							Offer
+						</label>
 					</div>
 					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="radio"
-							name="reqChecked"
-							checked={!this.state.offerChecked} //check if this is checked
-							onChange={this.handleChange}
-						/>
-						<label className="form-check-label" htmlFor="reqRadio">Request</label>
+						<label className="form-check-label">
+							<input
+								className="form-check-input"
+								type="radio"
+								name="reqChecked"
+								checked={!this.state.offerChecked} //check if this is checked
+								onChange={this.handleChange}
+							/>
+							Request
+						</label>
 					</div>
 				</div>
 				<div className="form-group">
 					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="radio"
-							name="typeOfItem0"
-							checked={this.state.typeOfItem === 0} //check if this is checked
-							onChange={this.handleChange}
-						/>
-						<label className="form-check-label" htmlFor="textbookRadio">Textbook</label>
+						<label className="form-check-label">
+							<input
+								className="form-check-input"
+								type="radio"
+								name="typeOfItem0"
+								checked={this.state.typeOfItem === 0} //check if this is checked
+								onChange={this.handleChange}
+							/>
+							Textbook
+						</label>
 					</div>
 					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="radio"
-							name="typeOfItem1"
-							checked={this.state.typeOfItem === 1} //check if this is checked
-							onChange={this.handleChange}
-						/>
-						<label className="form-check-label" htmlFor="notesRadio">Notes</label>
+						<label className="form-check-label">
+							<input
+								className="form-check-input"
+								type="radio"
+								name="typeOfItem1"
+								checked={this.state.typeOfItem === 1} //check if this is checked
+								onChange={this.handleChange}
+							/>
+							Notes
+						</label>
 					</div>
 					<div className="form-check form-check-inline">
-						<input
-							className="form-check-input"
-							type="radio"
-							name="typeOfItem2"
-							checked={this.state.typeOfItem === 2} //check if this is checked
-							onChange={this.handleChange}
-						/>
-						<label className="form-check-label" htmlFor="notesRadio">Skill</label>
+						<label className="form-check-label">
+							<input
+								className="form-check-input"
+								type="radio"
+								name="typeOfItem2"
+								checked={this.state.typeOfItem === 2} //check if this is checked
+								onChange={this.handleChange}
+							/>
+							Skill
+						</label>
 					</div>
 				</div>
 
