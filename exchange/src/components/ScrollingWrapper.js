@@ -18,7 +18,7 @@ let examplePost = {
 export default function ScrollingWrapper(props) {
 	var cards = [];
 	const coll = props.collection;
-	for (let i = 0; i < props.posts.length; i++) {
+	for (let i = 0; props.posts && i < props.posts.length; i++) {
 		cards.push(<Card
 			post={props.posts[i]}
 			key={i}

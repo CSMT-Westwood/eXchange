@@ -3,7 +3,7 @@ import * as Style from "./userInfoStyle";
 import "./background.css";
 import { RenderingContext } from '../../renderingContext';
 import Dashboard from './Dashboard'
-
+import TriggerButton from '../TriggerButton';
 function BasicInfo() {
 	const { settings } = useContext(RenderingContext);
 	return (
@@ -30,79 +30,66 @@ function InfoField(props) {
 
 export default function UserInfo() {
 	const { settings } = useContext(RenderingContext);
-	const [allPosts, setAllPosts] = useState([]);
-	const [unfulfilledPosts, setUnfulfilledPosts] = useState([]);
-	const [pendingPosts, setPendingPosts] = useState([]);
-	const [processingPosts, setProcessingPosts] = useState([]);
-	const [fulfilledPosts, setFulfilledPosts] = useState([]);
-	const [resultsClass, setResultsClass] = useState("");
+	//A dictionary: {'unfulfilled': <Array>, 'pending': <Array>..}
+	const [allPosts, setAllPosts] = useState([]); 
+	const [viewMyPosts, setViewMyPosts] = useState(true);
 
-	const getAllUserPosts = (value) => {
-		//To be implemented
-		// // get query results
-		// setQueryObject(value);
-		// console.log(value);
+	const fetchPosts = (isHost) => {
+		
+		// fetch the query
+		try {
+			let url = new URL('http://localhost:8000/feed/myPosts/')
+			if (!isHost) {
+				url = new URL('http://localhost:8000/feed/followedPosts/')
+			}
+			fetch(url, {
+				method: "GET",
+				headers: {
+					 "Content-Type": "application/json",
+					"token":  sessionStorage.getItem("token")
+					}
+			})
+				.then(a => a.json())
+				.then(b => setAllPosts(b));
+		} catch (e) {
+			console.log(e);
+		}
+	}
 
-		// // change the page layout
-		// if (firstVisit) {
-		// 	setFirstVisit(false);
-		// 	setTimeout(() => setResultsClass("directory-result-shown"), 2000);
-		// }
+	const getPosts = () => {
+		//Now to make the Cards!
+		if (viewMyPosts) {
+			fetchPosts(true);
+		} else {
+			fetchPosts(false);
+		}
+		console.log(allPosts);
+	}
+	getPosts();
 
-		// // fetch the query
-		// try {
-		// 	let url = new URL("http://localhost:8000/post/search");
-		// 	let params = value;
-		// 	Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-		// 	fetch(url, {
-		// 		method: "GET",
-		// 		headers: { "Content-Type": "application/json" },
-		// 	})
-		// 		.then(a => a.json())
-		// 		.then(b => setResults(b));
-		// } catch (e) {
-		// 	console.log(e);
-		// }
+	const toggleMyPosts = () => {
+		setViewMyPosts(!viewMyPosts);
 	}
-	//TESTING PURPOSES
-	let examplePost = {
-		typeOfPost: 0, //0,1 = offer, request
-		typeOfItem: 0, //0,1 = textbook, notes		
-		course: 'CS33',
-		itemName: 'Computer Organization: A Perspective!',
-		condition: 0, //from 0 (best) to 3 (worst)
-		description: 'Awesome. I dropped this off at your house when I went to the',
-		link: '',
-		fulfilled: 0, //Unfulfilled, Pending (matched w at least 1 other person), Fulfilled (marked for deletion). On the backend, we will switch pending to fulfilled after 2 weeks have passed.
-		publication_date: new Date(2023, 4, 13),
-		author: 'Tommy', 		// the author’s username
-	}
-	var posts = [];
-	for (let i = 0; i < 6; i++) {
-		posts.push(examplePost);
-	}
-	let unfulfilledPostsTest = posts;
-	let pendingPostsTest = posts;
-	let fulfilledPostsTest = posts;
 
 	return (
+		
 		<div>
 			<div className="profile-block">
 				<BasicInfo />
 				<Style.UserInfo left>
-					<InfoField name="Reputation" value={settings.rp.rp} />
-					<InfoField name="Activity" value={settings.activities.activities.length} />
+					<InfoField name="Reputation" value={settings.rp.rp} /> 
+					<InfoField name="Activity" value={settings.activities.length} />
 				</Style.UserInfo>
 				<Style.UserInfo>
-					<InfoField name="Following" value={settings.preferences.preferences.length} />
+					<InfoField name="Following" value={settings.preferences.length} />
 					<InfoField name="Posts" value={settings.posts.posts.length} />
 				</Style.UserInfo>
 			</div>
 			
 			<Dashboard
-				unfulfilledPosts={unfulfilledPostsTest}
-				pendingPosts={pendingPostsTest}
-				fulfilledPosts={fulfilledPostsTest}
+				allPosts={allPosts}
+				toggleMyPosts={toggleMyPosts}
+				viewMyPosts={viewMyPosts}
 			>
 			</Dashboard>
 		</div>
