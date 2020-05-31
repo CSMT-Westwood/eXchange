@@ -88,10 +88,10 @@ export default function UserInfo() {
 		<div className="profile-page">
 			<div className="profile-block">
 				<BasicInfo />
-				<div class="profile-userInfo">
+				<div className="profile-userInfo">
 					<InfoField name="Reputation" value={settings.rp.rp} /> 
 					<InfoField name="Activity" value={0} />
-					<InfoField name="Following" value={settings.preferences.length} />
+					<InfoField name="Following" value={0} />
 					<InfoField name="Posts" value={0} />
 				</div>
 			</div>

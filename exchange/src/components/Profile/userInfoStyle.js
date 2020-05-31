@@ -54,6 +54,9 @@ export const InfoField=styled.div`
     ) 1;
     border-radius: 0.6vw;
     border-width: 0.4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     z-index: 2;
     &:hover{
         background-color: rgba(255, 255, 255, 0.8);
