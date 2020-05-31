@@ -5,26 +5,25 @@ import { RenderingContext } from '../../renderingContext';
 import Dashboard from './Dashboard'
 import TriggerButton from '../TriggerButton';
 import history from "../history";
+import "./Profile.css"
 
 function BasicInfo() {
 	const { settings } = useContext(RenderingContext);
 	return (
-		<div>
-
+		<Style.BasicInfo>
 			<Style.UserPhoto src={settings.photo.photo} />
 			<Style.UserName>{settings.username.username}</Style.UserName>
 			<Style.UserEmail>{settings.email.email}</Style.UserEmail>
-		
-		</div>
+		</Style.BasicInfo>
 	);
 }
 
 function InfoField(props) {
 	return (
-		<Style.InfoField color={window.color}>
+		<Style.InfoField color={window.color} >
 			<Style.Info>{props.name}</Style.Info>
 			<Style.Info>{props.value}</Style.Info>
-			<Style.InfoFieldWrapper name={props.name} />
+			{/* <Style.InfoFieldWrapper name={props.name}></Style.InfoFieldWrapper> */}
 		</Style.InfoField>
 	)
 }
@@ -47,56 +46,64 @@ export default function UserInfo() {
 		setViewMyPosts(!viewMyPosts);
 	}
 
-	const fetchPosts = (isHost) => {
-		
-		// fetch the query
-		try {
-			let url = new URL('http://localhost:8000/feed/myPosts/')
-			if (!isHost) {
-				url = new URL('http://localhost:8000/feed/followedPosts/')
+	// https://www.robinwieruch.de/react-hooks-fetch-data
+	// don't want to stuck in the fetch-render infinite loop
+	useEffect(() => {
+		const fetchPosts = (isHost) => {
+			// fetch the query
+			
+			try {
+				let url = new URL('http://localhost:8000/feed/myPosts/')
+				if (!isHost) {
+					url = new URL('http://localhost:8000/feed/followedPosts/')
+				}
+				console.log(url);
+				
+				fetch(url, {
+					method: "GET",
+					headers: {
+						 "Content-Type": "application/json",
+						"token":  sessionStorage.getItem("token") //TODO: verify this is correct token retrieval
+						}
+				})
+					.then(a => a.json())
+					.then(b => {console.log(b); return setAllPosts(b);});
+			} catch (e) {
+				console.log(e);
 			}
-			fetch(url, {
-				method: "GET",
-				headers: {
-					 "Content-Type": "application/json",
-					"token":  sessionStorage.getItem("token") //TODO: verify this is correct token retrieval
-					}
-			})
-				.then(a => a.json())
-				.then(b => setAllPosts(b));
-		} catch (e) {
-			console.log(e);
 		}
-	}
-
-	const getPosts = () => {
-		//Now to make the Cards!
-		if (viewMyPosts) {
-			fetchPosts(true);
-		} else {
-			fetchPosts(false);
+		const getPosts = () => {
+			//Now to make the Cards!
+			if (viewMyPosts) {
+				fetchPosts(true);
+			} else {
+				fetchPosts(false);
+			}
 		}
-		console.log(allPosts);
-		console.log(typeof(allPosts));
-		console.log(allPosts['unfulfilled'])
-	}
-
-	getPosts();
+		getPosts();
+	}, [viewMyPosts]);
+	
 	
 
 	return (
 		
-		<div>
+		<div className="profile-page">
 			<div className="profile-block">
 				<BasicInfo />
-				<Style.UserInfo left>
+				<div class="profile-userInfo">
+					<InfoField name="Reputation" value={settings.rp.rp} /> 
+					<InfoField name="Activity" value={0} />
+					<InfoField name="Following" value={settings.preferences.length} />
+					<InfoField name="Posts" value={0} />
+				</div>
+				{/* <Style.UserInfo>
 					<InfoField name="Reputation" value={settings.rp.rp} /> 
 					<InfoField name="Activity" value={0} />
 				</Style.UserInfo>
 				<Style.UserInfo>
 					<InfoField name="Following" value={settings.preferences.length} />
 					<InfoField name="Posts" value={0} />
-				</Style.UserInfo>
+				</Style.UserInfo>  */}
 			</div>
 			
 			<Dashboard

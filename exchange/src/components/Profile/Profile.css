@@ -1,8 +1,22 @@
 .profile-block {
-	position: absolute;
-	left: 2vw !important;
-	top: 10vh !important;
-	width: 35%;
-	height: 70%;
-	background-color: yellow;
+	position: fixed;
+	left: 2vw;
+	top: 10vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 93vh;
+	width: 35vw;
+}
+
+.profile-userInfo {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+}
+
+.profile-page {
+	width: 100%;
+	height: 0;
 }

@@ -15,7 +15,7 @@ export class Toggle extends React.Component {
 						type="checkbox"
 						checked={this.props.on}
 						onChange={() => this.props.onChange()}></input>
-					<span class="slider"></span>
+					<div className="slider"></div>
 					
 				</label>
 				

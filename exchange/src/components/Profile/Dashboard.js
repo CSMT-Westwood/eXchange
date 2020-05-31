@@ -67,9 +67,8 @@ function grabSinglePost(modalVisibility, props, postCollection, postIndex)  {
 	if (!modalVisibility) {
 		return null;
 	}
-	var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
 	console.log("Grabbed single post.");
-	return func(props, postCollection, postIndex);
+	return props.allPosts[postCollection][postIndex];
 }
 
 
