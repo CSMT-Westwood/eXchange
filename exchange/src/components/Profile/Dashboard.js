@@ -124,17 +124,15 @@ export default function Dashboard(props) {
 						modalContent={
 							<React.Fragment>
 								<Card
-									post={
-										modalPost
-									}
+									post={modalPost}
 									inModal={true}
-									showModal={() => { }
-									} />
-								{modalPost.fulfilled === 1 ? (
+									showModal={() => { }} 
+								/>
+								{(modalPost.fulfilled === 1  && props.viewMyPosts)? (
 									<ClientsDropdown
 									options={parseClients(modalPost)}
 									selectClient={selectClient} >
-								</ClientsDropdown>)
+									</ClientsDropdown>)
 								: null}
 							</React.Fragment>
 						}

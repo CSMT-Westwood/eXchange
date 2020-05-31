@@ -65,9 +65,7 @@ export default function UserInfo() {
 						 "Content-Type": "application/json",
 						"token":  sessionStorage.getItem("token") //TODO: verify this is correct token retrieval
 						}
-				})
-					.then(a => a.json())
-					.then(b => {console.log(b); return setAllPosts(b);});
+				}).then(a => a.json()).then(b => setAllPosts(b));
 			} catch (e) {
 				console.log(e);
 			}
@@ -96,14 +94,6 @@ export default function UserInfo() {
 					<InfoField name="Following" value={settings.preferences.length} />
 					<InfoField name="Posts" value={0} />
 				</div>
-				{/* <Style.UserInfo>
-					<InfoField name="Reputation" value={settings.rp.rp} /> 
-					<InfoField name="Activity" value={0} />
-				</Style.UserInfo>
-				<Style.UserInfo>
-					<InfoField name="Following" value={settings.preferences.length} />
-					<InfoField name="Posts" value={0} />
-				</Style.UserInfo>  */}
 			</div>
 			
 			<Dashboard
