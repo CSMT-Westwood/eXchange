@@ -8,7 +8,7 @@ function Notification(props) {
     const timeFormatter = (date) => {
         let month = date.getMonth() + 1;
         let day = date.getDay
-        return `${date.toTimeString().slice(0, 8)}, ${date.toDateString()}`;
+        return `${date.toTimeString().slice(0, 5)}, ${date.toDateString()}`;
     }
     const read = () => {
         fetch("http://localhost:8000/user/readNotification", {

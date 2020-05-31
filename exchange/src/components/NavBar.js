@@ -142,9 +142,9 @@ export default function NavBar (props) {
                 );
             }
             setNotifications(arr);
+            setNotificationVisibility(true);
+            toggleScrollLock();
         });
-        setNotificationVisibility(true);
-        toggleScrollLock();
     };
 
     const closeNotifications = () => {
