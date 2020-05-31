@@ -19,10 +19,10 @@ let examplePost = {
 	author: 'Tommy', 		// the author’s username
 }
 
-const rowsOfCards = (props, showModal) => {
+const rowsOfCards = (props, showModal, animationClass) => {
 	console.log("Rendered row of cards.");
 	return (
-		<React.Fragment>
+		<div className={animationClass}>
 			<ScrollingWrapper
 				posts={props.allPosts['unfulfilled']}
 				collection={'unfulfilled'}
@@ -44,7 +44,7 @@ const rowsOfCards = (props, showModal) => {
 					showModal
 				} title="Fulfilled">
 			</ScrollingWrapper>
-		</React.Fragment>)
+		</div>)
 }
 
 function parseClients(modalPost) {
@@ -77,6 +77,7 @@ export default function Dashboard(props) {
 	const [postIndex, setPostIndex] = useState(0);
 	const [postCollection, setPostCollection] = useState('');
 	const [selectedClient, setSelectedClient] = useState('');
+	const [animatedRefresh, setAnimatedRefresh] = useState("dashboard-show")
 
 	const showModal = (collection, i) => { //collection is 0, 1, or 2
 		setPostCollection(collection);
@@ -98,18 +99,26 @@ export default function Dashboard(props) {
 		setSelectedClient(id);
 	}
 
+
 	const modalPost = grabSinglePost(modalVisibility, props, postCollection, postIndex) 
 	
 	return (
-			<div className={`dashboard ${props.className}`} >
+			<div className="dashboard" >
 				<Toggle
 					on={!props.viewMyPosts}
 					offText='My posts'
 					onText="Posts I'm interested in"
-					onChange={props.toggleMyPosts}>
+					onChange={() => {
+							props.toggleMyPosts();
+							setAnimatedRefresh("dashboard-hide");
+							setTimeout(()=> {
+								setAnimatedRefresh("dashboard-show");
+							}, 1000);
+						}
+					}>
 				>
 				</Toggle>
-				{rowsOfCards(props, showModal)}
+				{rowsOfCards(props, showModal, animatedRefresh)}
 				{modalVisibility?
 					(<Modal
 						isVisible={modalVisibility} //we pass a bool value

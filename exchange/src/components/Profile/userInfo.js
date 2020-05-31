@@ -34,7 +34,6 @@ export default function UserInfo() {
 	//A dictionary: {'unfulfilled': <Array>, 'pending': <Array>..}
 	const [allPosts, setAllPosts] = useState({}); 
 	const [viewMyPosts, setViewMyPosts] = useState(true);
-	const [animatedRefresh, setAnimatedRefresh] = useState("dashboard-show")
 
 	useEffect(() => {
         if(!sessionStorage.getItem("token")){
@@ -45,10 +44,6 @@ export default function UserInfo() {
 	
 	const toggleMyPosts = () => {
 		setViewMyPosts(!viewMyPosts);
-		setAnimatedRefresh("dashboard-hide");
-		setTimeout(()=> {
-			setAnimatedRefresh("dashboard-show");
-		}, 1000)
 	}
 
 	// https://www.robinwieruch.de/react-hooks-fetch-data
@@ -102,7 +97,6 @@ export default function UserInfo() {
 			</div>
 			
 			<Dashboard
-				className={animatedRefresh}
 				allPosts={allPosts}
 				toggleMyPosts={toggleMyPosts}
 				viewMyPosts={viewMyPosts}
