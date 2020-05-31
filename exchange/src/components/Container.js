@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { Card } from './Card';
-import TriggerButton from './TriggerButton';
-import Form from './Form';
 
 function Container(props) {
     const [modalVisibility, setModalVisibility] = useState(false);
@@ -53,7 +51,7 @@ function Container(props) {
                     showLink={linkDisplay}
                 />}
             />
-            {cards}
+			{cards}
         </div>
     )
 }

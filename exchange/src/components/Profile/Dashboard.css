@@ -1,0 +1,41 @@
+
+
+.scrolling-wrapper {
+	height: 35%;
+	width: 100%;
+	margin-top: 5vw;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	background-color: yellow;
+
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+
+}
+
+.scrolling-wrapper>* {
+	flex: 0 0 auto;
+	width: 20% !important;
+	height: 300px !important;
+	margin-right: 1px;
+	padding-bottom: 50px !important;
+}
+
+.dashboard {
+	position: absolute;
+	top: 16vw;
+	left: 40vw;
+	width: 55%;
+	z-index: 0;
+}
+.wrapper-title {
+	z-index: 0;
+	bottom: 8vw;
+	position: relative;
+	font-weight: bold;
+}
