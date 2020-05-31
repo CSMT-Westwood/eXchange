@@ -35,10 +35,10 @@ export class ClientsDropdown extends React.Component {
 			myClients.push(
 				{
 					id: i,
-					title: myClients[i]['username'],
+					title: this.props.clients[i]['username'] + '  (' + this.props.clients[i]['rp'] + ' RP)',
 					selected: false,
 					key: 'clients',
-					rp: myClients[i]['rp']
+					rp: this.props.clients[i]['rp']
 				}
 			)
 		}
@@ -69,6 +69,7 @@ export class ClientsDropdown extends React.Component {
 				list={this.state.clients}
 				resetThenSet={this.resetThenSet}
 			/>
+			
 
 		);
 	}

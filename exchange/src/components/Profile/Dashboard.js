@@ -95,7 +95,7 @@ export default function Dashboard(props) {
 					(<Modal
 						isVisible={modalVisibility} //we pass a bool value
 						closeModal={closeModal} //we pass a reference to a function
-						hasAccept={true}
+						acceptStatus={2} //can accept as a host
 						modalContent={
 							<React.Fragment>
 								<Card
