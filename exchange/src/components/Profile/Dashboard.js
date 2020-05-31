@@ -52,6 +52,7 @@ export default function Dashboard(props) {
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [postIndex, setPostIndex] = useState(0);
 	const [postCollection, setPostCollection] = useState('');
+	const [selectedClient, setSelectedClient] = useState('');
 
 	const showModal = (collection, i) => { //collection is 0, 1, or 2
 		setPostCollection(collection);
@@ -68,6 +69,10 @@ export default function Dashboard(props) {
 	const toggleScrollLock = () => {
 		document.querySelector('html').classList.toggle('scroll-lock');
 	};
+
+	const selectClient = (id) => {
+		setSelectedClient(id);
+	}
 
 	const grabSinglePost = () => {
 		if(!modalVisibility) {
@@ -95,7 +100,11 @@ export default function Dashboard(props) {
 					(<Modal
 						isVisible={modalVisibility} //we pass a bool value
 						closeModal={closeModal} //we pass a reference to a function
-						acceptStatus={2} //can accept as a host
+						acceptStatus={
+							modalPost.fulfilled===1? 2: 0
+							} //can accept as a host iff post is pending
+						selectedClient={selectedClient}
+						post={modalPost}
 						modalContent={
 							<React.Fragment>
 								<Card
@@ -105,9 +114,10 @@ export default function Dashboard(props) {
 									inModal={true}
 									showModal={() => { }
 									} />
-								<ClientsDropdown
-									clients={modalPost['clients']}>
-								</ClientsDropdown>
+								{modalPost.fulfilled === 1 ? (<ClientsDropdown
+									clients={modalPost['clients']}
+									selectClient={selectClient} >
+								</ClientsDropdown>): null}
 							</React.Fragment>
 						}
 					/>) : null

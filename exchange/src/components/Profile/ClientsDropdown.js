@@ -34,11 +34,12 @@ export class ClientsDropdown extends React.Component {
 		for(let i = 0; this.props.clients && i < this.props.clients.length; i++) {
 			myClients.push(
 				{
-					id: i,
+					id: i, //this.props.clients[i]._id,
 					title: this.props.clients[i]['username'] + '  (' + this.props.clients[i]['rp'] + ' RP)',
 					selected: false,
 					key: 'clients',
-					rp: this.props.clients[i]['rp']
+					rp: this.props.clients[i]['rp'],
+					databaseID: this.props.clients[i]._id
 				}
 			)
 		}
@@ -49,10 +50,12 @@ export class ClientsDropdown extends React.Component {
 		let temp = JSON.parse(JSON.stringify(this.state[key]));
 		temp.forEach(item => item.selected = false);
 		temp[id].selected = true;
+		this.props.selectClient(temp[id].databaseID);
 		this.setState({
 			[key]: temp
 		});
 	}
+	//For multiple selection only. Currently not used.
 	toggleItem = (id, key) => {
 		let temp = JSON.parse(JSON.stringify(this.state[key]));
 		temp[id].selected = !temp[id].selected;
