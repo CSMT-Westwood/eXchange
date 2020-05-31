@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Card.css'
-import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'
+// import { DropdownMultiple, Dropdown } from 'reactjs-dropdown-component'
 import './ClientsDropdown.css';
 
 export class ClientsDropdown extends React.Component {
@@ -63,7 +63,7 @@ export class ClientsDropdown extends React.Component {
 
 	render() {
 		return(
-			<Dropdown
+			<div
 				title="Accept a client"
 				searchable={["Search for client", "No matching client"]}
 				list={this.state.clients}
