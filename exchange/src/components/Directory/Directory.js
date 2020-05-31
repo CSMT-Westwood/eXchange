@@ -52,7 +52,6 @@ function Directory(props) {
             <Container
                 className={`directory-result-box ${resultsClass}`}
                 posts={results}
-				displayCards={true}
 				></Container>
         </div>
     )

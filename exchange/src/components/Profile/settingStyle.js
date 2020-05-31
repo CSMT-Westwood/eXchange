@@ -66,7 +66,7 @@ export const SettingField = styled.input`
             ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
     ) 1;
 
-    border-width: 0.25vw;
+    border-width: 0.17vw;
     width: 20vw;
     height: 2.5vw;
     font-size: 1.3vw;
@@ -94,8 +94,7 @@ export const ChangeBtn = styled.input`
             ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
     ) 1;
 
-    border-radius: 0.4vw;
-    border-width: 0.2vw;
+    border-width: 0.17vw;
     position: absolute;
     top: 1vw;
     right: 40vw;
@@ -108,12 +107,92 @@ export const ChangeBtn = styled.input`
     background-color: rgba(0,0,0,0);
 
     &:hover{
-        border-width: 0.25vw;
-        background-color: rgba(255,255,255,0.4);
+        background-color: rgba(255,255,255,0.5);
     }
 `;
 
 export const ChangePhoto = styled(ChangeBtn)`
     right: 46.5vw;
     cursor: pointer;
+`;
+
+export const PreferenceSetting = styled(SettingModule)`
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 4vw;
+`;
+
+export const PreferenceField = styled.div`
+    width: 20vw;
+    height: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2vw;
+    font-weight: 500;
+    border-width: 0vw;
+    border-style: solid;
+    background:rgba(255,255,255,0.3);
+    position: relative;
+    top: 1vw;
+`;
+
+export const DeleteBtn = styled.button`
+    width: 2vw;
+    height: 2vw;
+    font-weight: 500;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-width: 0;
+    background:rgba(255,255,255,0);  
+    position: relative;
+    right: -18vw;
+    top: -1.5vw;
+    &:hover{
+        background:rgba(255,255,255, 0.8);
+        cursor: pointer;
+    }
+`;
+
+export const AddBtn = styled(ChangeBtn)`
+    position: relative;
+    top: 2vw;
+    bottom: 2vw;
+    right: -7vw;
+    width: 6vw;
+    height: 1.9vw;
+    border-style: solid;
+    border-radius: 0.5vw;
+    border-width: 0.17vw;
+    border-color: black;
+    font-size: 1.2vw;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0);
+
+    &:hover{
+        background-color: rgba(255,255,255,0.5);
+    }
+`;
+
+export const AddField = styled(SettingField)`
+    position: relative;
+    top: 1vw;
+    right 0vw;
+    background: rgba(255,255,255,0.5)
+`;
+
+export const PlaceHolder = styled(AddField)`
+    border-width: 0;
+    opacity: 0;
 `;

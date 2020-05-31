@@ -51,7 +51,7 @@ function Container(props) {
                     showLink={linkDisplay}
                 />}
             />
-			{props.displayCards ? cards : null}
+			{cards}
         </div>
     )
 }

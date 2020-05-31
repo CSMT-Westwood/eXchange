@@ -72,8 +72,6 @@ export class ClientsDropdown extends React.Component {
 				list={this.state.clients}
 				resetThenSet={this.resetThenSet}
 			/>
-			
-
 		);
 	}
 

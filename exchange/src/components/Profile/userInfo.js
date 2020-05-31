@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import * as Style from "./userInfoStyle";
 import "./background.css";
 import { RenderingContext } from '../../renderingContext';
 import Dashboard from './Dashboard'
 import TriggerButton from '../TriggerButton';
+import history from "../history";
+
 function BasicInfo() {
 	const { settings } = useContext(RenderingContext);
 	return (
@@ -34,6 +36,13 @@ export default function UserInfo() {
 	const [allPosts, setAllPosts] = useState({}); 
 	const [viewMyPosts, setViewMyPosts] = useState(true);
 
+	useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please Log in first!");
+            history.push("/login");
+        }
+	})
+	
 	const toggleMyPosts = () => {
 		setViewMyPosts(!viewMyPosts);
 	}
@@ -82,11 +91,11 @@ export default function UserInfo() {
 				<BasicInfo />
 				<Style.UserInfo left>
 					<InfoField name="Reputation" value={settings.rp.rp} /> 
-					<InfoField name="Activity" value={settings.activities.length} />
+					<InfoField name="Activity" value={0} />
 				</Style.UserInfo>
 				<Style.UserInfo>
 					<InfoField name="Following" value={settings.preferences.length} />
-					<InfoField name="Posts" value={settings.posts.posts.length} />
+					<InfoField name="Posts" value={0} />
 				</Style.UserInfo>
 			</div>
 			
