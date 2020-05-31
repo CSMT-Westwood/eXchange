@@ -119,3 +119,8 @@ export const ItemTxtDiv = styled.div`
     align-item: center;
     padding: 0 0.5vw;
 `;
+
+export const NotificationTitle = styled.h3`
+    text-align: center;
+    margin-bottom: 10px;
+`;

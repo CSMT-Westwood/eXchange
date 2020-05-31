@@ -1,0 +1,23 @@
+.notification {
+    border: silver solid 1px;
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.notification>p {
+    margin: 0;
+    text-align: left;
+    padding: 5px;
+}
+.notification:hover {
+    background-color: lightcyan;
+    cursor: pointer;
+}
+.notification-not-read {
+    background-color: cornsilk;
+}
+.notification-read {
+    background-color: white;
+}

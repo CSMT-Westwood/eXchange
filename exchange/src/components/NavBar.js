@@ -6,6 +6,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Modal from "./Modal.js";
 import Form from "./Form.js";
+import Notification from "./Notifications/Notification.js";
 import * as Style from "./navBarStyle";
 import { ReactComponent as MenuOpenIcon } from '../imgs/menu-close.svg'
 import { ReactComponent as MenuCloseIcon } from '../imgs/menu-open.svg'
@@ -84,7 +85,9 @@ function DropDownMenu () {
 export default function NavBar (props) {
     const {settings, setPage} = useContext(RenderingContext);
     const [pColor, setPcolor] = useState(window.color);
-    const [modalVisibility, setModalVisibility] = useState(false);
+    const [formVisibility, setFormVisibility] = useState(false);
+    const [notificationVisibility, setNotificationVisibility] = useState(false);
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         if(props.setting){
@@ -95,19 +98,54 @@ export default function NavBar (props) {
         }
     });
 
-    const showModal = () => {
+    const showForm = () => {
         if (sessionStorage["token"] == "") return;        
-        setModalVisibility(true);
+        setFormVisibility(true);
         toggleScrollLock();
     }
 
-    const closeModal = () => {
-        setModalVisibility(false);
+    const closeForm = () => {
+        setFormVisibility(false);
         toggleScrollLock();
     }
 
     const toggleScrollLock = () => {
         document.querySelector('html').classList.toggle('scroll-lock');
+    };
+
+    const showNotifications = () => {
+        if (sessionStorage["token"] == "") return;
+        fetch("http://localhost:8000/user/notifications", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "token": sessionStorage["token"]
+            }
+        })
+        .then(data => data.json())
+        .then(data => {
+            data = [...data];           // convert to array
+            data.sort((a, b) => a.activity_date < b.activity_date? 1 : -1); // sort the array by date
+            data.sort((a, b) => a.unread > b.unread ? -1 : 1); // sort by read/unread
+            let arr = [];
+            for (let i = 0; i < data.length; i++) {
+                arr.push(
+                    <Notification message={data[i].message} 
+                        date={data[i].activity_date} key={i}
+                        notificationId={data[i]._id}
+                        read={!data[i].unread}
+                    />
+                );
+            }
+            setNotifications(arr);
+        });
+        setNotificationVisibility(true);
+        toggleScrollLock();
+    };
+
+    const closeNotifications = () => {
+        setNotificationVisibility(false);
+        toggleScrollLock();
     };
 
     return (
@@ -119,20 +157,31 @@ export default function NavBar (props) {
                     style={{borderRadius: `50%`, height: `1.5vw`, width: `1.5vw`}}/>}>
                 <DropDownMenu />
             </NavItem>
-            <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
+            <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} 
+                onClick={showNotifications} />
             <NavItem name="createIcon" openIcon={<AddIcon/>} closeIcon={<AddIcon/>} 
-                onClick={showModal} />
+                onClick={showForm} />
             <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
             <Style.BTN onClick={() => {setPage("directory")}}>
                 <Style.Logo id="logoIcon"/>
             </Style.BTN>
             <Modal
-                isVisible={modalVisibility} //we pass a bool value
-                closeModal={closeModal} //we pass a reference to a function
+                isVisible={formVisibility} //we pass a bool value
+                closeModal={closeForm} //we pass a reference to a function
                 hasAccept={false}
                 showLink={()=>{}}   // not useful here
                 modalContent={
-                    <Form closeModal={closeModal} />
+                    <Form closeModal={closeForm} />
+                }
+            />
+            <Modal 
+                isVisible={notificationVisibility}
+                closeModal={closeNotifications}
+                hasAccept={false}
+                showLink = {()=>{}}
+                modalContent = {
+                    [<Style.NotificationTitle>Notifications</Style.NotificationTitle>,
+                    ...notifications]
                 }
             />
         </Style.Navbar>
