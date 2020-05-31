@@ -121,3 +121,12 @@ export const ItemTxtDiv = styled.div`
     align-item: center;
     padding: 0 0.5vw;
 `;
+
+
+export const StyledLink = styled(Link)`
+    color: black;
+    &:hover{
+        text-decoration: none;
+        color: black;
+    }
+`;

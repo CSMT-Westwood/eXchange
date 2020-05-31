@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as Style from "./userInfoStyle"
 import "./background.css"
 import { RenderingContext } from '../../renderingContext';
+import history from "../history";
 
 function BasicInfo () {
     const {settings} = useContext(RenderingContext);
@@ -26,8 +27,14 @@ function InfoField (props) {
 
 
 export default function UserInfo () {
-    const { settings } = useContext(RenderingContext);
-
+    const { settings } = useContext(RenderingContext);    
+    
+    useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please Log in first!");
+            history.push("/login");
+        }
+    })
     return (
         <div id="profileWrapper">
             <BasicInfo />

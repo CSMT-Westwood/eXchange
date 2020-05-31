@@ -3,14 +3,13 @@ import React, { useState, createContext } from 'react';
 export const RenderingContext = createContext();
 
 function RenderingContextProvider (props) {
-    const [page, setPage] = useState("directory");
     const [username, setUsername] = useState({"username": "User"});
     const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});
     const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
     const [theme, setTheme] = useState({"theme": 0});
     const [preferences, setPreferences] = useState({"preferences": []});
-    
+    const [onColorChange, setOnColorChange] = useState(false);
 
     const settings = {
         "theme": theme, 
@@ -53,7 +52,7 @@ function RenderingContextProvider (props) {
     }
 
     return (
-        <RenderingContext.Provider value={{page, setPage, settings, setSettings, changeInfo}}>
+        <RenderingContext.Provider value={{settings, setSettings, changeInfo, onColorChange, setOnColorChange}}>
             { props.children }
         </RenderingContext.Provider>
     );

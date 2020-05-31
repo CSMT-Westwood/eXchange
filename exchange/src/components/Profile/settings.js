@@ -1,15 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './background.css'
 import * as Style from "./settingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
+import history from "../history";
 
 window.color = 0;
 
 function PreferenceModule(){
     const {settings, changeInfo} = useContext(RenderingContext);
     const [addS, setAddS] = useState("");
-    
     function changePreferences(props){
         if(props.method === "add" && addS){
                 let temp = settings.preferences.preferences;
@@ -31,9 +31,9 @@ function PreferenceModule(){
                         <Style.PreferenceField as="div">
                             {pfs}
                         </Style.PreferenceField>
-                        <Style.DeleteBtn value="-"
+                        <Style.DeleteBtn
                             onClick={() => changePreferences({"method":"delete", "value": pfs})}
-                        />
+                        >-</Style.DeleteBtn>
                     </div>
                 )}
                 <Style.AddField color={window.color} type="text" value={addS} onChange={(e)=>setAddS(e.target.value)} />
@@ -46,30 +46,46 @@ function PreferenceModule(){
 
 function SettingModule (props) {
     const [state, setState] = useState(false);
-    const {settings, setSettings, changeInfo} = useContext(RenderingContext);
+    const {settings, setSettings, changeInfo, onColorChange, setOnColorChange} = useContext(RenderingContext);
     const [privateInfo, setPrivateInfo] = useState(settings[props.name][props.name]);
+    const [dummy, setDummy] = useState(false);
+
+    useEffect(() => {
+        if(props.name!=="theme" && onColorChange){
+            const interval = setInterval(() => {
+                setDummy(!dummy);
+            }, 30);
+            return () => clearInterval(interval);
+        }
+    });
 
     return (
         <Style.SettingModule onSubmit={(e)=>{
             e.preventDefault();
-            if (state && privateInfo!==settings[props.name][props.name]){
-                if(props.name !== "theme")
-                    changeInfo({[props.name]: privateInfo});
-                else{
-                    setSettings.theme({"theme" : window.color})
-                    window.color = privateInfo;
+            if(props.name==="theme" && onColorChange || state)
+                if (privateInfo!==settings[props.name][props.name]){
+                    if(props.name !== "theme")
+                        changeInfo({[props.name]: privateInfo});
+                    else{
+                        setSettings.theme({"theme" : window.color})
+                        window.color = privateInfo;
+                    }
                 }
-            }
-            setState(!state);
+            if(props.name==="theme")
+                setOnColorChange(!onColorChange);
+            else
+                setState(!state);
+            
         }}>
             <Style.SettingName>{props.name + ":"}</Style.SettingName>
-            {state
-                ? props.name==="theme"
+            {props.name==="theme" ? (onColorChange
                 ? <Style.SettingField color={window.color} type="range" min="0" max="100" value={privateInfo} onChange={(e)=>{setPrivateInfo( e.target.value ); window.color=e.target.value; }} />
-                : <Style.SettingField color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
+                : <Style.SettingField color={window.color} as='div'>{privateInfo}</Style.SettingField>
+            ): state
+                ? <Style.SettingField color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
                 : <Style.SettingField color={window.color} as='div'>{privateInfo}</Style.SettingField>
             }
-            <Style.ChangeBtn color={window.color} type="submit" value={state ? "Confirm" : "Change"}/>
+            <Style.ChangeBtn color={window.color} type="submit" value={props.name==="theme" ? (onColorChange ? "Confirm" : "Change") : (state ? "Confirm" : "Change")}/>
         </Style.SettingModule>
     );
 }
@@ -121,6 +137,12 @@ function SettingsWrapper () {
 }
 
 function Settings () {
+    useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please Log in first!");
+            history.push("/login");
+        }
+    });
     return(
         <div id="settingWrapper">
             <SettingsWrapper/>

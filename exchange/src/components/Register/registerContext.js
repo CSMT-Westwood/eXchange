@@ -1,10 +1,10 @@
 import React, {useState, createContext, useContext} from 'react';
 import { RenderingContext } from '../../renderingContext';
-
+import history from '../history';
+ 
 export const RegisterContext = createContext();
 
 function RegisterContextProvider (props) {
-    const [status, setStatus] = useState(props.status);
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
     const { settings, setSettings, setPage } = useContext(RenderingContext);
@@ -24,7 +24,8 @@ function RegisterContextProvider (props) {
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email});
                     setSettings.photo({"photo": data.avatar === null ? settings.photo.photo : data.avatar});
-                    setPage("directory");
+                    let name = props.name ==="/login" ? "/" : props.name === "/signup" ? "/login" : props.name;
+                    history.push(name);
             })}
         })
     }
@@ -32,7 +33,7 @@ function RegisterContextProvider (props) {
 
     const handleSumbit = (e) => {
         e.preventDefault();
-        if(status === 'login'){ // Log in scenario
+        if(window.location.href.slice(-5) === 'login'){ // Log in scenario
             fetch("http://localhost:8000/user/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
@@ -45,7 +46,8 @@ function RegisterContextProvider (props) {
                     setWarning("Logging in as " + info[0]["username"] + "...");
                     response.json().then(data => {
                         sessionStorage.setItem("token", data.token);
-                        getUserInfo({"token": data.token});
+                        setWarning("");
+                        getUserInfo({"token": data.token, "name": "/"});
                 })}
             })
         }
@@ -66,7 +68,8 @@ function RegisterContextProvider (props) {
                     else{
                         response.json().then(data => {
                             setWarning("Signing up as " + data.username + "...");
-                            setPage("login");
+                            history.push("/login");
+                            setWarning("");
                         })
                     }
                 })
@@ -75,7 +78,7 @@ function RegisterContextProvider (props) {
     }
 
     return (
-        <RegisterContext.Provider value={{info, setInfo, getUserInfo, status, setStatus, handleSumbit, warning, setWarning}}>
+        <RegisterContext.Provider value={{info, setInfo, getUserInfo, handleSumbit, warning, setWarning}}>
             { props.children }
         </RegisterContext.Provider>
     );

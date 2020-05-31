@@ -1,42 +1,27 @@
 import React, { useContext } from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
-import Register from './components/Register/Register';
-import Profile from './components/Profile/Profile';
+import {Login, Signup} from './components/Register/Register';
+import Settings from './components/Profile/settings';
 import Directory from './components/Directory/Directory';
+import UserInfo from './components/Profile/userInfo';
+import Feeds from './components/Feed/feeds'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
 import RegisterContextProvider from './components/Register/registerContext';
-
+import history from './components/history';
 
 function RenderingComponent () {
-    const {page} = useContext(RenderingContext);
-
-    switch(page) {
-        case "login":
-            return (<Register status="login" />);
-        case "signup":
-            return (<Register status="signup" />);
-        case "settings":
-            return (<Profile status="settings" />);
-        case "userinfo":
-            return (<Profile status="userinfo" />);
-        case "feeds":
-            return (<Profile status="feeds" />);
-        case "directory":
-            return (<Directory />);
-        default:
-            return (<Register status="login" />);
-    }
-}
-
-function DisplayWrapper () {
-    const {page} = useContext(RenderingContext);
+    const {settings} = useContext(RenderingContext);
     return(
-        <RegisterContextProvider>
-          <NavBar setting={page !== "settings" ? false: true} />
-          <RenderingComponent />
-        </RegisterContextProvider>  
+        <Router history={history}>
+            <Route exact path="/" component={Directory} />
+            <Route path="/login" component = {Login} />
+            <Route path="/signup" component = {Signup} />
+            <Route path={"/"+settings.username.username} component = {UserInfo} />
+            <Route path="/feeds" component = {Feeds} />
+            <Route path="/settings" component = {Settings} />
+        </Router>    
     );
 }
 
@@ -44,8 +29,12 @@ function App() {
     return (
         <div className="App">
             <RenderingContextProvider>
-                <DisplayWrapper />        
+                <RegisterContextProvider>
+                    <NavBar/>
+                    <RenderingComponent />
+                </RegisterContextProvider>  
             </RenderingContextProvider>
+            
         </div>
     );
 }
