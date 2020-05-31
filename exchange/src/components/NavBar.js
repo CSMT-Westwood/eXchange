@@ -172,7 +172,7 @@ export default function NavBar (props) {
             <Modal
                 isVisible={formVisibility} //we pass a bool value
                 closeModal={closeForm} //we pass a reference to a function
-                hasAccept={false}
+                acceptStatus={0} //no accept button
                 showLink={()=>{}}   // not useful here
                 modalContent={
                     <Form closeModal={closeForm} />
