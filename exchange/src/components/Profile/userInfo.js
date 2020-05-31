@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as Style from "./userInfoStyle"
 import "./background.css"
 import { RenderingContext } from '../../renderingContext';
+import history from "../history";
 
 function BasicInfo () {
     const {settings} = useContext(RenderingContext);
@@ -26,18 +27,24 @@ function InfoField (props) {
 
 
 export default function UserInfo () {
-    const { settings } = useContext(RenderingContext);
-
+    const { settings } = useContext(RenderingContext);    
+    
+    useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please Log in first!");
+            history.push("/login");
+        }
+    })
     return (
         <div id="profileWrapper">
             <BasicInfo />
             <Style.UserInfo left>
                 <InfoField name="Reputation" value={settings.rp.rp} />
-                <InfoField name="Activity" value={settings.activities.activities.length} />
+                <InfoField name="Activity" value={0} />
             </Style.UserInfo>
             <Style.UserInfo>
-                <InfoField name="Following" value={settings.preferences.preferences.length} />
-                <InfoField name="Posts" value={settings.posts.posts.length} />
+                <InfoField name="Following" value={0} />
+                <InfoField name="Posts" value={0} />
             </Style.UserInfo>
         </div>
     );

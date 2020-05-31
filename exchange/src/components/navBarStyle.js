@@ -28,9 +28,10 @@ export const Navbar = styled.nav`
             ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
             ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
     );
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 3;
 `;
 
 export const LI = styled.li`
@@ -60,14 +61,16 @@ export const Dropdown = styled.div`
     top: 3.5vw;
     right: 0vw;
     width: 8vw;
-    background-color:rgb(
+    background-color:rgba(
         ${(props) => (255 * Math.cos(props.color / 40))},
         ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) });
+        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }
+        , 0.8);
     border-top: 1px black solid;
+    border-bottom: 0.2vw black solid;
     padding: 0;
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
 `;
 
 export const MenuItem = styled(BTN)`
@@ -123,4 +126,12 @@ export const ItemTxtDiv = styled.div`
 export const NotificationTitle = styled.h3`
     text-align: center;
     margin-bottom: 10px;
+`;
+
+export const StyledLink = styled(Link)`
+    color: black;
+    &:hover{
+        text-decoration: none;
+        color: black;
+    }
 `;
