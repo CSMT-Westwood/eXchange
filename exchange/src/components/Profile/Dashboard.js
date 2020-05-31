@@ -20,6 +20,7 @@ let examplePost = {
 }
 
 const rowsOfCards = (props, showModal) => {
+	console.log("Rendered row of cards.");
 	return (
 		<React.Fragment>
 			<ScrollingWrapper
@@ -46,7 +47,7 @@ const rowsOfCards = (props, showModal) => {
 		</React.Fragment>)
 }
 
-const parseClients = (modalPost) => {
+function parseClients(modalPost) {
 	const clients = modalPost['clients']
 	const myClients = []
 	for (let i = 0; clients && i < clients.length; i++) {
@@ -62,7 +63,7 @@ const parseClients = (modalPost) => {
 	return myClients;
 }
 
-const grabSinglePost = (modalVisibility, props, postCollection, postIndex) => {
+function grabSinglePost(modalVisibility, props, postCollection, postIndex)  {
 	if (!modalVisibility) {
 		return null;
 	}
