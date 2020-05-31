@@ -52,7 +52,7 @@ export class Modal extends React.Component {
 
     // ideally, this should be placed inside the card class definition...
     // or it's better to raise all the methods up into the ancestor class.
-    acceptOfferReq = async () => {
+    acceptAsClient = async () => {
 		let currPost = this.props.modalContent.props.post;
 
 		if (!sessionStorage.hasOwnProperty("token")) {
@@ -82,7 +82,7 @@ export class Modal extends React.Component {
 		return;
     }
 
-    returnModalWithAccept() {
+    returnModalWithAcceptAsClient() {
         return ReactDOM.createPortal(
             <FocusTrap>
                 <aside
@@ -115,8 +115,8 @@ export class Modal extends React.Component {
                             <p className="modal-response-text">{this.state.responseText}</p>
                             <div className="form-group pt-5">
                                 <button className="form-control btn btn-primary" 
-                                    type="submit" onClick={this.acceptOfferReq}>
-                                    Accept
+                                    type="submit" onClick={this.acceptAsClient}>
+                                    I'm interested!
                                 </button>
                             </div>
                         </div>
@@ -133,11 +133,14 @@ export class Modal extends React.Component {
         if(!this.props.isVisible) {
             return null;
         }
-        if(this.props.hasAccept && sessionStorage.hasOwnProperty("token")) {
-            return this.returnModalWithAccept();
-        } else {
-            return this.returnModal();
-        }
+		if (sessionStorage.hasOwnProperty("token")) {
+            if(this.props.acceptStatus===1) {
+				return this.returnModalWithAcceptAsClient();
+			} else if (this.props.acceptStatus===2) {
+				return this.returnModalWithAcceptAsHost();
+			}
+		}
+		return this.returnModal();
 
     }
 }

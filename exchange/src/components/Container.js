@@ -42,7 +42,7 @@ function Container(props) {
             <Modal
                 isVisible={modalVisibility} //we pass a bool value
                 closeModal={closeModal} //we pass a reference to a function
-                hasAccept={true}
+                acceptStatus={1} //can accept as a client
                 showLink={modalShowLink}
                 modalContent={<Card
                     post={props.posts[postIndex]}
