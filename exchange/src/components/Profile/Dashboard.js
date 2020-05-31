@@ -101,9 +101,7 @@ export default function Dashboard(props) {
 	const modalPost = grabSinglePost(modalVisibility, props, postCollection, postIndex) 
 	
 	return (
-
-		<React.Fragment>
-			<div className="dashboard" >
+			<div className={`dashboard ${props.className}`} >
 				<Toggle
 					on={!props.viewMyPosts}
 					offText='My posts'
@@ -140,6 +138,5 @@ export default function Dashboard(props) {
 				}
 			
 			</div>
-		</React.Fragment>
 	);
 }
