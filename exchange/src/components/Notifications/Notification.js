@@ -6,8 +6,6 @@ function Notification(props) {
         useState(props.read ? "notification-read" : "notification-not-read");
 
     const timeFormatter = (date) => {
-        let month = date.getMonth() + 1;
-        let day = date.getDay
         return `${date.toTimeString().slice(0, 5)}, ${date.toDateString()}`;
     }
     const read = () => {
