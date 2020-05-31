@@ -19,7 +19,7 @@ let examplePost = {
 	author: 'Tommy', 		// the author’s username
 }
 
-function rowsOfCards(props, showModal) {
+const rowsOfCards = (props, showModal) => {
 	return (
 		<React.Fragment>
 			<ScrollingWrapper
@@ -46,6 +46,30 @@ function rowsOfCards(props, showModal) {
 		</React.Fragment>)
 }
 
+const parseClients = (modalPost) => {
+	const clients = modalPost['clients']
+	const myClients = []
+	for (let i = 0; clients && i < clients.length; i++) {
+		myClients.push(
+			{
+				value: clients[i]._id,
+				label: clients[i]['username'] + '  (' + clients[i]['rp'] + ' RP)',
+				rp: clients[i]['rp'],
+			}
+		)
+	}
+	console.log("Parsing clients list");
+	return myClients;
+}
+
+const grabSinglePost = (modalVisibility, props, postCollection, postIndex) => {
+	if (!modalVisibility) {
+		return null;
+	}
+	var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
+	console.log("Grabbed single post.");
+	return func(props, postCollection, postIndex);
+}
 
 
 export default function Dashboard(props) {
@@ -74,15 +98,7 @@ export default function Dashboard(props) {
 		setSelectedClient(id);
 	}
 
-	const grabSinglePost = () => {
-		if(!modalVisibility) {
-			return null;
-		}
-		var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
-		return func(props, postCollection, postIndex);
-	}
-
-	const modalPost = grabSinglePost();
+	const modalPost = grabSinglePost(modalVisibility, props, postCollection, postIndex) 
 	
 	return (
 
@@ -114,10 +130,12 @@ export default function Dashboard(props) {
 									inModal={true}
 									showModal={() => { }
 									} />
-								{modalPost.fulfilled === 1 ? (<ClientsDropdown
-									clients={modalPost['clients']}
+								{modalPost.fulfilled === 1 ? (
+									<ClientsDropdown
+									options={parseClients(modalPost)}
 									selectClient={selectClient} >
-								</ClientsDropdown>): null}
+								</ClientsDropdown>)
+								: null}
 							</React.Fragment>
 						}
 					/>) : null
