@@ -31,8 +31,12 @@ function InfoField(props) {
 export default function UserInfo() {
 	const { settings } = useContext(RenderingContext);
 	//A dictionary: {'unfulfilled': <Array>, 'pending': <Array>..}
-	const [allPosts, setAllPosts] = useState([]); 
+	const [allPosts, setAllPosts] = useState({}); 
 	const [viewMyPosts, setViewMyPosts] = useState(true);
+
+	const toggleMyPosts = () => {
+		setViewMyPosts(!viewMyPosts);
+	}
 
 	const fetchPosts = (isHost) => {
 		
@@ -46,7 +50,7 @@ export default function UserInfo() {
 				method: "GET",
 				headers: {
 					 "Content-Type": "application/json",
-					"token":  sessionStorage.getItem("token")
+					"token":  sessionStorage.getItem("token") //TODO: verify this is correct token retrieval
 					}
 			})
 				.then(a => a.json())
@@ -64,12 +68,12 @@ export default function UserInfo() {
 			fetchPosts(false);
 		}
 		console.log(allPosts);
+		console.log(typeof(allPosts));
+		console.log(allPosts['unfulfilled'])
 	}
-	getPosts();
 
-	const toggleMyPosts = () => {
-		setViewMyPosts(!viewMyPosts);
-	}
+	getPosts();
+	
 
 	return (
 		

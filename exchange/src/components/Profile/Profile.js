@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Settings from './settings';
 import UserInfo from './userInfo';
+import TestBlank from './TestBlank';
 import Feeds from '../Feed/feeds';
 import { RenderingContext } from '../../renderingContext';
 
@@ -12,9 +13,9 @@ export default function Profile (props) {
         setPage('login');
     } 
     switch (props.status) {
-        case "userinfo": return (<UserInfo />);
+        case "userinfo": return (<UserInfo/>);
         case "settings": return (<Settings />);
         case "feeds": return (<Feeds />);
-        default: return (<UserInfo />);
+        default: return (<TestBlank />);
     }
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from '../Modal';
 import Card from '../Card';
-import ScrollingWrapper from '../ScrollingWrapper';
+import ScrollingWrapper from './ScrollingWrapper';
 import Toggle from '../Toggle';
-import '../Dashboard.css';
-
+import './Dashboard.css';
+import ClientsDropdown from './ClientsDropdown';
 
 let examplePost = {
 	typeOfPost: 0, //0,1 = offer, request
@@ -46,10 +46,6 @@ function rowsOfCards(props, showModal) {
 		</React.Fragment>)
 }
 
-function grabSinglePost(props, collection, i) {
-	var func = new Function("collection", "i", "return props.allPosts[collection][i]");
-	return func;
-}
 
 
 export default function Dashboard(props) {
@@ -73,6 +69,15 @@ export default function Dashboard(props) {
 		document.querySelector('html').classList.toggle('scroll-lock');
 	};
 
+	const grabSinglePost = () => {
+		if(!modalVisibility) {
+			return null;
+		}
+		var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
+		return func(props, postCollection, postIndex);
+	}
+
+	const modalPost = grabSinglePost();
 	
 	return (
 
@@ -86,16 +91,28 @@ export default function Dashboard(props) {
 				>
 				</Toggle>
 				{rowsOfCards(props, showModal)}
-				<Modal
-					isVisible={modalVisibility} //we pass a bool value
-					closeModal={closeModal} //we pass a reference to a function
-					hasAccept={true}
-					modalContent={<Card
-						post={grabSinglePost(props, postCollection, postIndex)}
-						inModal={true}
-						showModal={() => { }}
-					/>}
-				/>
+				{modalVisibility?
+					(<Modal
+						isVisible={modalVisibility} //we pass a bool value
+						closeModal={closeModal} //we pass a reference to a function
+						hasAccept={true}
+						modalContent={
+							<React.Fragment>
+								<Card
+									post={
+										modalPost
+									}
+									inModal={true}
+									showModal={() => { }
+									} />
+								<ClientsDropdown
+									clients={modalPost['clients']}>
+								</ClientsDropdown>
+							</React.Fragment>
+						}
+					/>) : null
+				}
+			
 			</div>
 		</React.Fragment>
 	);
