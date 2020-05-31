@@ -19,7 +19,8 @@ let examplePost = {
 	author: 'Tommy', 		// the author’s username
 }
 
-function rowsOfCards(props, showModal) {
+const rowsOfCards = (props, showModal) => {
+	console.log("Rendered row of cards.");
 	return (
 		<React.Fragment>
 			<ScrollingWrapper
@@ -46,12 +47,37 @@ function rowsOfCards(props, showModal) {
 		</React.Fragment>)
 }
 
+function parseClients(modalPost) {
+	const clients = modalPost['clients']
+	const myClients = []
+	for (let i = 0; clients && i < clients.length; i++) {
+		myClients.push(
+			{
+				value: clients[i]._id,
+				label: clients[i]['username'] + '  (' + clients[i]['rp'] + ' RP)',
+				rp: clients[i]['rp'],
+			}
+		)
+	}
+	console.log("Parsing clients list");
+	return myClients;
+}
+
+function grabSinglePost(modalVisibility, props, postCollection, postIndex)  {
+	if (!modalVisibility) {
+		return null;
+	}
+	var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
+	console.log("Grabbed single post.");
+	return func(props, postCollection, postIndex);
+}
 
 
 export default function Dashboard(props) {
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [postIndex, setPostIndex] = useState(0);
 	const [postCollection, setPostCollection] = useState('');
+	const [selectedClient, setSelectedClient] = useState('');
 
 	const showModal = (collection, i) => { //collection is 0, 1, or 2
 		setPostCollection(collection);
@@ -69,15 +95,11 @@ export default function Dashboard(props) {
 		document.querySelector('html').classList.toggle('scroll-lock');
 	};
 
-	const grabSinglePost = () => {
-		if(!modalVisibility) {
-			return null;
-		}
-		var func = new Function("props", "collection", "i", "return props.allPosts[collection][i]");
-		return func(props, postCollection, postIndex);
+	const selectClient = (id) => {
+		setSelectedClient(id);
 	}
 
-	const modalPost = grabSinglePost();
+	const modalPost = grabSinglePost(modalVisibility, props, postCollection, postIndex) 
 	
 	return (
 
@@ -95,7 +117,11 @@ export default function Dashboard(props) {
 					(<Modal
 						isVisible={modalVisibility} //we pass a bool value
 						closeModal={closeModal} //we pass a reference to a function
-						acceptStatus={2} //can accept as a host
+						acceptStatus={
+							modalPost.fulfilled===1? 2: 0
+							} //can accept as a host iff post is pending
+						selectedClient={selectedClient}
+						post={modalPost}
 						modalContent={
 							<React.Fragment>
 								<Card
@@ -105,9 +131,12 @@ export default function Dashboard(props) {
 									inModal={true}
 									showModal={() => { }
 									} />
-								<ClientsDropdown
-									clients={modalPost['clients']}>
-								</ClientsDropdown>
+								{modalPost.fulfilled === 1 ? (
+									<ClientsDropdown
+									options={parseClients(modalPost)}
+									selectClient={selectClient} >
+								</ClientsDropdown>)
+								: null}
 							</React.Fragment>
 						}
 					/>) : null
