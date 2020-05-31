@@ -73,7 +73,7 @@ function DropDownMenu () {
 }
 
 export default function NavBar (props) {
-    const {settings, setPage, onColorChange} = useContext(RenderingContext);
+    const {settings, onColorChange} = useContext(RenderingContext);
     const [pColor, setPcolor] = useState(window.color);
     const {getUserInfo} = useContext(RegisterContext);
 
@@ -106,7 +106,7 @@ export default function NavBar (props) {
             <NavItem name="alertIcon" openIcon={<AlertOpenIcon/>} closeIcon={<AlertCloseIcon/>} />
             <NavItem name="createIcon" openIcon={<AddIcon/>} closeIcon={<AddIcon/>} />
             <NavItem name="searchIcon" openIcon={<SearchIcon/>} closeIcon={<SearchIcon/>} />
-            <Style.BTN onClick={() => {setPage("directory")}}>
+            <Style.BTN onClick={() => {history.push("/");}}>
                 <Style.Logo id="logoIcon"/>
             </Style.BTN>
         </Style.Navbar>
