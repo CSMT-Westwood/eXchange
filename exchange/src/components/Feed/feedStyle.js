@@ -15,13 +15,17 @@ export const FeedTitle = styled.div`
 `;
 
 export const NewContainer = styled(Container)`
-    opacity: 1;
+    opacity: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     background: blue;
     z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
 `;
 
 
