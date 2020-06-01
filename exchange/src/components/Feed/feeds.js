@@ -7,65 +7,55 @@ import history from "../history"
 import Container from '../Container';
 
 
-function FeedsContent (props) {
+function Feeds (props) {
     const {settings} = useContext(RenderingContext);
+    const [keys, setKeys] = useState([]);
+    const [preferences, setPreferences] = useState({});
+
+    useEffect(() => {
+        setKeys(settings.preferences.preferences);
+        function getFeed () {
+            fetch("http://localhost:8000/feed", {
+                method: "GET",
+                headers: { "Content-Type": "multipart/form-data", "token": sessionStorage.getItem("token")},
+            })
+            .then(response => {
+                if(!response.ok)
+                    response.json().then(data => console.log(data.message));
+                else {
+                    response.json().then(data => { 
+                        console.log(data);
+                        setPreferences(data);
+                    });
+                }
+            })
+        }
+        getFeed();
+    },[settings.preferences.preferences]);
+
 
     function createC () {
         let temptemp = [
             <Style.FeedTitle key={uuid()}>Personal Feed</Style.FeedTitle>,
             <div className="Test" key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</div>
         ];
-        console.log("output:", props.values);
-        for(let i = 0; i < props.keys.length; i++){
-            // console.log("Feed:", feed);
+
+        for(let each in preferences){   
+            
             temptemp.push(
                 <Style.FeedWrapper key={uuid()}>
-                    <Style.FieldTitle>{props.keys[i]}</Style.FieldTitle>
-                    <Container className="hello_hello_hello" posts={props.values[i]}/>
+                    <Style.FieldTitle>{each}</Style.FieldTitle>
+                    <Container className="hello_hello_hello" posts={preferences[each]}/>
                 </Style.FeedWrapper>
             );
         }
         return temptemp;
     }
 
-    if(!sessionStorage.getItem("token")){
-        alert("Please Log in first!");
-        history.push("/login");
-    }
-    return (
+    return(
         <Style.Temp>
             {createC()}
-        </Style.Temp> 
-    )
-}
-
-function Feeds () {
-    const {settings} = useContext(RenderingContext);
-    let keys = settings.preferences.preferences;
-    let values = Array.apply(null, Array(keys.length)).map(() =>[]);
-    function getFeed () {
-        fetch("http://localhost:8000/feed", {
-            method: "GET",
-            headers: { "Content-Type": "multipart/form-data", "token": sessionStorage.getItem("token")},
-        }).then(response => {
-            if(!response.ok)
-                response.json().then(data => console.log(data.message));
-            else
-                response.json().then(data => { data.preferencePosts.map(f => {
-                    for (let i = 0; i < keys.length; i++)
-                        if(f.course.includes(keys[i])){
-                            values[i].push(f);
-                            // console.log(values[i]);
-                        }
-                })}
-            )
-        })
-    }
-    
-    getFeed();
-    console.log(values);
-    return(
-        <FeedsContent keys={keys} values={values} />
+        </Style.Temp>
     );
 }
 
