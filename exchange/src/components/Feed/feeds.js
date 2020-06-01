@@ -55,15 +55,15 @@ function Feeds () {
                     for (let i = 0; i < keys.length; i++)
                         if(f.course.includes(keys[i])){
                             values[i].push(f);
-                            console.log(values[i]);
+                            // console.log(values[i]);
                         }
                 })}
             )
-        }).then(x => {console.log("values,", values);})
+        })
     }
     
     getFeed();
-    
+    console.log(values);
     return(
         <FeedsContent keys={keys} values={values} />
     );

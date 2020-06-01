@@ -24,8 +24,8 @@ function RegisterContextProvider (props) {
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email});
                     setSettings.photo({"photo": data.avatar === null ? settings.photo.photo : data.avatar});
-                    let name = props.name ==="/login" ? "/" : props.name === "/signup" ? "/login" : props.name;
-                    history.push(name);
+                    if(props.login)
+                        history.push("/");
             })}
         })
     }
@@ -47,7 +47,7 @@ function RegisterContextProvider (props) {
                     response.json().then(data => {
                         sessionStorage.setItem("token", data.token);
                         setWarning("");
-                        getUserInfo({"token": data.token, "name": "/"});
+                        getUserInfo({"token": data.token, "login": true});
                 })}
             })
         }

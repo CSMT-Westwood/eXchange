@@ -92,7 +92,7 @@ export default function NavBar (props) {
                 if(temp[i]==="/")
                     temp = temp.slice(i);
             }
-            getUserInfo({"token": sessionStorage.getItem("token"), "name":temp});
+            getUserInfo({"token": sessionStorage.getItem("token")});
         }
         if(onColorChange){
             const interval = setInterval(() => {
