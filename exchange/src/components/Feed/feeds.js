@@ -7,13 +7,11 @@ import history from "../history"
 import Container from '../Container';
 
 
-function Feeds (props) {
+function Feeds () {
     const {settings} = useContext(RenderingContext);
-    const [keys, setKeys] = useState([]);
     const [preferences, setPreferences] = useState({});
 
     useEffect(() => {
-        setKeys(settings.preferences.preferences);
         function getFeed () {
             fetch("http://localhost:8000/feed", {
                 method: "GET",
@@ -24,7 +22,6 @@ function Feeds (props) {
                     response.json().then(data => console.log(data.message));
                 else {
                     response.json().then(data => { 
-                        console.log(data);
                         setPreferences(data);
                     });
                 }
@@ -37,7 +34,7 @@ function Feeds (props) {
     function createC () {
         let temptemp = [
             <Style.FeedTitle key={uuid()}>Personal Feed</Style.FeedTitle>,
-            <div className="Test" key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</div>
+            <Style.FeedSubTitle key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</Style.FeedSubTitle>
         ];
 
         for(let each in preferences){   
@@ -45,7 +42,7 @@ function Feeds (props) {
             temptemp.push(
                 <Style.FeedWrapper key={uuid()}>
                     <Style.FieldTitle>{each}</Style.FieldTitle>
-                    <Container className="hello_hello_hello" posts={preferences[each]}/>
+                    <Style.NewContainer posts={preferences[each]}/>
                 </Style.FeedWrapper>
             );
         }

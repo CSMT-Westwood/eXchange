@@ -14,16 +14,26 @@ export const FeedTitle = styled.div`
     z-index: 2;
 `;
 
+export const FeedSubTitle = styled.div`
+    position: absolute;
+    height: 10vw;
+    width: 100vw;
+    top: 12vw;
+    left: 0;
+    font-size: 2vw;
+    font-weight: 400;
+    text-align: center;
+`;
+
 export const NewContainer = styled(Container)`
-    opacity: 0;
+    opacity: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    background: blue;
     z-index: 3;
     position: absolute;
-    top: 0;
+    top: 7vw;
     left: 0;
     width: 100vw;
 `;
