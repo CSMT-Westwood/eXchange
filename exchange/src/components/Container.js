@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { Card } from './Card';
-import TriggerButton from './TriggerButton';
-import Form from './Form';
 
 function Container(props) {
     const [modalVisibility, setModalVisibility] = useState(false);
@@ -44,7 +42,7 @@ function Container(props) {
             <Modal
                 isVisible={modalVisibility} //we pass a bool value
                 closeModal={closeModal} //we pass a reference to a function
-                hasAccept={true}
+                acceptStatus={1} //can accept as a client
                 showLink={modalShowLink}
                 modalContent={<Card
                     post={props.posts[postIndex]}
@@ -53,7 +51,7 @@ function Container(props) {
                     showLink={linkDisplay}
                 />}
             />
-            {cards}
+			{cards}
         </div>
     )
 }
