@@ -9,7 +9,7 @@
 	width: 35vw;
 	/* background-color: var(--color-tertiary); */
 	background-color: var(--color-quaternary);
-	color: var(--color-white);
+	color: black;
 	border: 0.05vw solid black;
 }
 

@@ -23,7 +23,7 @@
 	z-index: 0;
 }
 .directory-welcome-text > span {
-	background-color: cornsilk;
+	background-color: var(--color-background);
 	background-size: 110%;
 	padding: 0.4vw;
 	border-radius: 1%;

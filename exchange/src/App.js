@@ -14,12 +14,12 @@ import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 	html {
-		--color-primary: #FFD100; /*bruin gold*/
+		--color-primary: #fc5185; /*bruin gold*/
 		--color-secondary: #C3D7EE; /*lightest blue*/
 		--color-tertiary: #8BB8E8; /*light-blue*/
-		--color-quaternary: #222831; /*dark purple;*/
+		--color-quaternary: #fce38a; /*dark purple;*/
 		--color-quinary: #2D68C4; /*true blue*/
-		--color-senary: cornsilk; /*lightest blue #C3D7EE*/
+		--color-senary: #eaffd0; /*lightest blue #C3D7EE*/
 		--color-background: var(--color-senary);
 		--color-black: black;
 		--color-white: white;

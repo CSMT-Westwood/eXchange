@@ -24,7 +24,8 @@
 .search-bar-search-button {
     margin-left: 10px;
     cursor: pointer;
-    opacity: 1;
+	opacity: 1;
+	color: white;
 }
 .search-bar-mousedown {
     animation: lessen 0.2s alternate forwards;
@@ -49,7 +50,7 @@
 	font-size: larger;
 	font-weight: 600;
 	color: black;
-	background-color: cornsilk;
+	background-color: var(--color-background);
 }
 
 /* eliminate default behavior */

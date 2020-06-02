@@ -12,7 +12,7 @@ export const UserPhoto=styled.img`
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
-	border: var(--color-white) solid;
+	border: black;
 `;
 
 export const UserName=styled.span`
