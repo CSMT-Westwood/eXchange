@@ -23,7 +23,6 @@ function InfoField(props) {
 		<Style.InfoField color={window.color} >
 			<Style.Info>{props.name}</Style.Info>
 			<Style.Info>{props.value}</Style.Info>
-			{/* <Style.InfoFieldWrapper name={props.name}></Style.InfoFieldWrapper> */}
 		</Style.InfoField>
 	)
 }

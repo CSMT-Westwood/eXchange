@@ -5,15 +5,18 @@ import "../Profile/background.css";
 import uuid from "uuid/v1"
 import history from "../history"
 import Container from '../Container';
+import styled from 'styled-components';
 
 
-function Feeds (props) {
+function Feeds () {
     const {settings} = useContext(RenderingContext);
-    const [keys, setKeys] = useState([]);
     const [preferences, setPreferences] = useState({});
 
     useEffect(() => {
-        setKeys(settings.preferences.preferences);
+        if(!sessionStorage.getItem("token")){
+            alert("Please log in first!");
+            history.push("/");
+        }
         function getFeed () {
             fetch("http://localhost:8000/feed", {
                 method: "GET",
@@ -24,7 +27,6 @@ function Feeds (props) {
                     response.json().then(data => console.log(data.message));
                 else {
                     response.json().then(data => { 
-                        console.log(data);
                         setPreferences(data);
                     });
                 }
@@ -36,18 +38,29 @@ function Feeds (props) {
 
     function createC () {
         let temptemp = [
-            <Style.FeedTitle key={uuid()}>Personal Feed</Style.FeedTitle>,
-            <div className="Test" key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</div>
+            <Style.FeedTitle key={uuid()}>Personal Feeds</Style.FeedTitle>,
+            <Style.FeedSubTitle key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</Style.FeedSubTitle>
         ];
 
-        for(let each in preferences){   
-            
-            temptemp.push(
-                <Style.FeedWrapper key={uuid()}>
-                    <Style.FieldTitle>{each}</Style.FieldTitle>
-                    <Container className="hello_hello_hello" posts={preferences[each]}/>
-                </Style.FeedWrapper>
-            );
+        for(let each in preferences){
+            if(preferences[each].length!==0){  
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FeedWrapper>   
+                            <Style.NewContainer posts={preferences[each]}/>
+                        </Style.FeedWrapper>
+                    </Style.SecondaryWrapper>
+                );
+            }
+            else{
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FieldTitle>No result avaliable</Style.FieldTitle>
+                    </Style.SecondaryWrapper>
+                );
+            }
         }
         return temptemp;
     }

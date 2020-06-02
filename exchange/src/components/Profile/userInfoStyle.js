@@ -63,35 +63,6 @@ export const InfoField=styled.div`
     }
 `;
 
-export const InfoFieldWrapper=styled(InfoField)`
-    top: 0;
-    left: 0;
-    position: absolute;
-    background-size: 10vw 10vw;
-    opacity: 0.2;
-    padding: 0;
-    border: none;
-    width: 10vw;
-    height: 100%;
-    border-radius: 0;
-    z-index: 1;
-    &:hover{
-        opacity: 0.3;
-    }
-    background-image: url(${ (props) => {
-        switch (props.name){
-            case "Reputation": 
-            return (require (`../../imgs/reputation.jpg`)); 
-            case "Activity": 
-            return (require (`../../imgs/activities.jpg`)); 
-            case "Following": 
-            return (require (`../../imgs/following.jpg`)); 
-            case "Posts": 
-            return (require (`../../imgs/posts.jpg`)); 
-            default: return(""); 
-    }}});
-`;
-
 export const Info=styled.div`
     text-align: center;
     font-size: 1.7vw;

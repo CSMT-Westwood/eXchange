@@ -68,7 +68,7 @@ export const SubmitBtn=styled.input`
     background: #fff;
     border-width: 0;
     border-radius: 6px;
-    background: rgb(10, 80, 255);
+    background: rgb(0, 100, 200);
     color: #fff;
     font-size: 1.5vw;
     font-weight: 400;
@@ -76,7 +76,7 @@ export const SubmitBtn=styled.input`
     bottom: 0.5vw;
     left: 6vw;
     &:hover{
-        background: rgb(0, 68, 228);
+        background: rgb(30, 130, 245);
         cursor: pointer;
     }
     &:focus{
