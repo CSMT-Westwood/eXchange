@@ -39,9 +39,8 @@ function Feeds () {
     function createC () {
         let temptemp = [
             <Style.FeedTitle key={uuid()}>Personal Feeds</Style.FeedTitle>,
-            <Style.FeedSubTitle key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</Style.FeedSubTitle>
-        ];
-
+			<Style.FeedSubTitle key={uuid()}>You are following {settings.preferences.preferences.length} topics: {settings.preferences.preferences.join(', ')} </Style.FeedSubTitle>
+		];
         for(let each in preferences){
             if(preferences[each].length!==0){  
                 temptemp.push(

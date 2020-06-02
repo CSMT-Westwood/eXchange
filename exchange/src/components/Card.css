@@ -15,7 +15,7 @@
 }
 .badge-purple {
 	background-color: #5203fc;
-	color: #ffffff;
+	color: var(--color-white);
 }
 .full-card {
 	margin: 0 10px;

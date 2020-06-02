@@ -10,7 +10,7 @@ export class Toggle extends React.Component {
 			<React.Fragment>
 				
 				<label className="switch">
-					<h3 className="switch-label-left">{this.props.on? this.props.onText:this.props.offText}.</h3>
+					<h3 className="switch-label-left">{this.props.on? this.props.onText:this.props.offText}</h3>
 					<input
 						type="checkbox"
 						checked={this.props.on}

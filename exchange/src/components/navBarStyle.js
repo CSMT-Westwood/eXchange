@@ -20,18 +20,12 @@ export const A = styled.a`
 export const Navbar = styled.nav`
     height: 3.5vw;
     width: 100vw;
-    background: linear-gradient( 30deg,
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
-    );
+    background: var(--color-primary);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 3;
+	border-bottom: 0.2vw var(--color-black) solid;
 `;
 
 export const LI = styled.li`
@@ -61,11 +55,7 @@ export const Dropdown = styled.div`
     top: 3.5vw;
     right: 0vw;
     width: 8vw;
-    background-color:rgba(
-        ${(props) => (255 * Math.cos(props.color / 40))},
-        ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }
-        , 0.8);
+    background-color: var(--color-primary);
     border-top: 1px black solid;
     border-bottom: 0.2vw black solid;
     padding: 0;
@@ -83,7 +73,6 @@ export const MenuItem = styled(BTN)`
     padding: 0.75vw 0.3vw;
     font-size: 1vw;
     font-weight: 500;
-    background: rgba(10, 160, 219, 0);
     border-width: 0;
     z-index: 2;
     
@@ -94,7 +83,7 @@ export const MenuItem = styled(BTN)`
     &:hover{
         color: black;
         text-decoration: none;
-        background-color: lightgrey;
+        background-color: var(--color-primary)
     }
 `;
 

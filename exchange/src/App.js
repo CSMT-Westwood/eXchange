@@ -10,6 +10,26 @@ import Feeds from './components/Feed/feeds'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
 import RegisterContextProvider from './components/Register/registerContext';
 import history from './components/history';
+import {createGlobalStyle} from 'styled-components';
+
+const GlobalStyles = createGlobalStyle`
+	html {
+		--color-primary: #FFD100; /*bruin gold*/
+		--color-secondary: #40bad5; /*teal*/
+		--color-tertiary: #8BB8E8; /*light-blue*/
+		--color-quaternary: #035aa6; /*med blue #035aa6;*/
+		--color-quinary: #2D68C4; /*true blue*/
+		--color-senary: #C3D7EE; /*lightest blue*/
+		--color-background: var(--color-senary);
+		--color-black: black;
+		--color-white: white;
+		--color-text: black;
+		background-color: var(--color-background);
+	}
+	html > body {
+		color: var(--color-text);
+	}
+`
 
 function RenderingComponent () {
     const {settings} = useContext(RenderingContext);
@@ -28,6 +48,7 @@ function RenderingComponent () {
 function App() {
     return (
         <div className="App">
+			<GlobalStyles />
             <RenderingContextProvider>
                 <RegisterContextProvider>
                     <NavBar/>

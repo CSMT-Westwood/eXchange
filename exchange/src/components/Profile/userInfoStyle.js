@@ -12,6 +12,7 @@ export const UserPhoto=styled.img`
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
+	border: var(--color-white) solid;
 `;
 
 export const UserName=styled.span`
@@ -44,16 +45,8 @@ export const InfoField=styled.div`
     height: 10vw;
     position: relative;
     border-style: solid;
-    border-image: linear-gradient( 270deg,
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }), 
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -254 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
-    ) 1;
     border-radius: 0.6vw;
-    border-width: 0.4vw;
+    border-width: 0.25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,9 +1,3 @@
-html {
-    background: url("../../imgs/directoryBgi.jpg");
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: repeat-y;
-}
 .directory-search-bar-first {
     position: absolute;
     top: 55vh;
