@@ -1,30 +1,74 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import * as Style from './feedStyle'
 import { RenderingContext } from '../../renderingContext';
-import "../Profile/background.css"
+import "../Profile/background.css";
+import uuid from "uuid/v1"
+import history from "../history"
+import Container from '../Container';
+import styled from 'styled-components';
 
-// function getFeed (props) {
-//     const output = props.pfs.map(p => ({[p]: []}));
-//     props.fds.map(f => {output[f.itemName].push(f);});
-//     return output;
-// }
 
 function Feeds () {
     const {settings} = useContext(RenderingContext);
-    // let GroupedFeeds = getFeed({fds: settings.posts.posts, pfs:settings.preferences.preferences});
-    return (
-        <div>
-            <Style.FeedTitle>Personal Feed</Style.FeedTitle>
-            <div className="Test">You currently have 0 feed</div>
-            {/* {settings.preferences.preferences.map(pf => 
-                <Style.FeedWrapper>
-                    
-                    {GroupedFeeds.map(feed => 
-                        <Style.NewContainer posts={Object.values(feed)[0]} key={uuid()}/>
-                    )}
-                </Style.FeedWrapper>
-            )} */}
-        </div>
+    const [preferences, setPreferences] = useState({});
+
+    useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please log in first!");
+            history.push("/");
+        }
+        function getFeed () {
+            fetch("http://localhost:8000/feed", {
+                method: "GET",
+                headers: { "Content-Type": "multipart/form-data", "token": sessionStorage.getItem("token")},
+            })
+            .then(response => {
+                if(!response.ok)
+                    response.json().then(data => console.log(data.message));
+                else {
+                    response.json().then(data => { 
+                        setPreferences(data);
+                    });
+                }
+            })
+        }
+        getFeed();
+    },[settings.preferences.preferences]);
+
+
+    function createC () {
+        let temptemp = [
+            <Style.FeedTitle key={uuid()}>Personal Feeds</Style.FeedTitle>,
+            <Style.FeedSubTitle key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</Style.FeedSubTitle>
+        ];
+
+        for(let each in preferences){
+            if(preferences[each].length!==0){  
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FeedWrapper>   
+                            <Style.NewContainer posts={preferences[each]}/>
+                        </Style.FeedWrapper>
+                    </Style.SecondaryWrapper>
+                );
+            }
+            else{
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FieldTitle>No result avaliable</Style.FieldTitle>
+                    </Style.SecondaryWrapper>
+                );
+            }
+        }
+        return temptemp;
+    }
+
+    return(
+        <Style.Temp>
+            {createC()}
+        </Style.Temp>
     );
 }
 

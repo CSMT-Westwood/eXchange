@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '../imgs/logo.svg'
+import {Link} from 'react-router-dom';
 
 export const UL = styled.ul`
     list-style: none;
@@ -9,6 +10,7 @@ export const UL = styled.ul`
 
 export const BTN = styled.button`
     border-width: 0;
+    padding: 0;
 `;
 
 export const A = styled.a`
@@ -26,9 +28,10 @@ export const Navbar = styled.nav`
             ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
             ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
     );
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 3;
 `;
 
 export const LI = styled.li`
@@ -56,26 +59,28 @@ export const IconBtn = styled(A)`
 export const Dropdown = styled.div`
     position: absolute;
     top: 3.5vw;
-    left: 0;
-    width: 10vw;
-    background-color:rgb(
-        ${(props) => (255 * Math.sin(props.color / 40))},
-        ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-        ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) });
+    right: 0vw;
+    width: 8vw;
+    background-color:rgba(
+        ${(props) => (255 * Math.cos(props.color / 40))},
+        ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
+        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }
+        , 0.8);
     border-top: 1px black solid;
+    border-bottom: 0.2vw black solid;
     padding: 0;
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
 `;
 
 export const MenuItem = styled(BTN)`
     height: 3vw;
     width: 10vw;
     display: flex;
-    align-items: center;
+    align-item: center;
     border-radius: 0;
     transition: background var(--speed);
-    padding: 0.3rem;
+    padding: 0.75vw 0.3vw;
     font-size: 1vw;
     font-weight: 500;
     background: rgba(10, 160, 219, 0);
@@ -98,9 +103,8 @@ export const MenuIcon=styled(LI)`
     display: flex;
     position: absolute;
     top: 0;
-    left: ${(props) => (props.name==='menu' ? '0' : props.name==='user' ? '3vw' : '')};
-    right: ${(props) => (props.name==='aler' ? '0' : '')};
-    
+    right: ${(props) => (props.name==='user' ? '0' : props.name==='aler' ? '3vw' : 
+        props.name==='sear' ? '6vw' : '9vw')};
 `;
 
 export const Logo = styled(LogoIcon)`
@@ -112,14 +116,22 @@ export const Logo = styled(LogoIcon)`
     display: flex;
 `;
 
-export const UsernameOnBar = styled.div`
-    width: 15vw;
-    height: 3.5vw;
-    position: absolute;
-    left: 3.5vw;
+export const ItemTxtDiv = styled.div`
     display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 1.1vw;
-    text-align: left;
+    text-align: center;
+    align-item: center;
+    padding: 0 0.5vw;
+`;
+
+export const NotificationTitle = styled.h3`
+    text-align: center;
+    margin-bottom: 10px;
+`;
+
+export const StyledLink = styled(Link)`
+    color: black;
+    &:hover{
+        text-decoration: none;
+        color: black;
+    }
 `;

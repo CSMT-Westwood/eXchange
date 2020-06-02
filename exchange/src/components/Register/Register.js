@@ -1,15 +1,8 @@
-/*  React Compoment for Login and Signup
-    Usage:
-        import Register from '../Register/register'
-        Login: <Regiter status='login' />
-        Signup: <Register status='signup' />
-*/
-
 import React, { useContext } from 'react';
 import * as Style from "./registerStyle"
 import '../Profile/background.css'
-import RegisterContextProvider, { RegisterContext } from './registerContext';
-import { RenderingContext } from '../../renderingContext';
+import { RegisterContext } from './registerContext';
+import history from "../history";
 
 function InputField (props) {
     const {info, setInfo} = useContext(RegisterContext);
@@ -21,9 +14,8 @@ function InputField (props) {
 );
 }
 
-function Login () {
-    const {info, warning, setWarning, setStatus, handleSumbit} = useContext(RegisterContext);
-    const {setPage} = useContext(RenderingContext);
+export function Login () {
+    const {info, warning, setWarning, handleSumbit} = useContext(RegisterContext);
 
     return (
         <div className='pageWrapper'>
@@ -39,18 +31,16 @@ function Login () {
             </Style.RegisterForm>
             <Style.AlternateBtn onClick={() => {
                 setWarning("");
-                setStatus("signup");
-                setPage("signup");
+                history.push("/signup");
             }}>Don't have an account? Sign up here.</Style.AlternateBtn>
         </div>
     );
 }
 
 
-function Signup () {
-    const {info, warning, setWarning, setStatus, handleSumbit} = useContext(RegisterContext);
-    const {setPage} = useContext(RenderingContext);
-
+export function Signup () {
+    const {info, warning, setWarning, handleSumbit} = useContext(RegisterContext);
+    
     return (
         <div className='pageWrapper'>
             <Style.NavBar>Sign up</Style.NavBar>
@@ -67,25 +57,9 @@ function Signup () {
             </Style.RegisterForm>
             <Style.AlternateBtn onClick={() => {
                 setWarning("");
-                setStatus("login");
-                setPage("login");
+                history.push("/login");
                 }}>Already have an account? Log in here.</Style.AlternateBtn>
         </div>
     );
 }
 
-
-
-function Register (props) {
-    const StatusHandler = () => {
-        const {status} = useContext(RegisterContext);
-        return (status === "login" ? <Login /> : <Signup /> );
-    }
-    return (
-        <RegisterContextProvider status={props.status}>
-            <StatusHandler />
-        </RegisterContextProvider>
-    );
-}
-
-export default Register;

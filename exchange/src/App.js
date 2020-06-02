@@ -1,42 +1,27 @@
 import React, { useContext } from 'react';
+import {Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
-import Register from './components/Register/Register';
-import Profile from './components/Profile/Profile';
+import {Login, Signup} from './components/Register/Register';
+import Settings from './components/Profile/settings';
 import Directory from './components/Directory/Directory';
-import { Container } from './components/Container';
-import { Filler } from './components/Filler';
-import { Card } from './components/Card'
+import UserInfo from './components/Profile/userInfo';
+import Feeds from './components/Feed/feeds'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
+import RegisterContextProvider from './components/Register/registerContext';
+import history from './components/history';
 
 function RenderingComponent () {
-    const {page} = useContext(RenderingContext);
-
-    switch(page) {
-        case "login":
-            return (<Register status="login" />);
-        case "signup":
-            return (<Register status="signup" />);
-        case "settings":
-            return (<Profile status="settings" />);
-        case "userinfo":
-            return (<Profile status="userinfo" />);
-        case "feeds":
-            return (<Profile status="feeds" />);
-        case "directory":
-            return (<Directory />);
-        default:
-            return (<Register status="login" />);
-    }
-}
-
-function DisplayWrapper () {
-    const {page} = useContext(RenderingContext);
+    const {settings} = useContext(RenderingContext);
     return(
-      <div>
-          <NavBar setting={page !== "settings" ? false: true} />
-          <RenderingComponent />
-      </div>  
+        <Router history={history}>
+            <Route exact path="/" component={Directory} />
+            <Route path="/login" component = {Login} />
+            <Route path="/signup" component = {Signup} />
+            <Route path={"/"+settings.username.username} component = {UserInfo} />
+            <Route path="/feeds" component = {Feeds} />
+            <Route path="/settings" component = {Settings} />
+        </Router>    
     );
 }
 
@@ -44,41 +29,14 @@ function App() {
     return (
         <div className="App">
             <RenderingContextProvider>
-                <DisplayWrapper />        
+                <RegisterContextProvider>
+                    <NavBar/>
+                    <RenderingComponent />
+                </RegisterContextProvider>  
             </RenderingContextProvider>
+            
         </div>
     );
 }
-
-// let examplePost = {
-// 	typeOfPost: 0, //0,1 = offer, request
-// 	typeOfItem: 0, //0,1 = textbook, notes
-// 	course: 'CS33',
-// 	itemName: 'Computer Organization: A Perspective!',
-// 	condition: 0, //from 0 (best) to 3 (worst)
-// 	description: 'Awesome. I dropped this off at your house when I went to the',
-// 	link: '',
-// 	fulfilled: 0, //Unfulfilled, Pending (matched w at least 1 other person), Fulfilled (marked for deletion). On the backend, we will switch pending to fulfilled after 2 weeks have passed.
-// 	publication_date: new Date(2023, 4, 13),
-// 	author: 'Tommy', 		// the author’s username
-// }
-// const App = () => {
-// 	const triggerText = 'Offer/Request';
-// 	const onSubmit = (event) => {
-// 		// event.preventDefault(event);
-// 		// console.log(typeof(event));
-// 		// console.log(event.offerChecked); //console.log treats offerChecked as a string for some reason
-// 		// console.log(event.target.email.value);
-// 		// console.log(event.target.name.value);
-// 	};
-// 	return (
-// 		<div className="App">
-// 			<Filler />
-// 			<Container triggerText={triggerText} onSubmit={onSubmit} />
-// 			<Card post={examplePost} />
-// 			<Filler />
-// 		</div>
-// 	);
-// };
 
 export default App;
