@@ -3,6 +3,14 @@
     top: 55vh;
     z-index: 1;
 }
+.directory-body {
+	background: url("../../imgs/directory.jpg");
+	background-attachment: fixed;
+	background-size: 100%;
+	background-repeat: repeat-y;
+	height: 100vh;
+	width: 100vw;
+}
 .directory-search-bar {
     position: absolute;
     top: 55vh;
@@ -12,7 +20,15 @@
 .directory-welcome-text {
     margin-top: 20vh;
     text-align: center;
-    z-index: 0;
+	z-index: 0;
+}
+.directory-welcome-text > span {
+	background-color: cornsilk;
+	background-size: 110%;
+	padding: 0.4vw;
+	border-radius: 1%;
+	color: black;
+	
 }
 .directory-welcome-text-hidden {
     margin-top: 20vh;

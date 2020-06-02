@@ -9,7 +9,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+	padding: 10px;
 }
 
 .search-bar-search-bar {
@@ -17,7 +17,8 @@
     border-radius: calc(var(--search-bar-component-height) / 2);
     border: 1px solid silver;
     width: 30vw;
-    padding: 0 calc(var(--search-bar-component-height)/2);
+	padding: 0 calc(var(--search-bar-component-height)/2);
+	background-color: white;
 }
 
 .search-bar-search-button {
@@ -43,8 +44,12 @@
 .search-bar-dropdown {
     margin-right: 10px;
     height: var(--search-bar-component-height);
-    border-bottom: 1px silver solid;
-    font-size: larger;
+	border-bottom: 1px silver solid;
+	border-radius: 5%;
+	font-size: larger;
+	font-weight: 600;
+	color: black;
+	background-color: cornsilk;
 }
 
 /* eliminate default behavior */

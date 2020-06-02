@@ -30,7 +30,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #ccc;
+	background-color: white;
 	-webkit-transition: .4s;
 	transition: .4s;
 	padding-bottom: 2vw;
@@ -44,17 +44,17 @@
 	width: 1.81vw;
 	left: 0.1vw;
 	bottom: 0.5vh;
-	background-color: white;
+	background-color: darkgrey;
 	-webkit-transition: .4s;
 	transition: .4s;
 }
 
 input:checked+.slider {
-	background-color: var(--color-quinary);
+	background-color: var(--color-quaternary);
 }
 
 input:focus+.slider {
-	box-shadow: 0 0 1px var(--color-quinary);
+	box-shadow: 0 0 1px var(--color-quaternary);
 }
 
 input:checked+.slider:before {

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import SearchBar from './SearchBar';
 import Container from '../Container';
-import '../../App.css';
 import './directory.css';
 
 function Directory(props) {
@@ -42,8 +41,8 @@ function Directory(props) {
             <h1 className={
                 firstVisit ? "directory-welcome-text" : "directory-welcome-text-hidden"
             }>
-                Exchange. Learn. Discuss. Grow. <br /> <br />
-                Find any resource you want.
+				<span>	Exchange. Learn. Discuss. Grow.	</span> <br /> <br />
+                <span>	Find any resource you want.	</span>
             </h1>
             <SearchBar handleSearch={handleSearch}
                 className={
