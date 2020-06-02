@@ -132,7 +132,9 @@ export default function NavBar (props) {
             data.sort((a, b) => a.activity_date < b.activity_date? 1 : -1); // sort the array by date
             data.sort((a, b) => a.unread > b.unread ? -1 : 1); // sort by read/unread
             let arr = [];
+            let unreadCnt = 0;
             for (let i = 0; i < data.length; i++) {
+                unreadCnt += data[i].unread;
                 arr.push(
                     <Notification message={data[i].message} 
                         date={data[i].activity_date} key={i}
@@ -141,7 +143,7 @@ export default function NavBar (props) {
                     />
                 );
             }
-            setNotifications(arr);
+            setNotifications(arr.slice(0, Math.max(5, unreadCnt)));
             setNotificationVisibility(true);
             toggleScrollLock();
         });
