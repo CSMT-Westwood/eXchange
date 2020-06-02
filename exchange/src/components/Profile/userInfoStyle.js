@@ -46,7 +46,7 @@ export const InfoField=styled.div`
     position: relative;
     border-style: solid;
     border-radius: 0.6vw;
-    border-width: 0.25vw;
+    border-width: 0.15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;

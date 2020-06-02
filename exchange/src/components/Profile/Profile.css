@@ -1,7 +1,7 @@
 .profile-block {
 	position: fixed;
 	left: 0vw;
-	top: 0vh;
+	top: 4vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
