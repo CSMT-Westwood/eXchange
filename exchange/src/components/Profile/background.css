@@ -5,8 +5,10 @@
     left: 36vw;
     height: 32vw;
     width: 27vw;
-    background-color: rgba(231, 169, 54, 0.5);
+    background-color: rgba(12, 139, 212, 0.3);
     border-radius: 10px;
+    z-index: 4;
+    opacity: 1;
 }
 
 .pageWrapper::before{
@@ -18,7 +20,7 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.3;
+    opacity: 0.4;
 
     border-radius: 10px;
 }

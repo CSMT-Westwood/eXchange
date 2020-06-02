@@ -5,6 +5,7 @@ import "../Profile/background.css";
 import uuid from "uuid/v1"
 import history from "../history"
 import Container from '../Container';
+import styled from 'styled-components';
 
 
 function Feeds () {
@@ -12,6 +13,10 @@ function Feeds () {
     const [preferences, setPreferences] = useState({});
 
     useEffect(() => {
+        if(!sessionStorage.getItem("token")){
+            alert("Please log in first!");
+            history.push("/");
+        }
         function getFeed () {
             fetch("http://localhost:8000/feed", {
                 method: "GET",
@@ -33,18 +38,29 @@ function Feeds () {
 
     function createC () {
         let temptemp = [
-            <Style.FeedTitle key={uuid()}>Personal Feed</Style.FeedTitle>,
+            <Style.FeedTitle key={uuid()}>Personal Feeds</Style.FeedTitle>,
             <Style.FeedSubTitle key={uuid()}>You currently have {settings.preferences.preferences.length} preferences</Style.FeedSubTitle>
         ];
 
-        for(let each in preferences){   
-            
-            temptemp.push(
-                <Style.FeedWrapper key={uuid()}>
-                    <Style.FieldTitle>{each}</Style.FieldTitle>
-                    <Style.NewContainer posts={preferences[each]}/>
-                </Style.FeedWrapper>
-            );
+        for(let each in preferences){
+            if(preferences[each].length!==0){  
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FeedWrapper>   
+                            <Style.NewContainer posts={preferences[each]}/>
+                        </Style.FeedWrapper>
+                    </Style.SecondaryWrapper>
+                );
+            }
+            else{
+                temptemp.push(
+                    <Style.SecondaryWrapper color={window.color} key={uuid()}>
+                        <Style.FieldTitle color={window.color}>{each}</Style.FieldTitle>
+                        <Style.FieldTitle>No result avaliable</Style.FieldTitle>
+                    </Style.SecondaryWrapper>
+                );
+            }
         }
         return temptemp;
     }
