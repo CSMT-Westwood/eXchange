@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import * as Style from "./registerStyle"
-import '../Profile/background.css'
+import '../Profile/Background.css'
 import { RegisterContext } from './registerContext';
-import history from "../history";
+import history from "../History";
 
 function InputField (props) {
     const {info, setInfo} = useContext(RegisterContext);

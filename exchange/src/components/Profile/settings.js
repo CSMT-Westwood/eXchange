@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import './background.css'
-import * as Style from "./settingStyle"
+import './Background.css'
+import * as Style from "./SettingStyle"
 import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
-import history from "../history";
+import history from "../History";
 
 window.color = 0;
 

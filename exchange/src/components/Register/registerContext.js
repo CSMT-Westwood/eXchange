@@ -1,6 +1,6 @@
 import React, {useState, createContext, useContext} from 'react';
 import { RenderingContext } from '../../renderingContext';
-import history from '../history';
+import history from '../History';
  
 export const RegisterContext = createContext();
 

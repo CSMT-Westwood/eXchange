@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Form } from './Form';
 import FocusTrap from 'focus-trap-react';
-import "./modal.css";
+import "./Modal.css";
 export class Modal extends React.Component {
 	constructor(props) {
 		super(props);
