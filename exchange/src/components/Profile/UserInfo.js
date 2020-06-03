@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import * as Style from "./userInfoStyle";
-import "./background.css";
+import * as Style from "./UserInfoStyle";
+import "./Background.css";
 import { RenderingContext } from '../../renderingContext';
-import Dashboard from './Dashboard'
-import TriggerButton from '../TriggerButton';
-import history from "../history";
-import "./Profile.css"
+import Dashboard from './Dashboard';
+import history from "../History";
+import "./Profile.css";
 
 function BasicInfo() {
 	const { settings } = useContext(RenderingContext);
@@ -56,7 +55,6 @@ export default function UserInfo() {
 				if (!isHost) {
 					url = new URL('http://localhost:8000/feed/followedPosts/')
 				}
-				console.log(url);
 				
 				fetch(url, {
 					method: "GET",
@@ -87,7 +85,7 @@ export default function UserInfo() {
 		<div className="profile-page">
 			<div className="profile-block">
 				<BasicInfo />
-				<div className="profile-userInfo">
+				<div className="profile-UserInfo">
 					<InfoField name="Reputation" value={settings.rp.rp} /> 
 					<InfoField name="Activity" value={0} />
 					<InfoField name="Following" value={0} />

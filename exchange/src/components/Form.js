@@ -1,5 +1,5 @@
 import React from 'react';
-import "./form.css";
+import "./Form.css";
 /**
  * Currently suited for only Offer-Req Form.
  * IT'S NOT A GENERIC FORM COMPONENT.
@@ -75,12 +75,20 @@ export class Form extends React.Component {
 
 	async handleSubmit(event) {
 		event.preventDefault();
-		if (this.state.offerChecked && this.state.typeOfItem == 1 && this.state.link == "") {
-			this.toggleErrorMessage("Please input the link to your resource. Thanks!", true);
+		if (this.state.course === "") {
+			this.toggleErrorMessage("Please categorize your post under a course!", true);
 			return;
 		}
-		if (this.state.description == "") {
+		if (this.state.itemName === "") {
+			this.toggleErrorMessage("Please give your item a name!", true);
+			return;
+		}
+		if (this.state.description === "") {
 			this.toggleErrorMessage("Please give your post a description!", true);
+			return;
+		}
+		if (this.state.offerChecked && this.state.typeOfItem === 1 && this.state.link === "") {
+			this.toggleErrorMessage("Please input the link to your resource. Thanks!", true);
 			return;
 		}
 
@@ -93,6 +101,7 @@ export class Form extends React.Component {
 			description: this.state.description,
 			link: this.state.link
 		};
+		console.log(newPost);
 
 		try {
 			await fetch("http://localhost:8000/post/new", {

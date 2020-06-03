@@ -13,7 +13,7 @@
 	border: 0.05vw solid black;
 }
 
-.profile-userInfo {
+.profile-UserInfo {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-items: center;

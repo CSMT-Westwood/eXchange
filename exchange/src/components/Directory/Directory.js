@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import SearchBar from './SearchBar';
 import Container from '../Container';
-import './directory.css';
+import '../../App.css';
+import './Directory.css';
 
 function Directory(props) {
     const [queryObject, setQueryObject] = useState({});

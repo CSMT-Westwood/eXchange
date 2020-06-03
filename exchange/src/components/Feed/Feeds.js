@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import * as Style from './feedStyle'
+import * as Style from './FeedStyle'
 import { RenderingContext } from '../../renderingContext';
-import "../Profile/background.css";
+import "../Profile/Background.css";
 import uuid from "uuid/v1"
-import history from "../history"
-import Container from '../Container';
-import styled from 'styled-components';
+import history from "../History"
 
 
 function Feeds () {

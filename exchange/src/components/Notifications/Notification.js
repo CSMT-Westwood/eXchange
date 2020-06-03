@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./notification.css";
+import "./Notification.css";
 
 function Notification(props) {
     const [notificationClass, setNotificationClass] = 
