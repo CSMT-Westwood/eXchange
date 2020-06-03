@@ -55,7 +55,6 @@ export default function UserInfo() {
 				if (!isHost) {
 					url = new URL('http://localhost:8000/feed/followedPosts/')
 				}
-				console.log(url);
 				
 				fetch(url, {
 					method: "GET",
