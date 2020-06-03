@@ -9,7 +9,7 @@ import UserInfo from './components/Profile/UserInfo';
 import Feeds from './components/Feed/Feeds'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
 import RegisterContextProvider from './components/Register/registerContext';
-import history from './components/history';
+import history from './components/History';
 import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
