@@ -3,13 +3,13 @@ import {Router, Switch, Route} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
 import {Login, Signup} from './components/Register/Register';
-import Settings from './components/Profile/settings';
+import Settings from './components/Profile/Settings';
 import Directory from './components/Directory/Directory';
-import UserInfo from './components/Profile/userInfo';
-import Feeds from './components/Feed/feeds'
+import UserInfo from './components/Profile/UserInfo';
+import Feeds from './components/Feed/Feeds'
 import RenderingContextProvider, { RenderingContext } from './renderingContext';
 import RegisterContextProvider from './components/Register/registerContext';
-import history from './components/history';
+import history from './components/History';
 
 function RenderingComponent () {
     const {settings} = useContext(RenderingContext);

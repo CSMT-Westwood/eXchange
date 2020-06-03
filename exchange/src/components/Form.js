@@ -1,5 +1,5 @@
 import React from 'react';
-import "./form.css";
+import "./Form.css";
 /**
  * Currently suited for only Offer-Req Form.
  * IT'S NOT A GENERIC FORM COMPONENT.

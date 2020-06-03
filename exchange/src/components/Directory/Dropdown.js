@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './dropdown.css';
+import './Dropdown.css';
 
 function Dropdown(props) {
     const options = props.options;

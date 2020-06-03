@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Modal from "./Modal.js";
 import Form from "./Form.js";
 import Notification from "./Notifications/Notification.js";
-import * as Style from "./navBarStyle";
+import * as Style from "./NavBarStyle";
 import { ReactComponent as SearchIcon } from '../imgs/search.svg'
 import { ReactComponent as ProfileIcon } from '../imgs/profile.svg'
 import { ReactComponent as FeedIcon } from '../imgs/feed.svg'
@@ -13,7 +13,7 @@ import { ReactComponent as AlertCloseIcon } from '../imgs/alert-close.svg'
 import { ReactComponent as AddIcon } from '../imgs/addIcon.svg'
 import { RenderingContext } from '../renderingContext';
 import { RegisterContext } from './Register/registerContext';
-import history from '../components/history';
+import history from './History';
 
 function NavItem (props) {
     const [open, setOpen] = useState(false);
