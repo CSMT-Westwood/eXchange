@@ -64,14 +64,14 @@ export default function UserInfo() {
 						}
 				}).then(a => a.json()).then(b => {
 					setAllPosts(b);
-					if(isHost){
-						let x = 0;
+					let x = 0;
 						for (let each of Object.values(b))
 							x += each.length;
+					if(isHost){	
 						setSettings.postsC(x);
 					}
 					else{
-						setSettings.followC(Object.values(b)[0].length)
+						setSettings.followC(x);
 					}
 				});
 			} catch (e) {
