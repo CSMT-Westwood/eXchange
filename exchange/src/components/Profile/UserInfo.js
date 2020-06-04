@@ -28,7 +28,7 @@ function InfoField(props) {
 
 
 export default function UserInfo() {
-	const { settings } = useContext(RenderingContext);
+	const { settings, setSettings } = useContext(RenderingContext);
 	//A dictionary: {'unfulfilled': <Array>, 'pending': <Array>..}
 	const [allPosts, setAllPosts] = useState({}); 
 	const [viewMyPosts, setViewMyPosts] = useState(true);
@@ -62,7 +62,18 @@ export default function UserInfo() {
 						 "Content-Type": "application/json",
 						"token":  sessionStorage.getItem("token") //TODO: verify this is correct token retrieval
 						}
-				}).then(a => a.json()).then(b => setAllPosts(b));
+				}).then(a => a.json()).then(b => {
+					setAllPosts(b);
+					if(isHost){
+						let x = 0;
+						for (let each of Object.values(b))
+							x += each.length;
+						setSettings.postsC(x);
+					}
+					else{
+						setSettings.followC(Object.values(b)[0].length)
+					}
+				});
 			} catch (e) {
 				console.log(e);
 			}
