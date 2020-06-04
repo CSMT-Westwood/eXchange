@@ -21,13 +21,14 @@ export const Navbar = styled.nav`
     height: 3.5vw;
     width: 100vw;
     background: linear-gradient( 30deg,
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
-    );
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.9),
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        1));
     position: fixed;
     top: 0;
     left: 0;
@@ -61,11 +62,11 @@ export const Dropdown = styled.div`
     top: 3.5vw;
     right: 0vw;
     width: 8vw;
-    background-color:rgba(
-        ${(props) => (255 * Math.cos(props.color / 40))},
-        ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-        ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }
-        , 0.8);
+    background-color: rgba(
+        ${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        1);
     border-top: 1px black solid;
     border-bottom: 0.2vw black solid;
     padding: 0;
@@ -79,7 +80,7 @@ export const MenuItem = styled(BTN)`
     display: flex;
     align-item: center;
     border-radius: 0;
-    transition: background var(--speed);
+    transition: background 0.2s;
     padding: 0.75vw 0.3vw;
     font-size: 1vw;
     font-weight: 500;
@@ -90,6 +91,7 @@ export const MenuItem = styled(BTN)`
     &:link{
         color: black;
         text-decoration: none;
+        border: none;    
     }
     &:hover{
         color: black;

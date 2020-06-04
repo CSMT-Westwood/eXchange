@@ -5,7 +5,7 @@ import uuid from "uuid/v1"
 import { RenderingContext } from '../../renderingContext';
 import history from "../History";
 
-window.color = 0;
+window.color = 23;
 
 function PreferenceModule(){
     const {settings, changeInfo} = useContext(RenderingContext);
@@ -80,7 +80,7 @@ function SettingModule (props) {
             <Style.SettingName>{props.name + ":"}</Style.SettingName>
             {props.name==="theme" ? (onColorChange
                 ? <Style.SettingField color={window.color} type="range" min="0" max="100" value={privateInfo} onChange={(e)=>{setPrivateInfo( e.target.value ); window.color=e.target.value; }} />
-                : <Style.SettingField color={window.color} as='div'>{privateInfo}</Style.SettingField>
+                : <Style.SettingField color={window.color} as='div'>{"20".concat(privateInfo)}</Style.SettingField>
             ): state
                 ? <Style.SettingField color={window.color} type="text" value={privateInfo} onChange={(e)=>setPrivateInfo(e.target.value)} />
                 : <Style.SettingField color={window.color} as='div'>{privateInfo}</Style.SettingField>

@@ -7,7 +7,7 @@ export const RegisterContext = createContext();
 function RegisterContextProvider (props) {
     const [info, setInfo] = useState([{"username": ""}, {"email": ""}, {"password": ""}, {"confirm password": ""}]);
     const [warning, setWarning] = useState("");
-    const { settings, setSettings, setPage } = useContext(RenderingContext);
+    const { settings, setSettings } = useContext(RenderingContext);
 
     function getUserInfo (props) {
         fetch("http://localhost:8000/user/self", {
@@ -24,6 +24,8 @@ function RegisterContextProvider (props) {
                     setSettings.username({"username": data.username});
                     setSettings.email({"email": data.email});
                     setSettings.photo({"photo": data.avatar === null ? settings.photo.photo : data.avatar});
+                    setSettings.postsC(data.posts.length);
+                    setSettings.followC(data.followedPosts.length);
                     if(props.login)
                         history.push("/");
             })}

@@ -1,7 +1,7 @@
 .profile-block {
 	position: fixed;
-	left: 2vw;
-	top: 10vh;
+	left: 0vw;
+	top: 7vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -10,8 +10,8 @@
 }
 
 .profile-UserInfo {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	display: flex;
+	flex-direction: column;
 	justify-items: center;
 	align-items: center;
 }

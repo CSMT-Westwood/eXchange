@@ -57,14 +57,15 @@ export const SettingName = styled.span`
 `;
 
 export const SettingField = styled.input`
-    border-image: linear-gradient( 90deg,
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
-    ) 1;
+    border-image: linear-gradient( 30deg,
+    rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.4),
+    rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+    1)) 1;
 
     border-width: 0.17vw;
     width: 20vw;
@@ -86,13 +87,14 @@ export const ChangeBtn = styled.input`
     height: 1.9vw;
     border-style: solid;
     border-image: linear-gradient( 30deg,
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }), 
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -254 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
-    ) 1;
+    rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.4),
+    rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+    1)) 1;
 
     border-width: 0.17vw;
     position: absolute;

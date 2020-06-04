@@ -40,21 +40,23 @@ export const UserEmail=styled.span`
 // `;
 
 export const InfoField=styled.div`
-    width: 10vw;
-    height: 10vw;
+    width: 23vw;
+    height: 5.5vw;
     position: relative;
     border-style: solid;
-    border-image: linear-gradient( 270deg,
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) }), 
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -254 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) })
-    ) 1;
-    border-radius: 0.6vw;
-    border-width: 0.4vw;
+    border-image: linear-gradient( 30deg,
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.8),
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        1)) 1;
+    border-radius: 1vw;
+    border-width: 0.2vw;
     display: flex;
+    margin: 0.4vw 0;
     flex-direction: column;
     justify-content: center;
     z-index: 2;
@@ -65,7 +67,7 @@ export const InfoField=styled.div`
 
 export const Info=styled.div`
     text-align: center;
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     font-weight: 500;
     height: 3.5vw;
     position: relative;

@@ -87,9 +87,9 @@ export default function UserInfo() {
 				<BasicInfo />
 				<div className="profile-UserInfo">
 					<InfoField name="Reputation" value={settings.rp.rp} /> 
-					<InfoField name="Activity" value={0} />
-					<InfoField name="Following" value={0} />
-					<InfoField name="Posts" value={0} />
+					<InfoField name="Following" value={settings.followC} />
+					<InfoField name="Feeds" value={settings.preferences.preferences.length} />
+					<InfoField name="Posts" value={settings.postsC} />
 				</div>
 			</div>
 			

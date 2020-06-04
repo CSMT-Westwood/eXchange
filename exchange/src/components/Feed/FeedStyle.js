@@ -59,16 +59,15 @@ export const FieldTitle = styled.div`
     text-align: center;
     font-size: 2vw;
     font-weight: 550;
-    background: linear-gradient( 60deg,
-        rgba(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) },
-            0.3),
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) },
-            0.3)
-    ); 
+    background: linear-gradient( 30deg,
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.3),
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.5));
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -88,12 +87,13 @@ export const SecondaryWrapper = styled(Temp)`
     top: 20vw;
     border-style: solid;
     border-width: 0.2vw 0 0 0;
-    border-image: linear-gradient( 90deg,
-        rgb(${(props) => (255 * Math.sin(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 127, 2) * -180 / (127*127) + 254) }, 
-            ${(props) => (Math.pow(props.color - 127, 2) * 254 / (127*127)) }),
-        rgb(${(props) => (255 * Math.cos(props.color / 40))},
-            ${(props) => (Math.pow(props.color - 100, 2) * 50 / (100*100)) }, 
-            ${(props) => (Math.pow(props.color - 100, 2) * -100 / (100*100) + 200) })
-    ) 1; 
+    border-image: linear-gradient( 30deg,
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.3),
+        rgba(${(props) => (255 * Math.cos(props.color / 15))},
+        ${(props) => (Math.pow(props.color - 127, 2) * 255 / (127*127)) },
+        ${(props) => (255 * Math.sin(props.color / 30))}, 
+        0.5)) 1;
 `;

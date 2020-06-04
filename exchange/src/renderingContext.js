@@ -7,9 +7,11 @@ function RenderingContextProvider (props) {
     const [email, setEmail] = useState({"email": ""});
     const [rp, setRp] = useState({"rp": 0});
     const [photo, setPhoto] = useState({"photo": process.env.PUBLIC_URL + "/profile.svg"});
-    const [theme, setTheme] = useState({"theme": 0});
+    const [theme, setTheme] = useState({"theme": 23});
     const [preferences, setPreferences] = useState({"preferences": []});
     const [onColorChange, setOnColorChange] = useState(false);
+    const [postsC, setPostsC] = useState(0);
+    const [followC, setFollowC] = useState(0);
 
     const settings = {
         "theme": theme, 
@@ -18,6 +20,8 @@ function RenderingContextProvider (props) {
         "rp": rp, 
         "photo": photo, 
         "preferences": preferences,
+        "postsC": postsC,
+        "followC": followC
     };
     
     const setSettings = {
@@ -27,6 +31,8 @@ function RenderingContextProvider (props) {
         "rp": setRp, 
         "photo": setPhoto,
         "preferences": setPreferences,
+        "postsC": setPostsC,
+        "followC": setFollowC
     };
     
     function changeInfo (props) {
