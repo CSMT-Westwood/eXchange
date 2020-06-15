@@ -51,9 +51,9 @@ export default function UserInfo() {
 			// fetch the query
 			
 			try {
-				let url = new URL('http://localhost:8000/feed/myPosts/')
+				let url = new URL('https://bruin-exchange.herokuapp.com/feed/myPosts/')
 				if (!isHost) {
-					url = new URL('http://localhost:8000/feed/followedPosts/')
+					url = new URL('https://bruin-exchange.herokuapp.com/feed/followedPosts/')
 				}
 				
 				fetch(url, {

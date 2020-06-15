@@ -104,7 +104,7 @@ export class Form extends React.Component {
 		console.log(newPost);
 
 		try {
-			await fetch("http://localhost:8000/post/new", {
+			await fetch("https://bruin-exchange.herokuapp.com/post/new", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

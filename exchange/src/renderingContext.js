@@ -36,7 +36,7 @@ function RenderingContextProvider (props) {
     };
     
     function changeInfo (props) {
-        fetch("http://localhost:8000/user/update", {
+        fetch("https://bruin-exchange.herokuapp.com/user/update", {
             method: "PATCH",
             headers: { "Content-Type": "application/json", "token": sessionStorage.getItem("token")},
             body: JSON.stringify(props),

@@ -9,7 +9,7 @@ function Notification(props) {
         return `${date.toTimeString().slice(0, 5)}, ${date.toDateString()}`;
     }
     const read = () => {
-        fetch("http://localhost:8000/user/readNotification", {
+        fetch("https://bruin-exchange.herokuapp.com/user/readNotification", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

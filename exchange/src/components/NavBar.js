@@ -119,7 +119,7 @@ export default function NavBar (props) {
 
     const showNotifications = () => {
         if (sessionStorage["token"] == "" || sessionStorage["token"] == undefined) return;
-        fetch("http://localhost:8000/user/notifications", {
+        fetch("https://bruin-exchange.herokuapp.com/user/notifications", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

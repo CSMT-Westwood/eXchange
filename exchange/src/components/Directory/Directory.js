@@ -23,7 +23,7 @@ function Directory(props) {
 
         // fetch the query
         try {
-            let url = new URL("http://localhost:8000/post/search");
+            let url = new URL("https://bruin-exchange.herokuapp.com/post/search");
             let params = value;
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
             fetch(url, {

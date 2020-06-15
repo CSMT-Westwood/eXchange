@@ -100,7 +100,7 @@ export class Modal extends React.Component {
 		}
 
 		try {
-			let result = await fetch("http://localhost:8000/post/follow", {
+			let result = await fetch("https://bruin-exchange.herokuapp.com/post/follow", {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",
@@ -130,7 +130,7 @@ export class Modal extends React.Component {
 		}
 
 		try {
-			let result = await fetch("http://localhost:8000/post/chooseClient", {
+			let result = await fetch("https://bruin-exchange.herokuapp.com/post/chooseClient", {
 				method: "POST",
 				headers: {
 					"content-type": "application/json",

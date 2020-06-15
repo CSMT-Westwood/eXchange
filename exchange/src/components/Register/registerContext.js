@@ -10,7 +10,7 @@ function RegisterContextProvider (props) {
     const { settings, setSettings } = useContext(RenderingContext);
 
     function getUserInfo (props) {
-        fetch("http://localhost:8000/user/self", {
+        fetch("https://bruin-exchange.herokuapp.com/user/self", {
             method: "GET",
             headers: { "Content-Type": "application/json", "token": props.token},
         }).then(response => {
@@ -36,7 +36,7 @@ function RegisterContextProvider (props) {
     const handleSumbit = (e) => {
         e.preventDefault();
         if(window.location.href.slice(-5) === 'login'){ // Log in scenario
-            fetch("http://localhost:8000/user/login", {
+            fetch("https://bruin-exchange.herokuapp.com/user/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify({...info[0], ...info[2]}),
@@ -59,7 +59,7 @@ function RegisterContextProvider (props) {
                 setWarning("Passwords do not match!");
             }
             else{ // Valid information
-                fetch("http://localhost:8000/user/signup", {
+                fetch("https://bruin-exchange.herokuapp.com/user/signup", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({...info[0], ...info[2], ...info[1]}),

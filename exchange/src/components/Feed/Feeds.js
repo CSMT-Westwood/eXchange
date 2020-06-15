@@ -16,7 +16,7 @@ function Feeds () {
             history.push("/");
         }
         function getFeed () {
-            fetch("http://localhost:8000/feed", {
+            fetch("https://bruin-exchange.herokuapp.com/feed", {
                 method: "GET",
                 headers: { "Content-Type": "multipart/form-data", "token": sessionStorage.getItem("token")},
             })

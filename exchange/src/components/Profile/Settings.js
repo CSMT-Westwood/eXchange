@@ -98,7 +98,7 @@ function SettingsWrapper () {
         e.preventDefault();
         const data = new FormData();
         data.append("image", photo);
-        fetch("http://localhost:8000/userAvatar/avatar", {
+        fetch("https://bruin-exchange.herokuapp.com/userAvatar/avatar", {
             method: "POST",
             headers: { "token": sessionStorage.getItem("token") },
             body: data,

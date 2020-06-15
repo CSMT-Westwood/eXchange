@@ -17,6 +17,7 @@ function RenderingComponent () {
         <Router history={history}>
             <Route exact path="/" component={Directory} />
             <Route path="/login" component = {Login} />
+            <Route path="/eXchange" component = {Directory} />
             <Route path="/signup" component = {Signup} />
             <Route path={"/"+settings.username.username} component = {UserInfo} />
             <Route path="/feeds" component = {Feeds} />
