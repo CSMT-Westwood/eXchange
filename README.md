@@ -1,6 +1,9 @@
 # eXchange
 
-Textbook, notes, and tutoring-sharing platform.
+eXchange is a textbook, notes, and tutoring-sharing platform.  
+
+> Note: This is the front-end repo for eXchange, to see the backend repo, pls visit https://github.com/CSMT-Westwood/exchange-backend.
+
 ## Getting Started
 
 1. Download the repo
